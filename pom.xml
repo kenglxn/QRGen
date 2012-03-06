@@ -8,7 +8,7 @@
     <packaging>jar</packaging>
     <properties>
         <junit.version>4.8.2</junit.version>
-		<zxing.version>2.0</zxing.version>
+        <zxing.version>2.0</zxing.version>
         <maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
     </properties>
     <build>
@@ -69,5 +69,12 @@
             <url>https://oss.sonatype.org/content/repositories/releases</url>
         </repository>
     </repositories>
+
+    <distributionManagement>
+        <repository>
+            <id>gh-pages</id>
+            <url>file:///${basedir}/../QRGen_pages/repository/</url>
+        </repository>
+    </distributionManagement>
 
 </project>
