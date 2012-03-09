@@ -59,6 +59,19 @@ public class QRCodeTest {
     }
 
     @Test
+    public void shouldWriteToSuppliedStream() throws Exception {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        QRCode.from("Hello World").writeTo(stream);
+
+        Assert.assertNotNull(stream);
+        File tempFile = File.createTempFile("test", ".tmp");
+        long lengthBefore = tempFile.length();
+        FileOutputStream fileOutputStream = new FileOutputStream(tempFile);
+        stream.writeTo(fileOutputStream);
+        Assert.assertTrue(lengthBefore < tempFile.length());
+    }
+
+    @Test
     public void shouldBeAbleToOverrideDimensionsToFile() throws Exception {
         long defaultSize = QRCode.from("Hello World").to(ImageType.PNG).file().length();
         long defaultSize2 = QRCode.from("Hello World").to(ImageType.PNG).file().length();

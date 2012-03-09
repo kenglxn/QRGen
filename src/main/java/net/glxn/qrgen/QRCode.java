@@ -4,6 +4,7 @@ package net.glxn.qrgen;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
 
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
@@ -104,12 +105,24 @@ public class QRCode {
         return stream;
     }
 
+    /**
+     * writes a representation of the QR code to the supplied  {@link OutputStream}
+     * @param stream the {@link OutputStream} to write QR Code to
+     */
+    public void writeTo(OutputStream stream) {
+        try {
+            MatrixToImageWriter.writeToStream(createMatrix(), imageType.toString(), stream);
+        } catch (Exception e) {
+            throw new QRGenerationException("Failed to create QR image from text due to underlying exception", e);
+        }
+    }
+
     private BitMatrix createMatrix() throws WriterException {
         return new QRCodeWriter().encode(text, com.google.zxing.BarcodeFormat.QR_CODE, width, height);
     }
 
     private File createTempFile() throws IOException {
-        File file= File.createTempFile("QRCode", "."+imageType.toString().toLowerCase());
+        File file = File.createTempFile("QRCode", "."+imageType.toString().toLowerCase());
         file.deleteOnExit();
         return file;
     }
