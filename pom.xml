@@ -1,31 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
 
     <groupId>net.glxn</groupId>
     <artifactId>qrgen</artifactId>
-    <version>1.1</version>
+    <version>1.2-SNAPSHOT</version>
     <packaging>jar</packaging>
+    <name>QRGen</name>
+    <description>a simple QRCode generation api for java built on top ZXING</description>
+    <url>http://kenglxn.github.io/QRGen/</url>
+
+    <licenses>
+        <license>
+            <name>Apache License v2</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+        </license>
+    </licenses>
+
+    <scm>
+        <connection>scm:git:git@github.com:kenglxn/QRGen.git</connection>
+        <developerConnection>scm:git:git@github.com:kenglxn/QRGen.git</developerConnection>
+        <url>git@github.com:kenglxn/QRGen.git</url>
+    </scm>
+
+    <developers>
+        <developer>
+            <name>Ken Gullaksen</name>
+            <email>ken@glxn.net</email>
+        </developer>
+    </developers>
+
     <properties>
-        <junit.version>4.8.2</junit.version>
         <zxing.version>2.0</zxing.version>
+        <junit.version>4.8.2</junit.version>
+        <maven-compiler-plugin.source>1.6</maven-compiler-plugin.source>
+        <maven-compiler-plugin.target>1.6</maven-compiler-plugin.target>
+        <maven-source-plugin.version>2.1.2</maven-source-plugin.version>
         <maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
     </properties>
+
     <build>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin.version}</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>${maven-compiler-plugin.source}</source>
+                    <target>${maven-compiler-plugin.target}</target>
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>2.1.2</version>
+                <version>${maven-source-plugin.version}</version>
                 <executions>
                     <execution>
                         <goals>
@@ -38,19 +73,11 @@
     </build>
 
     <dependencies>
-
-        <dependency>
-            <groupId>com.google.zxing</groupId>
-            <artifactId>core</artifactId>
-            <version>${zxing.version}</version>
-        </dependency>
         <dependency>
             <groupId>com.google.zxing</groupId>
             <artifactId>javase</artifactId>
             <version>${zxing.version}</version>
         </dependency>
-
-
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -58,23 +85,5 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
-    <repositories>
-        <repository>
-            <id>google-snapshots</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </repository>
-        <repository>
-            <id>google-releases</id>
-            <url>https://oss.sonatype.org/content/repositories/releases</url>
-        </repository>
-    </repositories>
-
-    <distributionManagement>
-        <repository>
-            <id>gh-pages</id>
-            <url>file:///${basedir}/../QRGen_pages/repository/</url>
-        </repository>
-    </distributionManagement>
 
 </project>
