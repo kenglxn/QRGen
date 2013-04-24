@@ -42,7 +42,6 @@
         <junit.version>4.8.2</junit.version>
         <maven-compiler-plugin.source>1.6</maven-compiler-plugin.source>
         <maven-compiler-plugin.target>1.6</maven-compiler-plugin.target>
-        <maven-source-plugin.version>2.1.2</maven-source-plugin.version>
         <maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
     </properties>
 
@@ -60,7 +59,17 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>${maven-source-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
                 <executions>
                     <execution>
                         <goals>
