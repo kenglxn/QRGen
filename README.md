@@ -21,7 +21,7 @@ Maven:
     <dependency>
         <groupId>net.glxn</groupId>
         <artifactId>qrgen</artifactId>
-        <version>1.1</version>
+        <version>1.2</version>
     </dependency>
 </dependencies>
 ```
