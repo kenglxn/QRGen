@@ -17,6 +17,13 @@ public class QRCodeTest {
         File file = QRCode.from("Hello World").file();
         Assert.assertNotNull(file);
     }
+    
+    @Test
+    public void shouldGetFileWithNameFromTextWithDefaults() throws Exception {
+    	File file = QRCode.from("Hello World").file("Hello World");
+    	Assert.assertNotNull(file);
+    	Assert.assertTrue(file.getName().startsWith("Hello World"));
+    }
 
     @Test
     public void shouldGetSTREAMFromTextWithDefaults() throws Exception {
@@ -45,6 +52,16 @@ public class QRCodeTest {
         Assert.assertNotNull(jpg);
         File gif = QRCode.from("Hello World").to(ImageType.GIF).file();
         Assert.assertNotNull(gif);
+    }
+    
+    @Test
+    public void shouldGetFileWithNameFromTextWithImageTypeOverrides() throws Exception {
+        File jpg = QRCode.from("Hello World").to(ImageType.JPG).file("Hello World");
+        Assert.assertNotNull(jpg);
+        Assert.assertTrue(jpg.getName().startsWith("Hello World"));
+        File gif = QRCode.from("Hello World").to(ImageType.GIF).file("Hello World");
+        Assert.assertNotNull(gif);
+        Assert.assertTrue(gif.getName().startsWith("Hello World"));
     }
 
     @Test
@@ -79,5 +96,16 @@ public class QRCodeTest {
         Assert.assertNotNull(file);
         Assert.assertTrue(defaultSize == defaultSize2);
         Assert.assertTrue(defaultSize < file.length());
+    }
+    
+    @Test
+    public void shouldBeAbleToOverrideDimensionsToFileWithName() throws Exception {
+        long defaultSize = QRCode.from("Hello World").to(ImageType.PNG).file("Hello World").length();
+        long defaultSize2 = QRCode.from("Hello World").to(ImageType.PNG).file("Hello World").length();
+        File file = QRCode.from("Hello World").to(ImageType.PNG).withSize(250, 250).file("Hello World");
+        Assert.assertNotNull(file);
+        Assert.assertTrue(defaultSize == defaultSize2);
+        Assert.assertTrue(defaultSize < file.length());
+        Assert.assertTrue(file.getName().startsWith("Hello World"));
     }
 }
