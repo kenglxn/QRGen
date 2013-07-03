@@ -1,0 +1,10 @@
+language: java
+
+env:
+  global:
+    - SONATYPE_USERNAME=kenglxn
+    - secure: "lbZmg68Hf3xrmUvUaeDYnApm9sQ4hkBdJxUzySXlmcDzGzv/Xf1dOeKECO/c\no7swQnsPDiFm/V30wtf7lm71PdZI/YdKCetcmNsywgAduIMIY7uixW9Ph7aF\nzYvx7tBiYrokqQyxwvmAdvORhm4Zil8Aya5Ok7yQdCKgf2fBnes="
+
+after_success:
+  - python addServer.py
+  - mvn clean deploy --settings ~/.m2/settings-sonatype.xml
