@@ -89,6 +89,27 @@ public class QRCode {
 
         return file;
     }
+    
+    /**
+     * returns a {@link File} representation of the QR code. The file has the given name. 
+     * The file is set to be deleted on exit (i.e. {@link java.io.File#deleteOnExit()}).
+     * If you want the file to live beyond the life of the jvm process, you should make a copy.
+     * 
+     * @see #file()
+     * @param name name of the created file
+     * @return
+     */
+    public File file(String name) {
+    	File file;
+    	try{
+    		file = createTempFile(name);
+    		MatrixToImageWriter.writeToFile(createMatrix(), imageType.toString(), file);
+    	} catch (Exception e){
+    		throw new QRGenerationException("Failed to create QR image from text due to underlying exception", e);
+    	}
+    	
+    	return file;
+    }
 
     /**
      * returns a {@link ByteArrayOutputStream} representation of the QR code
@@ -123,6 +144,12 @@ public class QRCode {
 
     private File createTempFile() throws IOException {
         File file = File.createTempFile("QRCode", "."+imageType.toString().toLowerCase());
+        file.deleteOnExit();
+        return file;
+    }
+    
+    private File createTempFile(String name) throws IOException {
+    	File file = File.createTempFile(name, "."+imageType.toString().toLowerCase());
         file.deleteOnExit();
         return file;
     }
