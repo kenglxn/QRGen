@@ -10,7 +10,7 @@ if os.environ["TRAVIS_SECURE_ENV_VARS"] == "false":
 
 homedir = os.path.expanduser("~")
 
-m2 = xml.dom.minidom.parse(homedir + '/.m2/settings-sonatype.xml')
+m2 = xml.dom.minidom.parse(homedir + '/.m2/settings.xml')
 settings = m2.getElementsByTagName("settings")[0]
 
 serversNodes = settings.getElementsByTagName("servers")
