@@ -1,17 +1,16 @@
 package net.glxn.qrgen;
 
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.OutputStream;
+import com.google.zxing.*;
+import com.google.zxing.Writer;
+import com.google.zxing.client.j2se.*;
+import com.google.zxing.common.*;
+import com.google.zxing.qrcode.*;
+import net.glxn.qrgen.exception.*;
+import net.glxn.qrgen.image.*;
 
-import com.google.zxing.WriterException;
-import com.google.zxing.client.j2se.MatrixToImageWriter;
-import com.google.zxing.common.BitMatrix;
-import com.google.zxing.qrcode.QRCodeWriter;
-import net.glxn.qrgen.exception.QRGenerationException;
-import net.glxn.qrgen.image.ImageType;
+import java.io.*;
+import java.util.*;
 
 /**
  * QRCode generator. This is a simple class that is built on top of <a href="http://code.google.com/p/zxing/">ZXING</a><br/><br/>
@@ -23,13 +22,16 @@ import net.glxn.qrgen.image.ImageType;
  */
 public class QRCode {
 
-    private final String text;
-    private ImageType imageType = ImageType.PNG;
+    Writer qrWriter;
     private int width = 125;
     private int height = 125;
+    private final String text;
+    private ImageType imageType = ImageType.PNG;
+    private final HashMap<EncodeHintType,Object> hints = new HashMap<EncodeHintType, Object>();
 
     private QRCode(String text) {
         this.text = text;
+        qrWriter = new QRCodeWriter();
     }
 
     /**
@@ -74,6 +76,17 @@ public class QRCode {
     }
 
     /**
+     * Overrides the default cahrset by supplying a {@link com.google.zxing.EncodeHintType#CHARACTER_SET}
+     * hint to {@link com.google.zxing.qrcode.QRCodeWriter#encode}
+     *
+     * @return the current QRCode object
+     */
+    public QRCode withCharset(String charset) {
+        hints.put(EncodeHintType.CHARACTER_SET, charset);
+        return this;
+    }
+
+    /**
      * returns a {@link File} representation of the QR code. The file is set to be deleted on exit (i.e. {@link java.io.File#deleteOnExit()}).
      * If you want the file to live beyond the life of the jvm process, you should make a copy.
      * @return qrcode as file
@@ -97,7 +110,7 @@ public class QRCode {
      * 
      * @see #file()
      * @param name name of the created file
-     * @return
+     * @return qrcode as file
      */
     public File file(String name) {
     	File file;
@@ -118,7 +131,7 @@ public class QRCode {
     public ByteArrayOutputStream stream() {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         try {
-            MatrixToImageWriter.writeToStream(createMatrix(), imageType.toString(), stream);
+            writeToStream(stream);
         } catch (Exception e) {
             throw new QRGenerationException("Failed to create QR image from text due to underlying exception", e);
         }
@@ -132,14 +145,18 @@ public class QRCode {
      */
     public void writeTo(OutputStream stream) {
         try {
-            MatrixToImageWriter.writeToStream(createMatrix(), imageType.toString(), stream);
+            writeToStream(stream);
         } catch (Exception e) {
             throw new QRGenerationException("Failed to create QR image from text due to underlying exception", e);
         }
     }
 
+    private void writeToStream(OutputStream stream) throws IOException, WriterException {
+        MatrixToImageWriter.writeToStream(createMatrix(), imageType.toString(), stream);
+    }
+
     private BitMatrix createMatrix() throws WriterException {
-        return new QRCodeWriter().encode(text, com.google.zxing.BarcodeFormat.QR_CODE, width, height);
+        return qrWriter.encode(text, com.google.zxing.BarcodeFormat.QR_CODE, width, height, hints);
     }
 
     private File createTempFile() throws IOException {

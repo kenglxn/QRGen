@@ -1,14 +1,15 @@
 package net.glxn.qrgen;
 
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
+import com.google.zxing.*;
+import com.google.zxing.Writer;
+import com.google.zxing.common.*;
+import net.glxn.qrgen.exception.*;
+import net.glxn.qrgen.image.*;
+import org.junit.*;
 
-import org.junit.Assert;
-import org.junit.Test;
-
-import net.glxn.qrgen.image.ImageType;
+import java.io.*;
+import java.util.*;
 
 public class QRCodeTest {
 
@@ -17,12 +18,12 @@ public class QRCodeTest {
         File file = QRCode.from("Hello World").file();
         Assert.assertNotNull(file);
     }
-    
+
     @Test
     public void shouldGetFileWithNameFromTextWithDefaults() throws Exception {
-    	File file = QRCode.from("Hello World").file("Hello World");
-    	Assert.assertNotNull(file);
-    	Assert.assertTrue(file.getName().startsWith("Hello World"));
+        File file = QRCode.from("Hello World").file("Hello World");
+        Assert.assertNotNull(file);
+        Assert.assertTrue(file.getName().startsWith("Hello World"));
     }
 
     @Test
@@ -36,8 +37,8 @@ public class QRCodeTest {
 
         int length = 2950;
         char[] chars = new char[length];
-        for(int i = 0; i < length; i++) {
-             chars[i] = 'a';
+        for (int i = 0; i < length; i++) {
+            chars[i] = 'a';
         }
         String text = new String(chars);
         Assert.assertEquals(length, text.length());
@@ -53,7 +54,7 @@ public class QRCodeTest {
         File gif = QRCode.from("Hello World").to(ImageType.GIF).file();
         Assert.assertNotNull(gif);
     }
-    
+
     @Test
     public void shouldGetFileWithNameFromTextWithImageTypeOverrides() throws Exception {
         File jpg = QRCode.from("Hello World").to(ImageType.JPG).file("Hello World");
@@ -97,7 +98,7 @@ public class QRCodeTest {
         Assert.assertTrue(defaultSize == defaultSize2);
         Assert.assertTrue(defaultSize < file.length());
     }
-    
+
     @Test
     public void shouldBeAbleToOverrideDimensionsToFileWithName() throws Exception {
         long defaultSize = QRCode.from("Hello World").to(ImageType.PNG).file("Hello World").length();
@@ -107,5 +108,31 @@ public class QRCodeTest {
         Assert.assertTrue(defaultSize == defaultSize2);
         Assert.assertTrue(defaultSize < file.length());
         Assert.assertTrue(file.getName().startsWith("Hello World"));
+    }
+
+    @Test
+    public void shouldBeAbleToSupplyEncodingHint() throws Exception {
+        String charset = "UTF-8";
+        final Object[] charsetHint = new Object[1];
+        try {
+            final QRCode from = QRCode.from("Jour férié");
+            from.qrWriter = new Writer() {
+                @Override
+                public BitMatrix encode(String contents, BarcodeFormat format, int width, int height) throws WriterException {
+                    throw new UnsupportedOperationException("not implemented");
+                }
+
+                @Override
+                public BitMatrix encode(String contents, BarcodeFormat format, int width, int height,
+                                        Map<EncodeHintType, ?> hints)
+                        throws WriterException {
+                    charsetHint[0] = hints.get(EncodeHintType.CHARACTER_SET);
+                    return new BitMatrix(0);
+                }
+            };
+            from.to(ImageType.PNG).withCharset(charset).stream();
+        } catch (QRGenerationException ignored) {
+        }
+        Assert.assertEquals(charset, charsetHint[0]);
     }
 }
