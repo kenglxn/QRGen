@@ -57,7 +57,7 @@ QRCode.from("Hello World").to(ImageType.GIF).withSize(250, 250).stream();
 QRCode.from("Hello World").to(ImageType.PNG).writeTo(outputStream);
 
 // supply own file name
-QRCode.from("Hello World").withSize(250, 250).file("QRCode");
+QRCode.from("Hello World").file("QRCode");
 
 // supply charset hint to ZXING
 QRCode.from("Hello World").withCharset("UTF-8");
