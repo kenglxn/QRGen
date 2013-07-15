@@ -28,9 +28,9 @@ Maven:
 
 Or you can clone and build yourself:
 
-git clone git://github.com/kenglxn/QRGen.git
-cd QRGen/
-mvn clean install
+    git clone git://github.com/kenglxn/QRGen.git
+    cd QRGen/
+    mvn clean install
 
 #### Usage:
 
