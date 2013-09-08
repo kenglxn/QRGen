@@ -8,6 +8,7 @@ import com.google.zxing.common.*;
 import com.google.zxing.qrcode.*;
 import net.glxn.qrgen.exception.*;
 import net.glxn.qrgen.image.*;
+import net.glxn.qrgen.vcard.VCard;
 
 import java.io.*;
 import java.util.*;
@@ -51,6 +52,19 @@ public class QRCode {
      */
     public static QRCode from(String text) {
         return new QRCode(text);
+    }
+    
+    /**
+     * Creates a a QR Code from the given {@link VCard}.
+     * 
+     * The QRCode will have the following defaults:     <br/>
+     * {size: 100x100}<br/>{imageType:PNG}  <br/><br/>
+     * 
+     * @param vcard the vcard to encode as QRCode
+     * @return the QRCode object
+     */
+    public static QRCode from(VCard vcard){
+    	return new QRCode(vcard.toString());
     }
 
     /**
