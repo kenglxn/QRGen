@@ -6,13 +6,28 @@ import com.google.zxing.Writer;
 import com.google.zxing.common.*;
 import net.glxn.qrgen.exception.*;
 import net.glxn.qrgen.image.*;
+import net.glxn.qrgen.vcard.VCard;
+
 import org.junit.*;
 
 import java.io.*;
 import java.util.*;
 
 public class QRCodeTest {
-
+	
+	@Test
+	public void shouldGetFileFromVCardWithDefaults() throws Exception {
+		VCard johnDoe = new VCard("John Doe")
+							.setEmail("john.doe@example.org")
+							.setAddress("John Doe Street 1, 5678 Berlin")
+							.setTitle("Mister")
+							.setCompany("John Doe Inc.")
+							.setPhonenumber("1234")
+							.setWebsite("www.example.org");
+		File file = QRCode.from(johnDoe).file();
+		Assert.assertNotNull(file);
+	}
+	
     @Test
     public void shouldGetFileFromTextWithDefaults() throws Exception {
         File file = QRCode.from("Hello World").file();
