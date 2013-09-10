@@ -61,6 +61,17 @@ QRCode.from("Hello World").file("QRCode");
 
 // supply charset hint to ZXING
 QRCode.from("Hello World").withCharset("UTF-8");
+
+// encode contact data as vcard
+VCard johnDoe = new VCard("John Doe")
+							.setEmail("john.doe@example.org")
+							.setAddress("John Doe Street 1, 5678 Doestown")
+							.setTitle("Mister")
+							.setCompany("John Doe Inc.")
+							.setPhonenumber("1234")
+							.setWebsite("www.example.org");
+QRCode.from(johnDoe).file();
+
 ```
 
 #### License:
