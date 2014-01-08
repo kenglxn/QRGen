@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/kenglxn/QRGen.png?branch=master)](https://travis-ci.org/kenglxn/QRGen) [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/kenglxn/qrgen/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+[![Build Status](https://travis-ci.org/kenglxn/QRGen.png?branch=master)](https://travis-ci.org/kenglxn/QRGen)
 
 ### QRGen: a simple QRCode generation api for java built on top ZXING
 
@@ -66,4 +66,3 @@ QRCode.from("Hello World").withCharset("UTF-8");
 #### License:
 
 http://www.apache.org/licenses/LICENSE-2.0.html
-
