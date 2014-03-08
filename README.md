@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/kenglxn/QRGen.png?branch=master)](https://travis-ci.org/kenglxn/QRGen)
-[![Donate](https://www.gittip.com/kenglxn/)](https://www.gittip.com/kenglxn/)
+[![Donate](https://www.gittip.com/kenglxn/)](http://glxn.net/gittip.png)
 
 <script data-gittip-username="kenglxn" data-gittip-widget="button" src="//gttp.co/v1.js">
 </script>
