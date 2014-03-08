@@ -1,8 +1,7 @@
 [![Build Status](https://travis-ci.org/kenglxn/QRGen.png?branch=master)](https://travis-ci.org/kenglxn/QRGen)
 
-<script data-gittip-username="kenglxn"
-        data-gittip-widget="button"
-        src="//gttp.co/v1.js"></script>
+<script data-gittip-username="kenglxn" data-gittip-widget="button" src="//gttp.co/v1.js">
+</script>
 
 ### QRGen: a simple QRCode generation api for java built on top ZXING
 
