@@ -6,6 +6,8 @@ import com.google.zxing.Writer;
 import com.google.zxing.client.j2se.*;
 import com.google.zxing.common.*;
 import com.google.zxing.qrcode.*;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+
 import net.glxn.qrgen.exception.*;
 import net.glxn.qrgen.image.*;
 import net.glxn.qrgen.vcard.VCard;
@@ -90,13 +92,31 @@ public class QRCode {
     }
 
     /**
-     * Overrides the default cahrset by supplying a {@link com.google.zxing.EncodeHintType#CHARACTER_SET}
+     * Overrides the default charset by supplying a {@link com.google.zxing.EncodeHintType#CHARACTER_SET}
      * hint to {@link com.google.zxing.qrcode.QRCodeWriter#encode}
      *
      * @return the current QRCode object
      */
     public QRCode withCharset(String charset) {
-        hints.put(EncodeHintType.CHARACTER_SET, charset);
+        return withHint(EncodeHintType.CHARACTER_SET, charset);
+    }
+    
+    /**
+     * Overrides the default error correction by supplying a {@link com.google.zxing.EncodeHintType#ERROR_CORRECTION}
+     * hint to {@link com.google.zxing.qrcode.QRCodeWriter#encode}
+     *
+     * @return the current QRCode object
+     */
+    public QRCode withErrorCorrection(ErrorCorrectionLevel level) {
+        return withHint(EncodeHintType.ERROR_CORRECTION, level);
+    }
+    
+    /**
+     * Sets hint to {@link com.google.zxing.qrcode.QRCodeWriter#encode}
+     * @return the current QRCode object
+     */
+    public QRCode withHint(EncodeHintType hintType, Object value) {
+        hints.put(hintType, value);
         return this;
     }
 
