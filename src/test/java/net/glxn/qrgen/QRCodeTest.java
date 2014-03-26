@@ -1,33 +1,39 @@
 package net.glxn.qrgen;
 
 
-import com.google.zxing.*;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
 import com.google.zxing.Writer;
-import com.google.zxing.common.*;
-import net.glxn.qrgen.exception.*;
-import net.glxn.qrgen.image.*;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+import net.glxn.qrgen.exception.QRGenerationException;
+import net.glxn.qrgen.image.ImageType;
 import net.glxn.qrgen.vcard.VCard;
+import org.junit.Assert;
+import org.junit.Test;
 
-import org.junit.*;
-
-import java.io.*;
-import java.util.*;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.util.Map;
 
 public class QRCodeTest {
-	
-	@Test
-	public void shouldGetFileFromVCardWithDefaults() throws Exception {
-		VCard johnDoe = new VCard("John Doe")
-							.setEmail("john.doe@example.org")
-							.setAddress("John Doe Street 1, 5678 Berlin")
-							.setTitle("Mister")
-							.setCompany("John Doe Inc.")
-							.setPhonenumber("1234")
-							.setWebsite("www.example.org");
-		File file = QRCode.from(johnDoe).file();
-		Assert.assertNotNull(file);
-	}
-	
+
+    @Test
+    public void shouldGetFileFromVCardWithDefaults() throws Exception {
+        VCard johnDoe = new VCard("John Doe")
+                .setName("John Doe")
+                .setEmail("john.doe@example.org")
+                .setAddress("John Doe Street 1, 5678 Berlin")
+                .setTitle("Mister")
+                .setCompany("John Doe Inc.")
+                .setPhonenumber("1234")
+                .setWebsite("www.example.org");
+        File file = QRCode.from(johnDoe).file();
+        Assert.assertNotNull(file);
+    }
+
     @Test
     public void shouldGetFileFromTextWithDefaults() throws Exception {
         File file = QRCode.from("Hello World").file();
@@ -127,27 +133,63 @@ public class QRCodeTest {
 
     @Test
     public void shouldBeAbleToSupplyEncodingHint() throws Exception {
-        String charset = "UTF-8";
-        final Object[] charsetHint = new Object[1];
+        String expected = "UTF-8";
+        final Object[] capture = new Object[1];
         try {
             final QRCode from = QRCode.from("Jour férié");
-            from.qrWriter = new Writer() {
-                @Override
-                public BitMatrix encode(String contents, BarcodeFormat format, int width, int height) throws WriterException {
-                    throw new UnsupportedOperationException("not implemented");
-                }
-
-                @Override
-                public BitMatrix encode(String contents, BarcodeFormat format, int width, int height,
-                                        Map<EncodeHintType, ?> hints)
-                        throws WriterException {
-                    charsetHint[0] = hints.get(EncodeHintType.CHARACTER_SET);
-                    return new BitMatrix(0);
-                }
-            };
-            from.to(ImageType.PNG).withCharset(charset).stream();
+            from.qrWriter = writerWithCapture(capture);
+            from.to(ImageType.PNG).withCharset(expected).stream();
         } catch (QRGenerationException ignored) {
         }
-        Assert.assertEquals(charset, charsetHint[0]);
+        assertCapturedHint(expected, capture, EncodeHintType.CHARACTER_SET);
+    }
+
+    @Test
+    public void shouldBeAbleToSupplyErrorCorrectionHint() throws Exception {
+        ErrorCorrectionLevel expected = ErrorCorrectionLevel.L;
+        final Object[] capture = new Object[1];
+        try {
+            final QRCode from = QRCode.from("Jour férié");
+            from.qrWriter = writerWithCapture(capture);
+            from.to(ImageType.PNG).withErrorCorrection(ErrorCorrectionLevel.L).stream();
+        } catch (QRGenerationException ignored) {
+        }
+        assertCapturedHint(expected, capture, EncodeHintType.ERROR_CORRECTION);
+    }
+
+    @Test
+    public void shouldBeAbleToSupplyAnyHint() throws Exception {
+        String expected = "a hint";
+        EncodeHintType[] hintTypes = EncodeHintType.values();
+        for (EncodeHintType type : hintTypes) {
+            final Object[] capture = new Object[1];
+            try {
+                final QRCode from = QRCode.from("Jour férié");
+                from.qrWriter = writerWithCapture(capture);
+                from.to(ImageType.PNG).withHint(type, expected).stream();
+            } catch (QRGenerationException ignored) {
+            }
+            assertCapturedHint(expected, capture, type);
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    private void assertCapturedHint(Object expected, Object[] capture, EncodeHintType type) {
+        Assert.assertEquals(expected, ((Map<EncodeHintType, ?>) capture[0]).get(type));
+    }
+
+    private Writer writerWithCapture(final Object[] capture) {
+        return new Writer() {
+            @Override
+            public BitMatrix encode(String contents, BarcodeFormat format, int width, int height) throws WriterException {
+                throw new UnsupportedOperationException("not implemented");
+            }
+
+            @Override
+            public BitMatrix encode(String c, BarcodeFormat f, int w, int h, Map<EncodeHintType, ?> hs) throws WriterException {
+                capture[0] = hs;
+                return new BitMatrix(0);
+            }
+        };
     }
 }
