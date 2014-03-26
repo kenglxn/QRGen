@@ -14,7 +14,7 @@ import java.io.*;
 import java.util.*;
 
 public class QRCodeTest {
-	
+
 	@Test
 	public void shouldGetFileFromVCardWithDefaults() throws Exception {
 		VCard johnDoe = new VCard("John Doe")
@@ -27,7 +27,7 @@ public class QRCodeTest {
 		File file = QRCode.from(johnDoe).file();
 		Assert.assertNotNull(file);
 	}
-	
+
     @Test
     public void shouldGetFileFromTextWithDefaults() throws Exception {
         File file = QRCode.from("Hello World").file();
@@ -149,5 +149,10 @@ public class QRCodeTest {
         } catch (QRGenerationException ignored) {
         }
         Assert.assertEquals(charset, charsetHint[0]);
+    }
+
+    @Test
+    public void testFail() throws Exception {
+        Assert.fail("just testing");
     }
 }
