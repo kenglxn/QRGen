@@ -3,6 +3,10 @@ before_install: "git clone -b travis `git config --get remote.origin.url` target
 branches:
   only:
     - master
+branches:
+  except:
+    - travis
+    - gh-pages
 after_success:
   "mvn deploy --settings target/travis/settings.xml"
 env:
