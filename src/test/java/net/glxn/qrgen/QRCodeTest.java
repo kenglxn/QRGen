@@ -150,9 +150,4 @@ public class QRCodeTest {
         }
         Assert.assertEquals(charset, charsetHint[0]);
     }
-
-    @Test
-    public void testFail() throws Exception {
-        Assert.fail("just testing");
-    }
 }
