@@ -18,16 +18,16 @@ QRGen is available from [Maven Central Repository](http://search.maven.org/#brow
 Gradle:
 
     dependencies {
-        compile ("net.glxn:qrgen:1.3")
+        compile ("net.glxn:qrgen:1.4")
     }
-    
+
 Maven:
 
     <dependencies>
         <dependency>
             <groupId>net.glxn</groupId>
             <artifactId>qrgen</artifactId>
-            <version>1.3</version>
+            <version>1.4</version>
         </dependency>
     </dependencies>
 
@@ -66,6 +66,12 @@ QRCode.from("Hello World").file("QRCode");
 
 // supply charset hint to ZXING
 QRCode.from("Hello World").withCharset("UTF-8");
+
+// supply error correction level hint to ZXING
+QRCode.from("Hello World").withErrorCorrection(ErrorCorrectionLevel.L);
+
+// supply any hint to ZXING
+QRCode.from("Hello World").withHint(EncodeHintType.CHARACTER_SET, "UTF-8");
 
 // encode contact data as vcard using defaults
 VCard johnDoe = new VCard("John Doe")
