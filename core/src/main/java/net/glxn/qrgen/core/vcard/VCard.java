@@ -1,4 +1,4 @@
-package net.glxn.qrgen.vcard;
+package net.glxn.qrgen.core.vcard;
 
 /**
  * A simple wrapper for vCard data to use with ZXing QR Code generator.

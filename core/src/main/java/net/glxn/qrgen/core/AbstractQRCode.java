@@ -1,16 +1,16 @@
-package net.glxn.qrgen;
+package net.glxn.qrgen.core;
 
 
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.Writer;
 import com.google.zxing.WriterException;
-import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
-import net.glxn.qrgen.exception.QRGenerationException;
-import net.glxn.qrgen.image.ImageType;
-import net.glxn.qrgen.vcard.VCard;
+
+import net.glxn.qrgen.core.exception.QRGenerationException;
+import net.glxn.qrgen.core.image.ImageType;
+import net.glxn.qrgen.core.vcard.VCard;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -24,57 +24,19 @@ import java.util.HashMap;
  * Please take a look at their framework, as it has a lot of features. <br/> This small project is just a wrapper that gives a
  * convenient interface to work with. <br/><br/>
  * <p/>
- * Start here: {@link QRCode#from(String)} (e.g QRCode.from("hello"))
+ * Start here: {@link AbstractQRCode#from(String)} (e.g QRCode.from("hello"))
  */
-public class QRCode {
+public abstract class AbstractQRCode {
 
-    private final String text;
+    protected final HashMap<EncodeHintType, Object> hints = new HashMap<>();
 
-    private final HashMap<EncodeHintType, Object> hints = new HashMap<>();
+    protected Writer qrWriter;
 
-    Writer qrWriter;
+    protected int width = 125;
 
-    private int width = 125;
+    protected int height = 125;
 
-    private int height = 125;
-
-    private ImageType imageType = ImageType.PNG;
-
-    private QRCode(String text) {
-        this.text = text;
-        qrWriter = new QRCodeWriter();
-    }
-
-    /**
-     * Create a QR code from the given text.    <br/><br/>
-     * <p/>
-     * There is a size limitation to how much you can put into a QR code. This has been tested to work with up to a length of 2950
-     * characters.<br/><br/>
-     * <p/>
-     * The QRCode will have the following defaults:     <br/> {size: 100x100}<br/>{imageType:PNG}  <br/><br/>
-     * <p/>
-     * Both size and imageType can be overridden:   <br/> Image type override is done by calling {@link
-     * QRCode#to(net.glxn.qrgen.image.ImageType)} e.g. QRCode.from("hello world").to(JPG) <br/> Size override is done by calling
-     * {@link QRCode#withSize} e.g. QRCode.from("hello world").to(JPG).withSize(125, 125)  <br/>
-     *
-     * @param text the text to encode to a new QRCode, this may fail if the text is too large. <br/>
-     * @return the QRCode object    <br/>
-     */
-    public static QRCode from(String text) {
-        return new QRCode(text);
-    }
-
-    /**
-     * Creates a a QR Code from the given {@link VCard}.
-     * <p/>
-     * The QRCode will have the following defaults:     <br/> {size: 100x100}<br/>{imageType:PNG}  <br/><br/>
-     *
-     * @param vcard the vcard to encode as QRCode
-     * @return the QRCode object
-     */
-    public static QRCode from(VCard vcard) {
-        return new QRCode(vcard.toString());
-    }
+    protected ImageType imageType = ImageType.PNG;
 
     /**
      * Overrides the imageType from its default {@link ImageType#PNG}
@@ -82,7 +44,7 @@ public class QRCode {
      * @param imageType the {@link ImageType} you would like the resulting QR to be
      * @return the current QRCode object
      */
-    public QRCode to(ImageType imageType) {
+    public AbstractQRCode to(ImageType imageType) {
         this.imageType = imageType;
         return this;
     }
@@ -94,7 +56,7 @@ public class QRCode {
      * @param height the height in pixels
      * @return the current QRCode object
      */
-    public QRCode withSize(int width, int height) {
+    public AbstractQRCode withSize(int width, int height) {
         this.width = width;
         this.height = height;
         return this;
@@ -106,7 +68,7 @@ public class QRCode {
      *
      * @return the current QRCode object
      */
-    public QRCode withCharset(String charset) {
+    public AbstractQRCode withCharset(String charset) {
         return withHint(EncodeHintType.CHARACTER_SET, charset);
     }
 
@@ -116,7 +78,7 @@ public class QRCode {
      *
      * @return the current QRCode object
      */
-    public QRCode withErrorCorrection(ErrorCorrectionLevel level) {
+    public AbstractQRCode withErrorCorrection(ErrorCorrectionLevel level) {
         return withHint(EncodeHintType.ERROR_CORRECTION, level);
     }
 
@@ -125,7 +87,7 @@ public class QRCode {
      *
      * @return the current QRCode object
      */
-    public QRCode withHint(EncodeHintType hintType, Object value) {
+    public AbstractQRCode withHint(EncodeHintType hintType, Object value) {
         hints.put(hintType, value);
         return this;
     }
@@ -136,17 +98,7 @@ public class QRCode {
      *
      * @return qrcode as file
      */
-    public File file() {
-        File file;
-        try {
-            file = createTempFile();
-            MatrixToImageWriter.writeToPath(createMatrix(), imageType.toString(), file.toPath());
-        } catch (Exception e) {
-            throw new QRGenerationException("Failed to create QR image from text due to underlying exception", e);
-        }
-
-        return file;
-    }
+    public abstract File file();
 
     /**
      * returns a {@link File} representation of the QR code. The file has the given name. The file is set to be deleted on exit
@@ -157,17 +109,7 @@ public class QRCode {
      * @return qrcode as file
      * @see #file()
      */
-    public File file(String name) {
-        File file;
-        try {
-            file = createTempFile(name);
-            MatrixToImageWriter.writeToPath(createMatrix(), imageType.toString(), file.toPath());
-        } catch (Exception e) {
-            throw new QRGenerationException("Failed to create QR image from text due to underlying exception", e);
-        }
-
-        return file;
-    }
+    public abstract File file(String name);
 
     /**
      * returns a {@link ByteArrayOutputStream} representation of the QR code
@@ -198,23 +140,31 @@ public class QRCode {
         }
     }
 
-    private void writeToStream(OutputStream stream) throws IOException, WriterException {
-        MatrixToImageWriter.writeToStream(createMatrix(), imageType.toString(), stream);
-    }
+    protected abstract void writeToStream(OutputStream stream) throws IOException, WriterException;
 
-    private BitMatrix createMatrix() throws WriterException {
+    protected BitMatrix createMatrix(String text) throws WriterException {
         return qrWriter.encode(text, com.google.zxing.BarcodeFormat.QR_CODE, width, height, hints);
     }
 
-    private File createTempFile() throws IOException {
+    protected File createTempFile() throws IOException {
         File file = File.createTempFile("QRCode", "." + imageType.toString().toLowerCase());
         file.deleteOnExit();
         return file;
     }
 
-    private File createTempFile(String name) throws IOException {
+    protected File createTempFile(String name) throws IOException {
         File file = File.createTempFile(name, "." + imageType.toString().toLowerCase());
         file.deleteOnExit();
         return file;
     }
+
+	public Writer getQrWriter() {
+		return qrWriter;
+	}
+
+	public void setQrWriter(Writer qrWriter) {
+		this.qrWriter = qrWriter;
+	}
+    
+    
 }
