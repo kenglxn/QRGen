@@ -6,3 +6,5 @@ atlassian-ide-plugin.xml
 *.*~
 .project
 .settings
+core/.classpath
+.classpath
