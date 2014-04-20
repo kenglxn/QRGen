@@ -1,13 +1,3 @@
-.idea
-*.iml
-target
-atlassian-ide-plugin.xml
-
-*.*~
-.project
-.settings
-core/.classpath
-.classpath
 # built application files
 *.apk
 *.ap_
@@ -21,3 +11,6 @@ core/.classpath
 # generated files
 bin/
 gen/
+
+/project.properties
+
