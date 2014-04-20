@@ -1,22 +1,20 @@
 package net.glxn.qrgen.core;
 
 
-import com.google.zxing.EncodeHintType;
-import com.google.zxing.Writer;
-import com.google.zxing.WriterException;
-import com.google.zxing.common.BitMatrix;
-import com.google.zxing.qrcode.QRCodeWriter;
-import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
-
-import net.glxn.qrgen.core.exception.QRGenerationException;
-import net.glxn.qrgen.core.image.ImageType;
-import net.glxn.qrgen.core.vcard.VCard;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.HashMap;
+
+import net.glxn.qrgen.core.exception.QRGenerationException;
+import net.glxn.qrgen.core.image.ImageType;
+
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.Writer;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
 /**
  * QRCode generator. This is a simple class that is built on top of <a href="http://code.google.com/p/zxing/">ZXING</a><br/><br/>

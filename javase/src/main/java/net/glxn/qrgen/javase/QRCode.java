@@ -36,7 +36,6 @@ public class QRCode extends AbstractQRCode {
      * @return the QRCode object    <br/>
      */
     public static QRCode from(String text) {
-    	
         return new QRCode(text);
     }
 
