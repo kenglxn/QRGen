@@ -9,19 +9,19 @@ package net.glxn.qrgen.vcard;
  */
 public class VCard {
 
-    private static final String NAME = "N:";
+    private static final String NAME = "N;charset=utf-8:";
 
-    private static final String COMPANY = "ORG:";
+    private static final String COMPANY = "ORG;charset=utf-8:";
 
-    private static final String TITLE = "TITLE:";
+    private static final String TITLE = "TITLE;charset=utf-8:";
 
     private static final String PHONE = "TEL:";
 
-    private static final String WEB = "URL:";
+    private static final String WEB = "URL;charset=utf-8:";
 
     private static final String EMAIL = "EMAIL:";
 
-    private static final String ADDRESS = "ADR:";
+    private static final String ADDRESS = "ADR;charset=utf-8:";
 
     private String name;
 
@@ -89,6 +89,7 @@ public class VCard {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("BEGIN:VCARD\n");
+        sb.append("VERSION:3.0\n");
         if (name != null) {
             sb.append(NAME).append(name);
         }
