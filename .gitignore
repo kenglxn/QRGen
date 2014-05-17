@@ -2,3 +2,9 @@
 *.iml
 target
 atlassian-ide-plugin.xml
+*.*~
+.project
+.settings/
+android
+core
+javase
