@@ -9,19 +9,19 @@ package net.glxn.qrgen.core.vcard;
  */
 public class VCard {
 
-    private static final String NAME = "N;charset=utf-8:";
+    private static final String NAME = "N:";
 
-    private static final String COMPANY = "ORG;charset=utf-8:";
+    private static final String COMPANY = "ORG:";
 
-    private static final String TITLE = "TITLE;charset=utf-8:";
+    private static final String TITLE = "TITLE:";
 
     private static final String PHONE = "TEL:";
 
-    private static final String WEB = "URL;charset=utf-8:";
+    private static final String WEB = "URL:";
 
     private static final String EMAIL = "EMAIL:";
 
-    private static final String ADDRESS = "ADR;charset=utf-8:";
+    private static final String ADDRESS = "ADR:";
 
     private String name;
 
@@ -88,33 +88,34 @@ public class VCard {
      */
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("BEGIN:VCARD\n");
-        sb.append("VERSION:3.0\n");
+        
+        sb.append("BEGIN:VCARD"+System.lineSeparator());
+        sb.append("VERSION:3.0"+System.lineSeparator());
         if (name != null) {
             sb.append(NAME).append(name);
         }
         if (company != null) {
-            sb.append("\n" + COMPANY)
+            sb.append(System.lineSeparator() + COMPANY)
               .append(company);
         }
         if (title != null) {
-            sb.append("\n" + TITLE)
+            sb.append(System.lineSeparator() + TITLE)
               .append(title);
         }
         if (phonenumber != null) {
-            sb.append("\n" + PHONE)
+            sb.append(System.lineSeparator() + PHONE)
               .append(phonenumber);
         }
         if (website != null) {
-            sb.append("\n" + WEB).append(website);
+            sb.append(System.lineSeparator() + WEB).append(website);
         }
         if (email != null) {
-            sb.append("\n" + EMAIL).append(email);
+            sb.append(System.lineSeparator() + EMAIL).append(email);
         }
         if (address != null) {
-            sb.append("\n" + ADDRESS).append(address);
+            sb.append(System.lineSeparator() + ADDRESS).append(address);
         }
-        sb.append("\nEND:VCARD");
+        sb.append(System.lineSeparator()+"END:VCARD");
         return sb.toString();
     }
 }
