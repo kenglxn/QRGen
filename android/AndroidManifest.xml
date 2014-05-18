@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="net.glxn.qrgen.android" android:versionCode="1" android:versionName="1.5-SNAPSHOT">
+  package="net.glxn.qrgen.android" android:versionCode="1" android:versionName="2.0-SNAPSHOT">
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
 </manifest>
