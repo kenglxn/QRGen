@@ -30,7 +30,7 @@
 		<dependency>
 			<groupId>net.glxn.qrgen</groupId>
 			<artifactId>core</artifactId>
-			<version>${version}</version>
+			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
