@@ -8,12 +8,12 @@
 	<parent>
 		<groupId>net.glxn</groupId>
 		<artifactId>qrgen-parent</artifactId>
-		<version>1.5-SNAPSHOT</version>
+		<version>2.0-SNAPSHOT</version>
 	</parent>
 
 
 	<artifactId>javase</artifactId>
-	<version>1.5-SNAPSHOT</version>
+	<version>2.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>QRGen</name>
 	<description>a simple QRCode generation api for java built on top ZXING</description>
@@ -92,7 +92,7 @@
 		<dependency>
 			<groupId>net.glxn</groupId>
 			<artifactId>core</artifactId>
-			<version>1.5-SNAPSHOT</version>
+			<version>${version}</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>

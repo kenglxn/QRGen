@@ -5,11 +5,11 @@
 	<parent>
 		<artifactId>qrgen-parent</artifactId>
 		<groupId>net.glxn</groupId>
-		<version>1.5-SNAPSHOT</version>
+		<version>2.0-SNAPSHOT</version>
 	</parent>
 	<groupId>net.glxn</groupId>
 	<artifactId>android</artifactId>
-	<version>1.5-SNAPSHOT</version>
+	<version>2.0-SNAPSHOT</version>
 	<packaging>apklib</packaging>
 	<name>android</name>
 
@@ -30,7 +30,7 @@
 		<dependency>
 			<groupId>net.glxn</groupId>
 			<artifactId>core</artifactId>
-			<version>1.5-SNAPSHOT</version>
+			<version>${version}</version>
 		</dependency>
 
 		<dependency>
