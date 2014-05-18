@@ -83,6 +83,11 @@ VCard johnDoe = new VCard("John Doe")
                     .setWebsite("www.example.org");
 QRCode.from(johnDoe).file();
 
+// if using special characters don't forget to supply the encoding
+VCard johnSpecial = new VCard("Jöhn Dɵe")
+                        .setAdress("ëåäöƞ Sträät 1, 1234 Döestüwn");
+QRCode.from(johnSpecial).withCharset("UTF-8").file();
+
 ```
 
 #### License:
