@@ -13,7 +13,9 @@ ZXING: http://code.google.com/p/zxing/
 
 #### Get it:
 
-QRGen is available from [Maven Central Repository](http://search.maven.org/#browse%7C-852965118) using the following dependency declaration:
+QRGen consists of three modules: ```core```, ```javase``` and ```android```. Everything is available from [Maven Central Repository](http://search.maven.org/#browse%7C-852965118).
+When developing a Java application you need to add ```core``` and ```javase``` to your list of dependencies:
+
 
 Gradle:
 
@@ -30,6 +32,8 @@ Maven:
             <version>1.4</version>
         </dependency>
     </dependencies>
+
+When you want to use QRGen inside your android application you need to add ```core``` and ```android``` to your list of dependencies:
 
 Or you can clone and build yourself:
 
