@@ -1,4 +1,4 @@
-language: java
+language: android
 before_install: "git clone -b travis `git config --get remote.origin.url` target/travis"
 branches:
   only:
@@ -13,3 +13,6 @@ env:
   global:
     - secure: "nzDY1aT+P3NFCsbYS3He3C60auLKDYuGOYJHPmT4eeZDxGgxuqErMjNZ439L\nJxD8UUaJz19r3IP6543sNCmtJWbQjBB231XKo3Ecdp8aWxs8kBOhKWeLkbGv\nqi5jbPTaB/K+gYSiE3AEiWJV3wL88VQ+5V4/uUpKDId97TZhAVg="
     - secure: "Y728e7nyo+vG+1yuMkohnzOCRMo+z2tkaILW0AP9DBiPe8Pr1Uau2aBTW9WX\nW3CJj59cfv2QR4y9gtgcxUK3C92aaqbMQdNtX+qPciuBjMxKR+WdBFsh0bcc\nPdThBsji4ldzKS5v5O32g7it7RwA7978sK4UXOcNFEAyHY7fowQ="
+android:
+  components:
+    - build-tools-19.0.2
