@@ -3,17 +3,18 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
+
+
 	<parent>
-		<groupId>org.sonatype.oss</groupId>
-		<artifactId>oss-parent</artifactId>
-		<version>7</version>
+		<groupId>net.glxn.qrgen</groupId>
+		<artifactId>qrgen-parent</artifactId>
+		<version>2.0-SNAPSHOT</version>
 	</parent>
 
-	<groupId>net.glxn.qrgen</groupId>
-	<artifactId>qrgen-parent</artifactId>
+	<artifactId>core</artifactId>
 	<version>2.0-SNAPSHOT</version>
-	<packaging>pom</packaging>
-	<name>QRGen-parent</name>
+	<packaging>jar</packaging>
+	<name>QRGen</name>
 	<description>a simple QRCode generation api for java built on top ZXING</description>
 	<url>http://kenglxn.github.io/QRGen/</url>
 
@@ -36,12 +37,6 @@
 			<email>ken@glxn.net</email>
 		</developer>
 	</developers>
-
-	<modules>
-		<module>core</module>
-		<module>javase</module>
-		<module>android</module>
-	</modules>
 
 	<properties>
 		<zxing.version>3.0.0</zxing.version>
@@ -73,11 +68,26 @@
 					</execution>
 				</executions>
 			</plugin>
-
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 
 	<dependencies>
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>core</artifactId>
+			<version>${zxing.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
