@@ -7,16 +7,14 @@
 		<groupId>net.glxn.qrgen</groupId>
 		<version>2.0-SNAPSHOT</version>
 	</parent>
-	<groupId>net.glxn.qrgen</groupId>
 	<artifactId>android</artifactId>
 	<version>2.0-SNAPSHOT</version>
-	<packaging>apklib</packaging>
+	<packaging>jar</packaging>
 	<name>android</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<platform.version>4.1.1.4</platform.version>
-		<android.plugin.version>3.8.2</android.plugin.version>
 	</properties>
 
 	<dependencies>
@@ -24,7 +22,6 @@
 			<groupId>com.google.android</groupId>
 			<artifactId>android</artifactId>
 			<version>${platform.version}</version>
-			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
@@ -47,20 +44,4 @@
 		</dependency>
 
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>com.jayway.maven.plugins.android.generation2</groupId>
-				<artifactId>android-maven-plugin</artifactId>
-				<version>${android.plugin.version}</version>
-				<extensions>true</extensions>
-				<configuration>
-					<sdk>
-						<platform>16</platform>
-					</sdk>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 </project>
