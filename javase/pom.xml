@@ -3,17 +3,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-
-
 	<parent>
 		<groupId>net.glxn.qrgen</groupId>
 		<artifactId>qrgen-parent</artifactId>
 		<version>2.0-SNAPSHOT</version>
 	</parent>
 
-
 	<artifactId>javase</artifactId>
-	<version>2.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>QRGen</name>
 	<description>a simple QRCode generation api for java built on top ZXING</description>
@@ -38,14 +34,6 @@
 			<email>ken@glxn.net</email>
 		</developer>
 	</developers>
-
-	<properties>
-		<zxing.version>3.0.0</zxing.version>
-		<junit.version>4.8.2</junit.version>
-		<maven-compiler-plugin.source>1.7</maven-compiler-plugin.source>
-		<maven-compiler-plugin.target>1.7</maven-compiler-plugin.target>
-		<maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
-	</properties>
 
 	<build>
 		<plugins>

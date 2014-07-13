@@ -44,7 +44,7 @@
 	</modules>
 
 	<properties>
-		<zxing.version>3.0.0</zxing.version>
+		<zxing.version>3.1.0</zxing.version>
 		<junit.version>4.8.2</junit.version>
 		<maven-compiler-plugin.source>1.7</maven-compiler-plugin.source>
 		<maven-compiler-plugin.target>1.7</maven-compiler-plugin.target>
