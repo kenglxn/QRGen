@@ -15,7 +15,7 @@ ZXING: http://code.google.com/p/zxing/
 
 QRGen consists of three modules: ```core```, ```javase``` and ```android```. Everything is available from [Maven Central Repository](http://search.maven.org/#browse%7C-852965118).
 
-_**NOTE: The 2.0-SNAPSHOT version is not available through Maven Central. When 2.0 is released it will be, but until then you need to add the Sonatype Snaphot repo to your pom or gradle file:**_
+_**NOTE: The 2.0-SNAPSHOT version is not available through Maven Central. When 2.0 is released it will be, but until then you need to add the Sonatype Snapshot repo to your pom or gradle file:**_
 
     <repositories>
       <repository>
@@ -33,7 +33,7 @@ When developing a Java application you need to add ```javase``` module to your l
 Gradle:
 
     dependencies {
-		compile ("net.glxn.qrgen:javase:2.0-SNAPSHPOT")
+		compile ("net.glxn.qrgen:javase:2.0-SNAPSHOT")
     }
 
 Maven:
@@ -53,7 +53,7 @@ When you want to use QRGen inside your android application you need to add the `
 Gradle:
 
     dependencies {
-		compile ("net.glxn.qrgen:android:2.0-SNAPSHPOT")
+		compile ("net.glxn.qrgen:android:2.0-SNAPSHOT")
     }
 
 Maven:
