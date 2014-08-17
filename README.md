@@ -29,12 +29,12 @@ Maven:
 
 Gradle:
 
-  repositories {
-      maven {
-          url "https://oss.sonatype.org/content/repositories/snapshots/"
+    repositories {
+        maven {
+            url "https://oss.sonatype.org/content/repositories/snapshots/"
 
-      }
-  }
+        }
+    }
 ##### Java Application
 
 When developing a Java application you need to add ```javase``` module to your list of dependencies. The required ```core``` module will be added automatically by your build system:
