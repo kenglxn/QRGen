@@ -17,6 +17,8 @@ QRGen consists of three modules: ```core```, ```javase``` and ```android```. Eve
 
 _**NOTE: The 2.0-SNAPSHOT version is not available through Maven Central. When 2.0 is released it will be, but until then you need to add the Sonatype Snapshot repo to your pom or gradle file:**_
 
+Maven:
+
     <repositories>
       <repository>
         <id>sonatype-snapshots</id>
@@ -25,6 +27,14 @@ _**NOTE: The 2.0-SNAPSHOT version is not available through Maven Central. When 2
       </repository>
     </repositories>
 
+Gradle:
+
+  repositories {
+      maven {
+          url "https://oss.sonatype.org/content/repositories/snapshots/"
+
+      }
+  }
 ##### Java Application
 
 When developing a Java application you need to add ```javase``` module to your list of dependencies. The required ```core``` module will be added automatically by your build system:
