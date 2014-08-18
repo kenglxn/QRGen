@@ -24,7 +24,7 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(manifest=Config.NONE)
+@Config(manifest=Config.NONE, shadows={QRGenShadowBitmap.class})
 public class QRCodeTest {
 
 	@Test
