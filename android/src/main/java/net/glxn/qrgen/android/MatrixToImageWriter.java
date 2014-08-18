@@ -41,14 +41,16 @@ public class MatrixToImageWriter {
 	 * @return {@link Bitmap} representation of the input
 	 */
 	public static Bitmap toBitmap(BitMatrix matrix, MatrixToImageConfig config) {
-        int width = matrix.getWidth();
-        int height = matrix.getHeight();
-        int[] pixels = new int[width * height];
+        final int onColor = config.getPixelOnColor();
+        final int offColor = config.getPixelOffColor();
+        final int width = matrix.getWidth();
+        final int height = matrix.getHeight();
+        final int[] pixels = new int[width * height];
 
         for (int y = 0; y < height; y++) {
             int offset = y * width;
             for (int x = 0; x < width; x++) {
-                pixels[offset + x] = matrix.get(x, y) ? config.getPixelOnColor() : config.getPixelOffColor();
+                pixels[offset + x] = matrix.get(x, y) ? onColor : offColor;
             }
         }
 
