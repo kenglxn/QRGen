@@ -41,8 +41,6 @@ public class MatrixToImageWriter {
 	 * @return {@link Bitmap} representation of the input
 	 */
 	public static Bitmap toBitmap(BitMatrix matrix, MatrixToImageConfig config) {
-        int BLACK = 0xFF000000;
-        int WHITE = 0xFFFFFFFF;
         int width = matrix.getWidth();
         int height = matrix.getHeight();
         int[] pixels = new int[width * height];
@@ -50,11 +48,11 @@ public class MatrixToImageWriter {
         for (int y = 0; y < height; y++) {
             int offset = y * width;
             for (int x = 0; x < width; x++) {
-                pixels[offset + x] = matrix.get(x, y) ? BLACK : WHITE;
+                pixels[offset + x] = matrix.get(x, y) ? config.getPixelOnColor() : config.getPixelOffColor();
             }
         }
 
-        Bitmap image = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Bitmap image = Bitmap.createBitmap(width, height, config.getBufferedImageColorModel());
         image.setPixels(pixels, 0, width, 0, 0, width, height);
         return image;
 	}
