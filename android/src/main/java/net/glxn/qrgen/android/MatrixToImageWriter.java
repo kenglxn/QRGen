@@ -50,7 +50,7 @@ public class MatrixToImageWriter {
         for (int y = 0; y < height; y++) {
             int offset = y * width;
             for (int x = 0; x < width; x++) {
-                pixels[offset + x] = bitMatrix.get(x, y) ? BLACK : WHITE;
+                pixels[offset + x] = matrix.get(x, y) ? BLACK : WHITE;
             }
         }
 
