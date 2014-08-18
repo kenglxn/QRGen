@@ -41,32 +41,22 @@ public class MatrixToImageWriter {
 	 * @return {@link Bitmap} representation of the input
 	 */
 	public static Bitmap toBitmap(BitMatrix matrix, MatrixToImageConfig config) {
-		int width = matrix.getWidth();
-		int height = matrix.getHeight();
+        final int onColor = config.getPixelOnColor();
+        final int offColor = config.getPixelOffColor();
+        final int width = matrix.getWidth();
+        final int height = matrix.getHeight();
+        final int[] pixels = new int[width * height];
 
-		Bitmap image = Bitmap.createBitmap(width, height,
-				Bitmap.Config.ARGB_8888);
-		Canvas canvas = new Canvas();
-		canvas.setBitmap(image);
+        for (int y = 0; y < height; y++) {
+            int offset = y * width;
+            for (int x = 0; x < width; x++) {
+                pixels[offset + x] = matrix.get(x, y) ? onColor : offColor;
+            }
+        }
 
-		for (int x = 0; x < width; x++) {
-			for (int y = 0; y < height; y++) {
-				// image.setPixel(x, y, matrix.get(x, y) ? onColor : offColor);
-				Paint paint = new Paint();
-				if (matrix.get(x, y)) {
-					paint.setColor(Color.BLACK);
-				} else {
-					paint.setColor(Color.WHITE);
-				}
-
-				canvas.drawPoint(x, y, paint);
-
-			}
-		}
-
-		canvas.drawBitmap(image, 0, 0, null);
-		canvas.save(Canvas.ALL_SAVE_FLAG);
-		return image;
+        Bitmap image = Bitmap.createBitmap(width, height, config.getBufferedImageColorModel());
+        image.setPixels(pixels, 0, width, 0, 0, width, height);
+        return image;
 	}
 
 	/**
