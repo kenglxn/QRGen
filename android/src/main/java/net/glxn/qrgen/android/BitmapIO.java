@@ -24,12 +24,11 @@ public class BitmapIO {
 	
 	public static boolean write(Bitmap image, String type, File file) throws IOException {
 		OutputStream stream = null;
-		try{
+		try {
 			stream = new FileOutputStream(file);
 			return write(image, type, stream);
-			
 		} catch (IOException ioe) {
-			
+			throw ioe;
 		} finally {
 			if(stream != null) {
 				stream.flush();
@@ -37,6 +36,5 @@ public class BitmapIO {
 			}
 		}
 		
-		return false;
 	}
 }

@@ -38,11 +38,7 @@ public class MatrixToImageConfig {
 	}
 
 	Bitmap.Config getBufferedImageColorModel() {
-//		return 0;
-		// Use faster BINARY if colors match default
-		//Represents an image with 8-bit RGBA color components packed into integer pixels.
-		//Represents an opaque byte-packed 1, 2, or 4 bit image.
-		return onColor == BLACK && offColor == WHITE ? Bitmap.Config.ALPHA_8: Bitmap.Config.ARGB_8888;
-		//return onColor == BLACK && offColor == WHITE ? Bitmap.TYPE_BYTE_BINARY: BufferedImage.TYPE_INT_RGB;
+		//On Android the ALPHA_8 model doesn't work, results in empty files and therefore IOExceptions
+		return Bitmap.Config.ARGB_8888;
 	}
 }
