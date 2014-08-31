@@ -21,7 +21,7 @@ public class BitmapIO {
 		// Default is PNG and for GIFs also
 		return image.compress(CompressFormat.PNG, 80, stream);
 	}
-	
+
 	public static boolean write(Bitmap image, String type, File file) throws IOException {
 		OutputStream stream = null;
 		try {
@@ -30,11 +30,10 @@ public class BitmapIO {
 		} catch (IOException ioe) {
 			throw ioe;
 		} finally {
-			if(stream != null) {
+			if (stream != null) {
 				stream.flush();
 				stream.close();
 			}
 		}
-		
 	}
 }

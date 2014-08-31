@@ -163,6 +163,4 @@ public abstract class AbstractQRCode {
 	public void setQrWriter(Writer qrWriter) {
 		this.qrWriter = qrWriter;
 	}
-    
-    
 }
