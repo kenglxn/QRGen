@@ -89,8 +89,8 @@ public class VCard {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         
-        sb.append("BEGIN:VCARD"+System.lineSeparator());
-        sb.append("VERSION:3.0"+System.lineSeparator());
+        sb.append("BEGIN:VCARD" + System.lineSeparator());
+        sb.append("VERSION:3.0" + System.lineSeparator());
         if (name != null) {
             sb.append(NAME).append(name);
         }
@@ -115,7 +115,7 @@ public class VCard {
         if (address != null) {
             sb.append(System.lineSeparator() + ADDRESS).append(address);
         }
-        sb.append(System.lineSeparator()+"END:VCARD");
+        sb.append(System.lineSeparator() + "END:VCARD");
         return sb.toString();
     }
 }

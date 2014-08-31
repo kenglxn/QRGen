@@ -15,8 +15,8 @@ import net.glxn.qrgen.core.vcard.VCard;
 public class QRCode extends AbstractQRCode {
 
 	protected final String text;
-	
-	 protected QRCode(String text) {
+
+	protected QRCode(String text) {
 	        this.text = text;
 	        qrWriter = new QRCodeWriter();
 	    }
@@ -50,7 +50,7 @@ public class QRCode extends AbstractQRCode {
     public static AbstractQRCode from(VCard vcard) {
         return new QRCode(vcard.toString());
     }
-    
+
     @Override
     public File file() {
         File file;

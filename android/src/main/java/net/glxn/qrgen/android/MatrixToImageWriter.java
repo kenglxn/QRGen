@@ -5,13 +5,10 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 
 import com.google.zxing.common.BitMatrix;
 
-public class MatrixToImageWriter {
+public final class MatrixToImageWriter {
 
 	private static final MatrixToImageConfig DEFAULT_CONFIG = new MatrixToImageConfig();
 
@@ -40,7 +37,7 @@ public class MatrixToImageWriter {
 	 *            output configuration
 	 * @return {@link Bitmap} representation of the input
 	 */
-	public static Bitmap toBitmap(BitMatrix matrix, MatrixToImageConfig config) {
+	public static Bitmap toBitmap(final BitMatrix matrix, final MatrixToImageConfig config) {
         final int onColor = config.getPixelOnColor();
         final int offColor = config.getPixelOffColor();
         final int width = matrix.getWidth();
@@ -48,7 +45,7 @@ public class MatrixToImageWriter {
         final int[] pixels = new int[width * height];
 
         for (int y = 0; y < height; y++) {
-            int offset = y * width;
+            final int offset = y * width;
             for (int x = 0; x < width; x++) {
                 pixels[offset + x] = matrix.get(x, y) ? onColor : offColor;
             }
