@@ -23,12 +23,12 @@
             <artifactId>core</artifactId>
             <version>${project.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.robolectric</groupId>
             <artifactId>robolectric</artifactId>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>com.squareup</groupId>
             <artifactId>fest-android</artifactId>
