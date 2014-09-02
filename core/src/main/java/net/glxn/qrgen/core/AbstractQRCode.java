@@ -156,13 +156,11 @@ public abstract class AbstractQRCode {
         return file;
     }
 
-	public Writer getQrWriter() {
-		return qrWriter;
-	}
+    public Writer getQrWriter() {
+        return qrWriter;
+    }
 
-	public void setQrWriter(Writer qrWriter) {
-		this.qrWriter = qrWriter;
-	}
-    
-    
+    public void setQrWriter(Writer qrWriter) {
+        this.qrWriter = qrWriter;
+    }
 }

@@ -36,19 +36,19 @@ public class QRCodeTest {
         File file = QRCode.from(johnDoe).file();
         Assert.assertNotNull(file);
     }
-    
+
     @Test
     public void shouldGetFileFromVCardWithExtendedChars() throws Exception {
-    	VCard johnDoe = new VCard("John Doe")
-	        .setName("Björkelundsvägen")
-	        .setEmail("john.doe@example.org")
-	        .setAddress("John Doe Street 1, 5678 Gråbo")
-	        .setTitle("Mister")
-	        .setCompany("John Doe Inc.")
-	        .setPhonenumber("1234")
-	        .setWebsite("www.Björkelundsvägen.org");
-    	File file = QRCode.from(johnDoe).file();
-    	Assert.assertNotNull(file);
+        VCard johnDoe = new VCard("John Doe")
+                .setName("Björkelundsvägen")
+                .setEmail("john.doe@example.org")
+                .setAddress("John Doe Street 1, 5678 Gråbo")
+                .setTitle("Mister")
+                .setCompany("John Doe Inc.")
+                .setPhonenumber("1234")
+                .setWebsite("www.Björkelundsvägen.org");
+        File file = QRCode.from(johnDoe).file();
+        Assert.assertNotNull(file);
     }
 
     @Test
@@ -72,7 +72,6 @@ public class QRCodeTest {
 
     @Test
     public void shouldHandleLargeString() throws Exception {
-
         int length = 2950;
         char[] chars = new char[length];
         for (int i = 0; i < length; i++) {
