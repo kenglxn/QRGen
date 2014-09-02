@@ -1,99 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
 
+    <parent>
+        <groupId>net.glxn.qrgen</groupId>
+        <artifactId>qrgen-parent</artifactId>
+        <version>2.0-SNAPSHOT</version>
+    </parent>
 
-	<parent>
-		<groupId>net.glxn.qrgen</groupId>
-		<artifactId>qrgen-parent</artifactId>
-		<version>2.0-SNAPSHOT</version>
-	</parent>
+    <artifactId>core</artifactId>
+    <version>2.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>QRGen</name>
+    <description>a simple QRCode generation api for java built on top ZXING</description>
+    <url>http://kenglxn.github.io/QRGen/</url>
 
-	<artifactId>core</artifactId>
-	<version>2.0-SNAPSHOT</version>
-	<packaging>jar</packaging>
-	<name>QRGen</name>
-	<description>a simple QRCode generation api for java built on top ZXING</description>
-	<url>http://kenglxn.github.io/QRGen/</url>
+    <licenses>
+        <license>
+            <name>Apache License v2</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+        </license>
+    </licenses>
 
-	<licenses>
-		<license>
-			<name>Apache License v2</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
-		</license>
-	</licenses>
+    <scm>
+        <connection>scm:git:git@github.com:kenglxn/QRGen.git</connection>
+        <developerConnection>scm:git:git@github.com:kenglxn/QRGen.git</developerConnection>
+        <url>git@github.com:kenglxn/QRGen.git</url>
+    </scm>
 
-	<scm>
-		<connection>scm:git:git@github.com:kenglxn/QRGen.git</connection>
-		<developerConnection>scm:git:git@github.com:kenglxn/QRGen.git</developerConnection>
-		<url>git@github.com:kenglxn/QRGen.git</url>
-	</scm>
+    <developers>
+        <developer>
+            <name>Ken Gullaksen</name>
+            <email>ken@glxn.net</email>
+        </developer>
+    </developers>
 
-	<developers>
-		<developer>
-			<name>Ken Gullaksen</name>
-			<email>ken@glxn.net</email>
-		</developer>
-	</developers>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
-	<properties>
-		<zxing.version>3.0.0</zxing.version>
-		<junit.version>4.8.2</junit.version>
-		<maven-compiler-plugin.source>1.7</maven-compiler-plugin.source>
-		<maven-compiler-plugin.target>1.7</maven-compiler-plugin.target>
-		<maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
-	</properties>
-
-	<build>
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>${maven-compiler-plugin.version}</version>
-				<configuration>
-					<source>${maven-compiler-plugin.source}</source>
-					<target>${maven-compiler-plugin.target}</target>
-					<encoding>UTF-8</encoding>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
-				<executions>
-					<execution>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<executions>
-					<execution>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
-
-	<dependencies>
-		<dependency>
-			<groupId>com.google.zxing</groupId>
-			<artifactId>core</artifactId>
-			<version>${zxing.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>${junit.version}</version>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>core</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

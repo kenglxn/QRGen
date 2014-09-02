@@ -1,89 +1,152 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>org.sonatype.oss</groupId>
-		<artifactId>oss-parent</artifactId>
-		<version>7</version>
-	</parent>
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
 
-	<groupId>net.glxn.qrgen</groupId>
-	<artifactId>qrgen-parent</artifactId>
-	<version>2.0-SNAPSHOT</version>
-	<packaging>pom</packaging>
-	<name>QRGen-parent</name>
-	<description>a simple QRCode generation api for java built on top ZXING</description>
-	<url>http://kenglxn.github.io/QRGen/</url>
+    <groupId>net.glxn.qrgen</groupId>
+    <artifactId>qrgen-parent</artifactId>
+    <version>2.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>QRGen-parent</name>
+    <description>a simple QRCode generation api for java built on top ZXING</description>
+    <url>http://kenglxn.github.io/QRGen/</url>
 
-	<licenses>
-		<license>
-			<name>Apache License v2</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
-		</license>
-	</licenses>
+    <licenses>
+        <license>
+            <name>Apache License v2</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+        </license>
+    </licenses>
 
-	<scm>
-		<connection>scm:git:git@github.com:kenglxn/QRGen.git</connection>
-		<developerConnection>scm:git:git@github.com:kenglxn/QRGen.git</developerConnection>
-		<url>git@github.com:kenglxn/QRGen.git</url>
-	</scm>
+    <scm>
+        <connection>scm:git:git@github.com:kenglxn/QRGen.git</connection>
+        <developerConnection>scm:git:git@github.com:kenglxn/QRGen.git</developerConnection>
+        <url>git@github.com:kenglxn/QRGen.git</url>
+    </scm>
 
-	<developers>
-		<developer>
-			<name>Ken Gullaksen</name>
-			<email>ken@glxn.net</email>
-		</developer>
-	</developers>
+    <developers>
+        <developer>
+            <name>Ken Gullaksen</name>
+            <email>ken@glxn.net</email>
+        </developer>
+    </developers>
 
-	<modules>
-		<module>core</module>
-		<module>javase</module>
-		<module>android</module>
-	</modules>
+    <modules>
+        <module>core</module>
+        <module>javase</module>
+        <module>android</module>
+    </modules>
 
-	<properties>
-		<zxing.version>3.0.0</zxing.version>
-		<junit.version>4.8.2</junit.version>
-		<maven-compiler-plugin.source>1.7</maven-compiler-plugin.source>
-		<maven-compiler-plugin.target>1.7</maven-compiler-plugin.target>
-		<maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
-	</properties>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <platform.version>4.1.1.4</platform.version>
 
-	<build>
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>${maven-compiler-plugin.version}</version>
-				<configuration>
-					<source>${maven-compiler-plugin.source}</source>
-					<target>${maven-compiler-plugin.target}</target>
-					<encoding>UTF-8</encoding>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
-				<executions>
-					<execution>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
+        <android.plugin.version>3.8.2</android.plugin.version>
+        <maven-compiler-plugin.source>1.7</maven-compiler-plugin.source>
+        <maven-compiler-plugin.target>1.7</maven-compiler-plugin.target>
+        <maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
+        <maven-source-plugin.version>2.3</maven-source-plugin.version>
+        <maven-javadoc-plugin.version>2.9.1</maven-javadoc-plugin.version>
+        <junit.version>4.8.2</junit.version>
+        <zxing.version>3.0.0</zxing.version>
+        <robolectric.version>2.2</robolectric.version>
+        <fest-android.version>1.0.7</fest-android.version>
+    </properties>
 
-		</plugins>
-	</build>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.google.zxing</groupId>
+                <artifactId>javase</artifactId>
+                <version>${zxing.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.zxing</groupId>
+                <artifactId>core</artifactId>
+                <version>${zxing.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.android</groupId>
+                <artifactId>android</artifactId>
+                <version>${platform.version}</version>
+                <scope>provided</scope>
+            </dependency>
 
-	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>${junit.version}</version>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.robolectric</groupId>
+                <artifactId>robolectric</artifactId>
+                <version>${robolectric.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.squareup</groupId>
+                <artifactId>fest-android</artifactId>
+                <version>${fest-android.version}</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>${maven-source-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>${maven-javadoc-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>com.jayway.maven.plugins.android.generation2</groupId>
+                    <artifactId>android-maven-plugin</artifactId>
+                    <version>${android.plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${maven-compiler-plugin.source}</source>
+                    <target>${maven-compiler-plugin.target}</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
