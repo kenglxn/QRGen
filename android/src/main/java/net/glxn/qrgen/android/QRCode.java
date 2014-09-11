@@ -1,5 +1,6 @@
 package net.glxn.qrgen.android;
 
+import android.graphics.Bitmap;
 import com.google.zxing.WriterException;
 import com.google.zxing.qrcode.QRCodeWriter;
 import net.glxn.qrgen.core.AbstractQRCode;
@@ -60,6 +61,19 @@ public class QRCode extends AbstractQRCode {
      */
     public static AbstractQRCode from(VCard vcard) {
         return new QRCode(vcard.toString());
+    }
+
+    /**
+     * Returns a {@link android.graphics.Bitmap} without creating a {@link java.io.File} first.
+     *
+     * @return {@link android.graphics.Bitmap} of this QRCode
+     */
+    public Bitmap bitmap() {
+        try {
+            return MatrixToImageWriter.toBitmap(createMatrix(text));
+        } catch (WriterException e) {
+            throw new QRGenerationException("Failed to create QR image from text due to underlying exception", e);
+        }
     }
 
     @Override
