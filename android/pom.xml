@@ -33,5 +33,9 @@
             <groupId>com.squareup</groupId>
             <artifactId>fest-android</artifactId>
         </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
     </dependencies>
 </project>
