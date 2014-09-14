@@ -1,45 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<artifactId>qrgen-parent</artifactId>
-		<groupId>net.glxn.qrgen</groupId>
-		<version>2.0-SNAPSHOT</version>
-	</parent>
-	<artifactId>android</artifactId>
-	<packaging>jar</packaging>
-	<name>android</name>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>qrgen-parent</artifactId>
+        <groupId>net.glxn.qrgen</groupId>
+        <version>2.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>android</artifactId>
+    <packaging>jar</packaging>
+    <name>android</name>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
-	<dependencies>
-		<dependency>
-			<groupId>com.google.android</groupId>
-			<artifactId>android</artifactId>
-			<version>${android.platform.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>net.glxn.qrgen</groupId>
-			<artifactId>core</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.robolectric</groupId>
-			<artifactId>robolectric</artifactId>
-			<version>${robolectric.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.squareup</groupId>
-			<artifactId>fest-android</artifactId>
-			<version>${fest-android.version}</version>
-			<scope>test</scope>
-		</dependency>
-
-	</dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>net.glxn.qrgen</groupId>
+            <artifactId>core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.android</groupId>
+            <artifactId>android</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.robolectric</groupId>
+            <artifactId>robolectric</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup</groupId>
+            <artifactId>fest-android</artifactId>
+        </dependency>
+    </dependencies>
 </project>
