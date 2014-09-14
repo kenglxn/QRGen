@@ -1,5 +1,6 @@
 package net.glxn.qrgen.android;
 
+import android.graphics.Bitmap;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.Writer;
@@ -24,6 +25,18 @@ import java.util.Map;
 @RunWith(RobolectricTestRunner.class)
 @Config(manifest = Config.NONE, shadows = {QRGenShadowBitmap.class})
 public class QRCodeTest {
+
+    @Test
+    public void shouldCreateBitmapWithDefaults() throws Exception {
+        Bitmap bmp = QRCode.from("www.example.org").bitmap();
+        Assert.assertNotNull(bmp);
+    }
+
+    @Test
+    public void shouldGetFileAsBitmapWithDefaults() throws Exception {
+        File file = QRCode.from("www.example.org").to(ImageType.BMP).file();
+        Assert.assertNotNull(file);
+    }
 
     @Test
     public void shouldGetFileFromVCardWithDefaults() throws Exception {

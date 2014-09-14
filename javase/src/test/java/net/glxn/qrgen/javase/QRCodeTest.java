@@ -52,6 +52,12 @@ public class QRCodeTest {
     }
 
     @Test
+    public void shouldGetBitmapFileFromText() throws Exception {
+        File file = QRCode.from("www.example.org").to(ImageType.BMP).file();
+        Assert.assertNotNull(file);
+    }
+
+    @Test
     public void shouldGetFileFromTextWithDefaults() throws Exception {
         File file = QRCode.from("Hello World").file();
         Assert.assertNotNull(file);
