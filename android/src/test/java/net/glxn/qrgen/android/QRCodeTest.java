@@ -33,6 +33,12 @@ public class QRCodeTest {
     }
 
     @Test
+    public void shouldGetFileAsBitmapWithDefaults() throws Exception {
+        File file = QRCode.from("www.example.org").to(ImageType.BMP).file();
+        Assert.assertNotNull(file);
+    }
+
+    @Test
     public void shouldGetFileFromVCardWithDefaults() throws Exception {
         VCard johnDoe = new VCard("John Doe")
                 .setName("John Doe")

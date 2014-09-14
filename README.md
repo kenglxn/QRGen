@@ -135,6 +135,16 @@ QRCode.from(johnSpecial).withCharset("UTF-8").file();
 
 ```
 
+#### Android only
+
+On Android you have a special method `bitmap()` which returns a `android.graphics.Bitmap` without creating a `File` object before, so you can use the generated `android.graphics.Bitmap` immediately inside an `ImageView`:
+
+```java
+Bitmap bmp = QRCode.from("www.example.org").bitmap();
+ImageView myImage = (ImageView) findViewById(R.id.imageView);
+myImage.setImageBitmap(myBitmap);
+```
+
 #### License:
 
 http://www.apache.org/licenses/LICENSE-2.0.html
