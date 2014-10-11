@@ -45,6 +45,7 @@
 
 	<properties>
 		<zxing.version>3.1.0</zxing.version>
+        <jfree.svg.version>2.1</jfree.svg.version>
 		<junit.version>4.8.2</junit.version>
 		<robolectric.version>2.2</robolectric.version>
 		<fest-android.version>1.0.7</fest-android.version>
@@ -111,6 +112,11 @@
                 <groupId>com.google.zxing</groupId>
                 <artifactId>core</artifactId>
                 <version>${zxing.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jfree</groupId>
+                <artifactId>jfreesvg</artifactId>
+                <version>${jfree.svg.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.google.android</groupId>
