@@ -54,11 +54,11 @@ public class QRCode extends AbstractQRCode {
         return new QRCode(vcard.toString());
     }
 
-    public File svg() {
+    private File svg() {
         File file;
         try {
             file = createTempSvgFile();
-            MatrixToSvgWriter.writeToPath(createMatrix(text), imageType.toString(), file.toPath());
+            MatrixToSvgWriter.writeToPath(createMatrix(text), file.toPath());
         } catch (Exception e) {
             throw new QRGenerationException("Failed to create QR svg from text due to underlying exception", e);
         }
@@ -66,11 +66,11 @@ public class QRCode extends AbstractQRCode {
         return file;
     }
 
-    public File svg(String name) {
+    private File svg(String name) {
         File file;
         try {
             file = createTempSvgFile(name);
-            MatrixToSvgWriter.writeToPath(createMatrix(text), imageType.toString(), file.toPath());
+            MatrixToSvgWriter.writeToPath(createMatrix(text), file.toPath());
         } catch (Exception e) {
             throw new QRGenerationException("Failed to create QR svg from text due to underlying exception", e);
         }
@@ -109,13 +109,11 @@ public class QRCode extends AbstractQRCode {
         MatrixToImageWriter.writeToStream(createMatrix(text), imageType.toString(), stream);
     }
 
-    protected File createTempSvgFile() throws IOException {
-        File file = File.createTempFile("QRCode", ".svg");
-        file.deleteOnExit();
-        return file;
+    private File createTempSvgFile() throws IOException {
+        return createTempSvgFile("QRCode");
     }
 
-    protected File createTempSvgFile(String name) throws IOException {
+    private File createTempSvgFile(String name) throws IOException {
         File file = File.createTempFile(name, ".svg");
         file.deleteOnExit();
         return file;

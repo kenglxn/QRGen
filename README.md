@@ -135,14 +135,6 @@ QRCode.from(johnSpecial).withCharset("UTF-8").file();
 
 ```
 
-#### SVG creation
-
-```java
-QRCode.from("www.example.org").svg();
-```
-
-**SVG creation is _not_ available on android**
-
 #### Android only
 
 On Android you have a special method `bitmap()` which returns a `android.graphics.Bitmap` without creating a `File` object before, so you can use the generated `android.graphics.Bitmap` immediately inside an `ImageView`:

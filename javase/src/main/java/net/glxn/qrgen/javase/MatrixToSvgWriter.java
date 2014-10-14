@@ -35,7 +35,7 @@ public class MatrixToSvgWriter {
         return svgGraphics;
     }
 
-    public static void writeToPath(BitMatrix matrix, String format, Path file) throws IOException {
+    public static void writeToPath(BitMatrix matrix, Path file) throws IOException {
         SVGGraphics2D g2 = toSvgDocument(matrix, DEFAULT_CONFIG);
         SVGUtils.writeToSVG(file.toFile(), g2.getSVGElement());
     }
