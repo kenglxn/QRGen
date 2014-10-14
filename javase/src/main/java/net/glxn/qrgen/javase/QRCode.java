@@ -5,6 +5,7 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.qrcode.QRCodeWriter;
 import net.glxn.qrgen.core.AbstractQRCode;
 import net.glxn.qrgen.core.exception.QRGenerationException;
+import net.glxn.qrgen.core.image.ImageType;
 import net.glxn.qrgen.core.vcard.VCard;
 
 import java.io.File;
@@ -53,6 +54,30 @@ public class QRCode extends AbstractQRCode {
         return new QRCode(vcard.toString());
     }
 
+    public File svg() {
+        File file;
+        try {
+            file = createTempSvgFile();
+            MatrixToSvgWriter.writeToPath(createMatrix(text), imageType.toString(), file.toPath());
+        } catch (Exception e) {
+            throw new QRGenerationException("Failed to create QR svg from text due to underlying exception", e);
+        }
+
+        return file;
+    }
+
+    public File svg(String name) {
+        File file;
+        try {
+            file = createTempSvgFile(name);
+            MatrixToSvgWriter.writeToPath(createMatrix(text), imageType.toString(), file.toPath());
+        } catch (Exception e) {
+            throw new QRGenerationException("Failed to create QR svg from text due to underlying exception", e);
+        }
+
+        return file;
+    }
+
     @Override
     public File file() {
         File file;
@@ -82,5 +107,17 @@ public class QRCode extends AbstractQRCode {
     @Override
     protected void writeToStream(OutputStream stream) throws IOException, WriterException {
         MatrixToImageWriter.writeToStream(createMatrix(text), imageType.toString(), stream);
+    }
+
+    protected File createTempSvgFile() throws IOException {
+        File file = File.createTempFile("QRCode", ".svg");
+        file.deleteOnExit();
+        return file;
+    }
+
+    protected File createTempSvgFile(String name) throws IOException {
+        File file = File.createTempFile(name, ".svg");
+        file.deleteOnExit();
+        return file;
     }
 }

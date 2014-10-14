@@ -82,6 +82,10 @@
 			<version>${project.version}</version>
 		</dependency>
         <dependency>
+            <groupId>org.jfree</groupId>
+            <artifactId>jfreesvg</artifactId>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>

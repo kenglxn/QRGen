@@ -45,6 +45,7 @@
 
 	<properties>
 		<zxing.version>3.1.0</zxing.version>
+        <jfree.svg.version>2.1</jfree.svg.version>
 		<junit.version>4.8.2</junit.version>
 		<robolectric.version>2.2</robolectric.version>
 		<fest-android.version>1.0.7</fest-android.version>
@@ -53,6 +54,26 @@
 		<maven-compiler-plugin.target>1.7</maven-compiler-plugin.target>
 		<maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
 	</properties>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>2.12.1</version>
+                <configuration>
+                    <configLocation>checkstyle.xml</configLocation>
+                </configuration>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>checkstyle</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+        </plugins>
+    </reporting>
 
 	<build>
 		<plugins>
@@ -91,6 +112,11 @@
                 <groupId>com.google.zxing</groupId>
                 <artifactId>core</artifactId>
                 <version>${zxing.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jfree</groupId>
+                <artifactId>jfreesvg</artifactId>
+                <version>${jfree.svg.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.google.android</groupId>
