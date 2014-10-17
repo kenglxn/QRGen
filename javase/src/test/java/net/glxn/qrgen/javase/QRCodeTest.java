@@ -24,12 +24,6 @@ import java.util.Map;
 public class QRCodeTest {
 
     @Test
-    public void shouldGetSvgFromText() throws Exception {
-        File file = QRCode.from("www.example.org").svg();
-        Assert.assertNotNull(file);
-    }
-
-    @Test
     public void shouldGetFileFromVCardWithDefaults() throws Exception {
         VCard johnDoe = new VCard("John Doe")
                 .setName("John Doe")
