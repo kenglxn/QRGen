@@ -45,7 +45,7 @@ public class QRCodeTest {
                 .setEmail("john.doe@example.org")
                 .setAddress("John Doe Street 1, 5678 Berlin")
                 .setTitle("Mister").setCompany("John Doe Inc.")
-                .setPhonenumber("1234").setWebsite("www.example.org");
+                .setPhoneNumber("1234").setWebsite("www.example.org");
         File file = QRCode.from(johnDoe).file();
         Assert.assertNotNull(file);
     }

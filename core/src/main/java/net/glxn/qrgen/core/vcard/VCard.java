@@ -29,7 +29,7 @@ public class VCard {
 
     private String title;
 
-    private String phonenumber;
+    private String phoneNumber;
 
     private String email;
 
@@ -55,8 +55,8 @@ public class VCard {
         return this;
     }
 
-    public VCard setPhonenumber(String phonenumber) {
-        this.phonenumber = phonenumber;
+    public VCard setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
         return this;
     }
 
@@ -102,9 +102,9 @@ public class VCard {
             sb.append(System.lineSeparator() + TITLE)
               .append(title);
         }
-        if (phonenumber != null) {
+        if (phoneNumber != null) {
             sb.append(System.lineSeparator() + PHONE)
-              .append(phonenumber);
+              .append(phoneNumber);
         }
         if (website != null) {
             sb.append(System.lineSeparator() + WEB).append(website);
