@@ -31,7 +31,7 @@ public class QRCodeTest {
                 .setAddress("John Doe Street 1, 5678 Berlin")
                 .setTitle("Mister")
                 .setCompany("John Doe Inc.")
-                .setPhonenumber("1234")
+                .setPhoneNumber("1234")
                 .setWebsite("www.example.org");
         File file = QRCode.from(johnDoe).file();
         Assert.assertNotNull(file);
@@ -45,7 +45,7 @@ public class QRCodeTest {
                 .setAddress("John Doe Street 1, 5678 Gråbo")
                 .setTitle("Mister")
                 .setCompany("John Doe Inc.")
-                .setPhonenumber("1234")
+                .setPhoneNumber("1234")
                 .setWebsite("www.Björkelundsvägen.org");
         File file = QRCode.from(johnDoe).file();
         Assert.assertNotNull(file);
