@@ -16,7 +16,7 @@ ZXING: http://code.google.com/p/zxing/
 
 QRGen consists of three modules: ```core```, ```javase``` and ```android```. Everything is available from [Maven Central Repository](http://search.maven.org/#browse%7C-852965118).
 
-_**NOTE: The SNAPSHOT versions are not available through Maven Central. If you want the snapshot version either build locally or add the Sonatype Snapshot repo to your pom or gradle file:**_
+_**NOTE: SNAPSHOT versions are not available through Maven Central. If you want the snapshot version either build locally or add the Sonatype Snapshot repo to your pom or gradle file:**_
 
 Maven:
 
