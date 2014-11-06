@@ -37,6 +37,8 @@ Gradle:
     }
 ##### Java Application
 
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/net.glxn.qrgen/javase/badge.svg)](https://maven-badges.herokuapp.com/maven-central/net.glxn.qrgen/javase)
+
 When developing a Java application you need to add ```javase``` module to your list of dependencies. The required ```core``` module will be added automatically by your build system:
 
 
@@ -57,6 +59,8 @@ Maven:
     </dependencies>
 
 ##### Android
+
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/net.glxn.qrgen/android/badge.svg)](https://maven-badges.herokuapp.com/maven-central/net.glxn.qrgen/android)
 
 When you want to use QRGen inside your android application you need to add the ```android``` module to your list of dependencies. The required ```core``` module will be added automatically by your build system:
 
