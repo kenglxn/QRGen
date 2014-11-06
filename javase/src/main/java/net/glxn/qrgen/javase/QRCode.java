@@ -5,7 +5,6 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.qrcode.QRCodeWriter;
 import net.glxn.qrgen.core.AbstractQRCode;
 import net.glxn.qrgen.core.exception.QRGenerationException;
-import net.glxn.qrgen.core.image.ImageType;
 import net.glxn.qrgen.core.vcard.VCard;
 
 import java.io.File;
@@ -54,7 +53,7 @@ public class QRCode extends AbstractQRCode {
         return new QRCode(vcard.toString());
     }
 
-    private File svg() {
+    public File svg() {
         File file;
         try {
             file = createTempSvgFile();
@@ -66,7 +65,7 @@ public class QRCode extends AbstractQRCode {
         return file;
     }
 
-    private File svg(String name) {
+    public File svg(String name) {
         File file;
         try {
             file = createTempSvgFile(name);
