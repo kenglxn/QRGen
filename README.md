@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/kenglxn/QRGen.png?branch=master)](https://travis-ci.org/kenglxn/QRGen)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/net.glxn/qrgen/badge.svg)](https://maven-badges.herokuapp.com/maven-central/net.glxn/qrgen)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/net.glxn.qrgen/core/badge.svg)](https://maven-badges.herokuapp.com/maven-central/net.glxn.qrgen/core)
 
 [![Donate](https://rawgithub.com/twolfson/gittip-badge/0.2.0/dist/gittip.png)](https://www.gittip.com/kenglxn/)
 
