@@ -14,9 +14,8 @@ import net.glxn.qrgen.core.vcard.VCard;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
+import java.io.*;
+import java.nio.file.Files;
 import java.util.Map;
 
 public class QRCodeTest {
@@ -197,6 +196,14 @@ public class QRCodeTest {
             }
             assertCapturedHint(expected, capture, type);
         }
+    }
+
+    @Test
+    public void shouldColorOutput() throws IOException {
+        File file = QRCode.from("Hello World").color(0xFFFF0000, 0xFFFFFFAA).file();
+        File tempFile = File.createTempFile("qr_", ".png");
+        Files.copy(file.toPath(), new FileOutputStream(tempFile));
+        System.out.println(tempFile.getAbsoluteFile());
     }
 
     @SuppressWarnings("unchecked")

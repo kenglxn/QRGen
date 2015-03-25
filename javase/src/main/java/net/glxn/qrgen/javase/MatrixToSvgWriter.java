@@ -8,11 +8,8 @@ import org.jfree.graphics2d.svg.SVGUtils;
 import java.awt.*;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.ArrayList;
 
 public class MatrixToSvgWriter {
-
-    private static final MatrixToImageConfig DEFAULT_CONFIG = new MatrixToImageConfig();
 
     private static SVGGraphics2D toSvgDocument(BitMatrix matrix, MatrixToImageConfig config) {
         int width = matrix.getWidth();
@@ -35,8 +32,8 @@ public class MatrixToSvgWriter {
         return svgGraphics;
     }
 
-    public static void writeToPath(BitMatrix matrix, Path file) throws IOException {
-        SVGGraphics2D g2 = toSvgDocument(matrix, DEFAULT_CONFIG);
+    public static void writeToPath(BitMatrix matrix, Path file, MatrixToImageConfig matrixToImageConfig) throws IOException {
+        SVGGraphics2D g2 = toSvgDocument(matrix, matrixToImageConfig);
         SVGUtils.writeToSVG(file.toFile(), g2.getSVGElement());
     }
 
