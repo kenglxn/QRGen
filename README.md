@@ -107,6 +107,11 @@ QRCode.from("Hello World").withSize(250, 250).stream();
 QRCode.from("Hello World").to(ImageType.GIF).withSize(250, 250).file();
 QRCode.from("Hello World").to(ImageType.GIF).withSize(250, 250).stream();
 
+// override default colors (black on white)
+// notice that the color format is "0x(alpha: 1 byte)(RGB: 3 bytes)"
+// so in the example below it's red for foreground and yellowish for background, both 100% alpha (FF).
+QRCode.from("Hello World").withColor(0xFFFF0000, 0xFFFFFFAA).file();
+
 // supply own outputstream
 QRCode.from("Hello World").to(ImageType.PNG).writeTo(outputStream);
 

@@ -1,6 +1,7 @@
 package net.glxn.qrgen.javase;
 
 import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageConfig;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.qrcode.QRCodeWriter;
 import net.glxn.qrgen.core.AbstractQRCode;
@@ -13,7 +14,10 @@ import java.io.OutputStream;
 
 public class QRCode extends AbstractQRCode {
 
+    public static final MatrixToImageConfig DEFAULT_CONFIG = new MatrixToImageConfig();
+
     protected final String text;
+    protected MatrixToImageConfig matrixToImageConfig = DEFAULT_CONFIG;
 
     protected QRCode(String text) {
         this.text = text;
@@ -57,7 +61,7 @@ public class QRCode extends AbstractQRCode {
         File file;
         try {
             file = createTempSvgFile();
-            MatrixToSvgWriter.writeToPath(createMatrix(text), file.toPath());
+            MatrixToSvgWriter.writeToPath(createMatrix(text), file.toPath(), matrixToImageConfig);
         } catch (Exception e) {
             throw new QRGenerationException("Failed to create QR svg from text due to underlying exception", e);
         }
@@ -69,7 +73,7 @@ public class QRCode extends AbstractQRCode {
         File file;
         try {
             file = createTempSvgFile(name);
-            MatrixToSvgWriter.writeToPath(createMatrix(text), file.toPath());
+            MatrixToSvgWriter.writeToPath(createMatrix(text), file.toPath(), matrixToImageConfig);
         } catch (Exception e) {
             throw new QRGenerationException("Failed to create QR svg from text due to underlying exception", e);
         }
@@ -82,7 +86,7 @@ public class QRCode extends AbstractQRCode {
         File file;
         try {
             file = createTempFile();
-            MatrixToImageWriter.writeToPath(createMatrix(text), imageType.toString(), file.toPath());
+            MatrixToImageWriter.writeToPath(createMatrix(text), imageType.toString(), file.toPath(), matrixToImageConfig);
         } catch (Exception e) {
             throw new QRGenerationException("Failed to create QR image from text due to underlying exception", e);
         }
@@ -95,7 +99,7 @@ public class QRCode extends AbstractQRCode {
         File file;
         try {
             file = createTempFile(name);
-            MatrixToImageWriter.writeToPath(createMatrix(text), imageType.toString(), file.toPath());
+            MatrixToImageWriter.writeToPath(createMatrix(text), imageType.toString(), file.toPath(), matrixToImageConfig);
         } catch (Exception e) {
             throw new QRGenerationException("Failed to create QR image from text due to underlying exception", e);
         }
@@ -105,7 +109,7 @@ public class QRCode extends AbstractQRCode {
 
     @Override
     protected void writeToStream(OutputStream stream) throws IOException, WriterException {
-        MatrixToImageWriter.writeToStream(createMatrix(text), imageType.toString(), stream);
+        MatrixToImageWriter.writeToStream(createMatrix(text), imageType.toString(), stream, matrixToImageConfig);
     }
 
     private File createTempSvgFile() throws IOException {
@@ -116,5 +120,10 @@ public class QRCode extends AbstractQRCode {
         File file = File.createTempFile(name, ".svg");
         file.deleteOnExit();
         return file;
+    }
+
+    public QRCode withColor(int onColor, int offColor) {
+        matrixToImageConfig = new MatrixToImageConfig(onColor, offColor);
+        return this;
     }
 }
