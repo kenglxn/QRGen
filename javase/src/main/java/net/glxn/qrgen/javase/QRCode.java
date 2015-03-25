@@ -122,7 +122,7 @@ public class QRCode extends AbstractQRCode {
         return file;
     }
 
-    public QRCode color(int onColor, int offColor) {
+    public QRCode withColor(int onColor, int offColor) {
         matrixToImageConfig = new MatrixToImageConfig(onColor, offColor);
         return this;
     }

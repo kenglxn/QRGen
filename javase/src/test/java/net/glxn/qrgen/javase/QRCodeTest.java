@@ -200,7 +200,7 @@ public class QRCodeTest {
 
     @Test
     public void shouldColorOutput() throws IOException {
-        File file = QRCode.from("Hello World").color(0xFFFF0000, 0xFFFFFFAA).file();
+        File file = QRCode.from("Hello World").withColor(0xFFFF0000, 0xFFFFFFAA).file();
         File tempFile = File.createTempFile("qr_", ".png");
         Files.copy(file.toPath(), new FileOutputStream(tempFile));
         System.out.println(tempFile.getAbsoluteFile());
