@@ -1,11 +1,14 @@
 package net.glxn.qrgen.javase;
 
+import com.google.zxing.EncodeHintType;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageConfig;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.qrcode.QRCodeWriter;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import net.glxn.qrgen.core.AbstractQRCode;
 import net.glxn.qrgen.core.exception.QRGenerationException;
+import net.glxn.qrgen.core.image.ImageType;
 import net.glxn.qrgen.core.vcard.VCard;
 
 import java.io.File;
@@ -22,6 +25,60 @@ public class QRCode extends AbstractQRCode {
     protected QRCode(String text) {
         this.text = text;
         qrWriter = new QRCodeWriter();
+    }
+
+    /**
+     * Overrides the imageType from its default {@link net.glxn.qrgen.core.image.ImageType#PNG}
+     *
+     * @param imageType the {@link net.glxn.qrgen.core.image.ImageType} you would like the resulting QR to be
+     * @return the current QRCode object
+     */
+    public QRCode to(ImageType imageType) {
+        this.imageType = imageType;
+        return this;
+    }
+
+    /**
+     * Overrides the size of the qr from its default 125x125
+     *
+     * @param width  the width in pixels
+     * @param height the height in pixels
+     * @return the current QRCode object
+     */
+    public QRCode withSize(int width, int height) {
+        this.width = width;
+        this.height = height;
+        return this;
+    }
+
+    /**
+     * Overrides the default charset by supplying a {@link com.google.zxing.EncodeHintType#CHARACTER_SET} hint to {@link
+     * com.google.zxing.qrcode.QRCodeWriter#encode}
+     *
+     * @return the current QRCode object
+     */
+    public QRCode withCharset(String charset) {
+        return withHint(EncodeHintType.CHARACTER_SET, charset);
+    }
+
+    /**
+     * Overrides the default error correction by supplying a {@link com.google.zxing.EncodeHintType#ERROR_CORRECTION} hint to
+     * {@link com.google.zxing.qrcode.QRCodeWriter#encode}
+     *
+     * @return the current QRCode object
+     */
+    public QRCode withErrorCorrection(ErrorCorrectionLevel level) {
+        return withHint(EncodeHintType.ERROR_CORRECTION, level);
+    }
+
+    /**
+     * Sets hint to {@link com.google.zxing.qrcode.QRCodeWriter#encode}
+     *
+     * @return the current QRCode object
+     */
+    public QRCode withHint(EncodeHintType hintType, Object value) {
+        hints.put(hintType, value);
+        return this;
     }
 
     /**
@@ -53,7 +110,7 @@ public class QRCode extends AbstractQRCode {
      * @param vcard the vcard to encode as QRCode
      * @return the QRCode object
      */
-    public static AbstractQRCode from(VCard vcard) {
+    public static QRCode from(VCard vcard) {
         return new QRCode(vcard.toString());
     }
 

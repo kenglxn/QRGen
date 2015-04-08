@@ -7,14 +7,16 @@ import com.google.zxing.Writer;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
-import net.glxn.qrgen.core.AbstractQRCode;
 import net.glxn.qrgen.core.exception.QRGenerationException;
 import net.glxn.qrgen.core.image.ImageType;
 import net.glxn.qrgen.core.vcard.VCard;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Map;
 
@@ -23,6 +25,18 @@ public class QRCodeTest {
     @Test
     public void shouldGetSvgFromText() throws Exception {
         File file = QRCode.from("www.example.org").svg();
+        Assert.assertNotNull(file);
+    }
+
+    @Test
+    public void shouldGetSvgWithSizeFromText() throws Exception {
+        File file = QRCode.from("www.example.com").withSize(250, 250).svg();
+        Assert.assertNotNull(file);
+    }
+
+    @Test
+    public void shouldGetSvgWithSizeAndColorFromText() {
+        File file = QRCode.from("www.example.com").withSize(250, 250).withColor(30, 90).svg();
         Assert.assertNotNull(file);
     }
 
@@ -161,7 +175,7 @@ public class QRCodeTest {
         String expected = "UTF-8";
         final Object[] capture = new Object[1];
         try {
-            final AbstractQRCode from = QRCode.from("Jour férié");
+            final QRCode from = QRCode.from("Jour férié");
             from.setQrWriter(writerWithCapture(capture));
             from.to(ImageType.PNG).withCharset(expected).stream();
         } catch (QRGenerationException ignored) {
@@ -174,7 +188,7 @@ public class QRCodeTest {
         ErrorCorrectionLevel expected = ErrorCorrectionLevel.L;
         final Object[] capture = new Object[1];
         try {
-            final AbstractQRCode from = QRCode.from("Jour férié");
+            final QRCode from = QRCode.from("Jour férié");
             from.setQrWriter(writerWithCapture(capture));
             from.to(ImageType.PNG).withErrorCorrection(ErrorCorrectionLevel.L).stream();
         } catch (QRGenerationException ignored) {
@@ -189,7 +203,7 @@ public class QRCodeTest {
         for (EncodeHintType type : hintTypes) {
             final Object[] capture = new Object[1];
             try {
-                final AbstractQRCode from = QRCode.from("Jour férié");
+                final QRCode from = QRCode.from("Jour férié");
                 from.setQrWriter(writerWithCapture(capture));
                 from.to(ImageType.PNG).withHint(type, expected).stream();
             } catch (QRGenerationException ignored) {

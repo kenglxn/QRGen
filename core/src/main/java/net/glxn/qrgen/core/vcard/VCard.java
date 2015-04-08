@@ -2,7 +2,7 @@ package net.glxn.qrgen.core.vcard;
 
 /**
  * A simple wrapper for vCard data to use with ZXing QR Code generator.
- * <p/>
+ *
  * See also http://zxing.appspot.com/generator/ and Contact Information
  *
  * @author Frederik Hahne <atomfrede@gmail.com>
