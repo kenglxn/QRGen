@@ -7,7 +7,6 @@ import com.google.zxing.Writer;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
-import net.glxn.qrgen.core.AbstractQRCode;
 import net.glxn.qrgen.core.exception.QRGenerationException;
 import net.glxn.qrgen.core.image.ImageType;
 import net.glxn.qrgen.core.vcard.VCard;
@@ -147,7 +146,7 @@ public class QRCodeTest {
         String expected = "UTF-8";
         final Object[] capture = new Object[1];
         try {
-            final AbstractQRCode from = QRCode.from("Jour férié");
+            final QRCode from = QRCode.from("Jour férié");
             from.setQrWriter(writerWithCapture(capture));
             from.to(ImageType.PNG).withCharset(expected).stream();
         } catch (QRGenerationException ignored) {
@@ -160,7 +159,7 @@ public class QRCodeTest {
         ErrorCorrectionLevel expected = ErrorCorrectionLevel.L;
         final Object[] capture = new Object[1];
         try {
-            final AbstractQRCode from = QRCode.from("Jour férié");
+            final QRCode from = QRCode.from("Jour férié");
             from.setQrWriter(writerWithCapture(capture));
             from.to(ImageType.PNG).withErrorCorrection(ErrorCorrectionLevel.L)
                 .stream();
@@ -176,7 +175,7 @@ public class QRCodeTest {
         for (EncodeHintType type : hintTypes) {
             final Object[] capture = new Object[1];
             try {
-                final AbstractQRCode from = QRCode.from("Jour férié");
+                final QRCode from = QRCode.from("Jour férié");
                 from.setQrWriter(writerWithCapture(capture));
                 from.to(ImageType.PNG).withHint(type, expected).stream();
             } catch (QRGenerationException ignored) {
