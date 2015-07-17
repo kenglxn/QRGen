@@ -9,7 +9,7 @@ import org.junit.Test;
 public class WifiTest {
 
 	@Test
-	public void testFromString() {
+	public void wifiFromString() {
 		Wifi wifi = new Wifi(
 				"WIFI:S:some weird SSID;T:WPA;P:aintNoSecret;H:true;");
 		assertEquals("some weird SSID", wifi.getSsid());
@@ -18,25 +18,24 @@ public class WifiTest {
 		assertEquals(true, wifi.isHidden());
 	}
 
-	@Test(expected=IllegalArgumentException.class)
-	public void testFromNull() {
+	@Test(expected = IllegalArgumentException.class)
+	public void wifiFromNull() {
 		new Wifi(null);
 	}
 
-	@Test(expected=IllegalArgumentException.class)
-	public void testFromEmptyString() {
+	@Test(expected = IllegalArgumentException.class)
+	public void wifiFromEmptyString() {
 		new Wifi("");
 	}
 
 	@Test
-	public void testFromHeaderOnly() {
+	public void wifiFromHeaderOnly() {
 		Wifi wifi = new Wifi("WIFI:");
 		assertNull(null, wifi.getSsid());
 		assertNull(null, wifi.getAuthentication());
 		assertNull(null, wifi.getPsk());
 		assertEquals(false, wifi.isHidden());
 	}
-
 
 	@Test
 	public void testToString() {

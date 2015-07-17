@@ -8,12 +8,12 @@ import org.junit.Test;
 public class GirocodeTest {
 
 	@Test
-	public void testFromStringLf() {
+	public void girocodeFromStringLf() {
 		checkFromString("\n");
 	}
 
 	@Test
-	public void testFromStringCrLf() {
+	public void girocodeFromStringCrLf() {
 		checkFromString("\r\n");
 	}
 
@@ -44,12 +44,12 @@ public class GirocodeTest {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testFromNull() {
+	public void girocodeFromNull() {
 		new Girocode(null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testFromEmptyString() {
+	public void girocodeFromEmptyString() {
 		new Girocode("");
 	}
 
