@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import net.glxn.qrgen.core.scheme.Girocode.GirocodeSchemeDesc;
+import net.glxn.qrgen.core.scheme.UrlCode.UrlCodeSchemeDesc;
 import net.glxn.qrgen.core.scheme.VCard.VCardSchemeDesc;
 import net.glxn.qrgen.core.scheme.Wifi.WifiSchemeDesc;
 
@@ -17,6 +18,7 @@ public class QRCodeSchemeReader {
 		schemeDescs.add(new WifiSchemeDesc());
 		schemeDescs.add(new VCardSchemeDesc());
 		schemeDescs.add(new GirocodeSchemeDesc());
+		schemeDescs.add(new UrlCodeSchemeDesc());
 		KNOWN_SCHEMES = Collections.unmodifiableList(schemeDescs);
 	}
 	

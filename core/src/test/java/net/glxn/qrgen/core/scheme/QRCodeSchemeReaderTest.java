@@ -1,6 +1,9 @@
 package net.glxn.qrgen.core.scheme;
 
 import static org.junit.Assert.*;
+
+import java.net.URL;
+
 import net.glxn.qrgen.core.scheme.Girocode.Encoding;
 
 import org.junit.Test;
@@ -78,6 +81,17 @@ public class QRCodeSchemeReaderTest {
 		assertEquals("for a good prupose", girocode.getText());
 		assertEquals("Watch this Girocode :-)", girocode.getHint());
 	}
+	
+	@Test
+	public void readUrlCode() throws Exception {
+		QRCodeScheme scheme = reader.read("http://www.github.org");
+		assertNotNull(scheme);
+		assertThat(scheme, is(UrlCode.class));
+		UrlCode urlCode = (UrlCode)scheme;
+		assertEquals(new URL("http://www.github.org"), urlCode.getUrl());
+	}
+
+
 
 	@Test(expected=IllegalArgumentException.class)
 	public void readUnknownScheme() {
