@@ -10,13 +10,13 @@ import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.*;
 
-public class QRCodeSchemeReaderTest {
+public class QRCodeSchemeParserTest {
 	
-	private QRCodeSchemeReader reader = new QRCodeSchemeReader();
+	private QRCodeSchemeParser parser = new QRCodeSchemeParser();
 
 	@Test
-	public void readWifi() {
-		QRCodeScheme scheme = reader.read("WIFI:S:some weird SSID;T:WPA;P:aintNoSecret;H:true;");
+	public void parseWifi() {
+		QRCodeScheme scheme = parser.parse("WIFI:S:some weird SSID;T:WPA;P:aintNoSecret;H:true;");
 		assertNotNull(scheme);
 		assertThat(scheme, is(Wifi.class));
 		Wifi wifi = (Wifi)scheme;
@@ -27,8 +27,8 @@ public class QRCodeSchemeReaderTest {
 	}
 
 	@Test
-	public void readVCard() {
-		QRCodeScheme scheme = reader.read("BEGIN:VCARD\n" + //
+	public void parseVCard() {
+		QRCodeScheme scheme = parser.parse("BEGIN:VCARD\n" + //
 				"VERSION:3.0\n" + //
 				"N:Cookiemonster\n" + //
 				"ORG:CTV\n" + //
@@ -53,8 +53,8 @@ public class QRCodeSchemeReaderTest {
 	}
 
 	@Test
-	public void readGirocode() {
-		QRCodeScheme scheme = reader.read("BCD\n" + //
+	public void parseGirocode() {
+		QRCodeScheme scheme = parser.parse("BCD\n" + //
 				"001\n" + //
 				"1\n" + //
 				"SCT\n" + //
@@ -83,8 +83,8 @@ public class QRCodeSchemeReaderTest {
 	}
 	
 	@Test
-	public void readUrlCode() throws Exception {
-		QRCodeScheme scheme = reader.read("http://www.github.org");
+	public void parseUrlCode() throws Exception {
+		QRCodeScheme scheme = parser.parse("http://www.github.org");
 		assertNotNull(scheme);
 		assertThat(scheme, is(UrlCode.class));
 		UrlCode urlCode = (UrlCode)scheme;
@@ -94,7 +94,7 @@ public class QRCodeSchemeReaderTest {
 
 
 	@Test(expected=IllegalArgumentException.class)
-	public void readUnknownScheme() {
-		reader.read("hihi");
+	public void parseUnknownScheme() {
+		parser.parse("hihi");
 	}
 }

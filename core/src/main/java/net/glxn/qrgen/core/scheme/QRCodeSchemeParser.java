@@ -9,7 +9,7 @@ import net.glxn.qrgen.core.scheme.UrlCode.UrlCodeSchemeDesc;
 import net.glxn.qrgen.core.scheme.VCard.VCardSchemeDesc;
 import net.glxn.qrgen.core.scheme.Wifi.WifiSchemeDesc;
 
-public class QRCodeSchemeReader {
+public class QRCodeSchemeParser {
 
 	private final static List<QRCodeSchemeDesc<?>> KNOWN_SCHEMES;
 	
@@ -22,7 +22,7 @@ public class QRCodeSchemeReader {
 		KNOWN_SCHEMES = Collections.unmodifiableList(schemeDescs);
 	}
 	
-	public QRCodeScheme read(final String qrCodeString) {
+	public QRCodeScheme parse(final String qrCodeString) {
 		for (QRCodeSchemeDesc<?> qrCodeSchemeDesc : KNOWN_SCHEMES) {
 			if (qrCodeSchemeDesc.matches(qrCodeString)) {
 				return qrCodeSchemeDesc.createScheme(qrCodeString);
