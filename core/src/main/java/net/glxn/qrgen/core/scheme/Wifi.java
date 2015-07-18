@@ -46,19 +46,31 @@ public class Wifi extends AbstractQRCodeScheme {
 					"this is not a valid WIFI code: " + wifiCode);
 		}
 		Map<String, String> parameters = getParameters(
-				wifiCode.substring(WIFI_PROTOCOL_HEADER.length()), ";");
+				wifiCode.substring(WIFI_PROTOCOL_HEADER.length()), "(?<!\\\\);");
 		if (parameters.containsKey(SSID)) {
-			setSsid(parameters.get(SSID));
+			setSsid(unescape(parameters.get(SSID)));
 		}
 		if (parameters.containsKey(AUTHENTICATION)) {
 			setAuthentication(parameters.get(AUTHENTICATION));
 		}
 		if (parameters.containsKey(PSK)) {
-			setPsk(parameters.get(PSK));
+			setPsk(unescape(parameters.get(PSK)));
 		}
 		if (parameters.containsKey(HIDDEN)) {
 			setHidden(parameters.get(HIDDEN));
 		}
+	}
+
+	public String escape(final String text) {
+		return text.replace("\\", "\\\\").replace(",", "\\,")
+				.replace(";", "\\;").replace(".", "\\.")
+				.replace("\"", "\\\"").replace("'", "\\'");
+	}
+
+	public String unescape(final String text) {
+		return text.replace("\\\\", "\\").replace("\\,", ",")
+				.replace("\\;", ";").replace("\\.", ".")
+				.replace("\\\"", "\"").replace("\\'", "'");
 	}
 
 	/**
@@ -177,14 +189,14 @@ public class Wifi extends AbstractQRCodeScheme {
 	public String toString() {
 		StringBuilder bob = new StringBuilder(WIFI_PROTOCOL_HEADER);
 		if (getSsid() != null) {
-			bob.append(SSID).append(":").append(getSsid()).append(";");
+			bob.append(SSID).append(":").append(escape(getSsid())).append(";");
 		}
 		if (getAuthentication() != null) {
 			bob.append(AUTHENTICATION).append(":").append(getAuthentication())
 					.append(";");
 		}
 		if (getPsk() != null) {
-			bob.append(PSK).append(":").append(getPsk()).append(";");
+			bob.append(PSK).append(":").append(escape(getPsk())).append(";");
 		}
 		bob.append(HIDDEN).append(":").append(isHidden()).append(";");
 		return bob.toString();
