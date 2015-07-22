@@ -5,25 +5,6 @@ import java.net.URL;
 
 public class UrlCode implements QRCodeScheme {
 
-	public static class UrlCodeSchemeDesc implements QRCodeSchemeDesc<UrlCode> {
-
-		@Override
-		public boolean matches(String qrCodeString) {
-			try {
-				createScheme(qrCodeString);
-				return true;
-			} catch (IllegalArgumentException e) {
-				return false;
-			}
-		}
-
-		@Override
-		public UrlCode createScheme(String qrCodeString) {
-			return new UrlCode(qrCodeString);
-		}
-
-	}
-
 	private URL url;
 
 	public UrlCode() {

@@ -6,20 +6,6 @@ package net.glxn.qrgen.core.scheme;
  */
 public class Girocode extends AbstractQRCodeScheme {
 
-	public static class GirocodeSchemeDesc implements QRCodeSchemeDesc<Girocode> {
-
-		@Override
-		public boolean matches(String qrCodeString) {
-			return qrCodeString.startsWith(SERVICE_HEADER);
-		}
-
-		@Override
-		public Girocode createScheme(String qrCodeString) {
-			return new Girocode(qrCodeString);
-		}
-
-	}
-
 	protected static final String SERVICE_HEADER = "BCD";
 	protected static final String FUNCTION_SEPA_CREDIT_TRANSFER = "SCT";
 	protected static final String VERSION_1 = "001";

@@ -1,0 +1,5 @@
+net.glxn.qrgen.core.scheme.QRCodeScheme=\
+net.glxn.qrgen.core.scheme.Girocode,\
+net.glxn.qrgen.core.scheme.Wifi,\
+net.glxn.qrgen.core.scheme.VCard,\
+net.glxn.qrgen.core.scheme.UrlCode

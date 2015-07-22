@@ -12,21 +12,6 @@ import java.util.Map;
 public class VCard extends AbstractQRCodeScheme {
 
 	private static final String BEGIN_VCARD = "BEGIN:VCARD";
-
-	public static class VCardSchemeDesc implements QRCodeSchemeDesc<VCard> {
-
-		@Override
-		public boolean matches(String qrCodeString) {
-			return qrCodeString.startsWith(BEGIN_VCARD);
-		}
-
-		@Override
-		public VCard createScheme(String qrCodeString) {
-			return new VCard(qrCodeString);
-		}
-
-	}
-
 	private static final String NAME = "N";
 	private static final String COMPANY = "ORG";
 	private static final String TITLE = "TITLE";

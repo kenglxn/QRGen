@@ -8,20 +8,6 @@ import java.util.Map;
  */
 public class Wifi extends AbstractQRCodeScheme {
 
-	public static class WifiSchemeDesc implements QRCodeSchemeDesc<Wifi> {
-
-		@Override
-		public boolean matches(String qrCodeString) {
-			return qrCodeString.startsWith(WIFI_PROTOCOL_HEADER);
-		}
-
-		@Override
-		public Wifi createScheme(String qrCodeString) {
-			return new Wifi(qrCodeString);
-		}
-
-	}
-
 	public enum Authentication {
 		WEP, WPA, nopass;
 	}
