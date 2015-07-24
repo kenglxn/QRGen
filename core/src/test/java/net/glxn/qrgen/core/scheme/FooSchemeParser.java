@@ -1,7 +1,6 @@
 package net.glxn.qrgen.core.scheme;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URL;
 import java.util.LinkedHashSet;
 import java.util.Set;
 

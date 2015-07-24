@@ -4,7 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.Set;
 
 /**
- * Common interface for classes that can interpret certain QR code text into content types like e.g. Wifi.
+ * Common interface for classes that can interpret certain QR code text into content types like e.g. {@link Wifi}.
  * TODO: does this parser stuff make sense at all?
  */
 public interface QRCodeSchemeParser {

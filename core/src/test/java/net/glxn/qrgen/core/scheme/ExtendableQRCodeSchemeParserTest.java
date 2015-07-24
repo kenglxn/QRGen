@@ -14,10 +14,10 @@ import net.glxn.qrgen.core.scheme.Girocode.Encoding;
 
 import org.junit.Test;
 
-public class QRCodeSchemeParserImplTest {
+public class ExtendableQRCodeSchemeParserTest {
 
 	protected QRCodeSchemeParser createParser() {
-		return new QRCodeSchemeParserImpl();
+		return new ExtendableQRCodeSchemeParser();
 	}
 
 	@Test
@@ -27,6 +27,7 @@ public class QRCodeSchemeParserImplTest {
 		expectedTypes.add(VCard.class);
 		expectedTypes.add(Wifi.class);
 		expectedTypes.add(URL.class);
+		expectedTypes.add(Foo.class);
 		assertEquals(expectedTypes, createParser().getSupportedSchemes());
 	}
 
@@ -112,4 +113,12 @@ public class QRCodeSchemeParserImplTest {
 	public void parseUnknownScheme() throws Exception {
 		createParser().parse("hihi");
 	}
+
+	@Test
+	public void useParserExtension() throws Exception {
+		Object scheme = createParser().parse("foo:bar");
+		assertNotNull(scheme);
+		assertThat(scheme, is(Foo.class));
+	}
+
 }
