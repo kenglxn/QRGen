@@ -1,34 +1,51 @@
 package net.glxn.qrgen.core.scheme;
 
-import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import net.glxn.qrgen.core.scheme.Girocode.Encoding;
 
 import org.junit.Test;
 
-import static org.hamcrest.CoreMatchers.*;
+public class QRCodeSchemeParserImplTest {
 
-public class QRCodeSchemeParserTest {
-	
-	private QRCodeSchemeParser parser = new QRCodeSchemeParser();
+	protected QRCodeSchemeParser createParser() {
+		return new QRCodeSchemeParserImpl();
+	}
 
 	@Test
-	public void parseWifi() {
-		QRCodeScheme scheme = parser.parse("WIFI:S:some weird SSID;T:WPA;P:aintNoSecret;H:true;");
+	public void getSupportedSchemes() {
+		Set<Class<?>> expectedTypes = new LinkedHashSet<Class<?>>();
+		expectedTypes.add(Girocode.class);
+		expectedTypes.add(VCard.class);
+		expectedTypes.add(Wifi.class);
+		expectedTypes.add(URL.class);
+		assertEquals(expectedTypes, createParser().getSupportedSchemes());
+	}
+
+	@Test
+	public void parseWifi() throws Exception {
+		Object scheme = createParser().parse(
+				"WIFI:S:some weird SSID;T:WPA;P:aintNoSecret;H:true;");
 		assertNotNull(scheme);
 		assertThat(scheme, is(Wifi.class));
-		Wifi wifi = (Wifi)scheme;
-		assertEquals("some weird SSID",wifi.getSsid());
+		Wifi wifi = (Wifi) scheme;
+		assertEquals("some weird SSID", wifi.getSsid());
 		assertEquals("WPA", wifi.getAuthentication());
 		assertEquals("aintNoSecret", wifi.getPsk());
 		assertEquals(true, wifi.isHidden());
 	}
 
 	@Test
-	public void parseVCard() {
-		QRCodeScheme scheme = parser.parse("BEGIN:VCARD\n" + //
+	public void parseVCard() throws Exception {
+		Object scheme = createParser().parse("BEGIN:VCARD\n" + //
 				"VERSION:3.0\n" + //
 				"N:Cookiemonster\n" + //
 				"ORG:CTV\n" + //
@@ -41,7 +58,7 @@ public class QRCodeSchemeParserTest {
 				"END:VCARD");
 		assertNotNull(scheme);
 		assertThat(scheme, is(VCard.class));
-		VCard vcard = (VCard)scheme;
+		VCard vcard = (VCard) scheme;
 		assertEquals("Cookiemonster", vcard.getName());
 		assertEquals("Sesamestreet 1", vcard.getAddress());
 		assertEquals("CTV", vcard.getCompany());
@@ -53,8 +70,8 @@ public class QRCodeSchemeParserTest {
 	}
 
 	@Test
-	public void parseGirocode() {
-		QRCodeScheme scheme = parser.parse("BCD\n" + //
+	public void parseGirocode() throws Exception {
+		Object scheme = createParser().parse("BCD\n" + //
 				"001\n" + //
 				"1\n" + //
 				"SCT\n" + //
@@ -70,7 +87,7 @@ public class QRCodeSchemeParserTest {
 		);
 		assertNotNull(scheme);
 		assertThat(scheme, is(Girocode.class));
-		Girocode girocode = (Girocode)scheme;
+		Girocode girocode = (Girocode) scheme;
 		assertEquals(Encoding.UTF_8, girocode.getEncoding());
 		assertEquals("DAAABCDGGD", girocode.getBic());
 		assertEquals("Miss Marple", girocode.getName());
@@ -81,20 +98,18 @@ public class QRCodeSchemeParserTest {
 		assertEquals("for a good prupose", girocode.getText());
 		assertEquals("Watch this Girocode :-)", girocode.getHint());
 	}
-	
+
 	@Test
 	public void parseUrlCode() throws Exception {
-		QRCodeScheme scheme = parser.parse("http://www.github.org");
+		Object scheme = createParser().parse("http://www.github.org");
 		assertNotNull(scheme);
-		assertThat(scheme, is(UrlCode.class));
-		UrlCode urlCode = (UrlCode)scheme;
-		assertEquals(new URL("http://www.github.org"), urlCode.getUrl());
+		assertThat(scheme, is(URL.class));
+		URL urlCode = (URL) scheme;
+		assertEquals(new URL("http://www.github.org"), urlCode);
 	}
 
-
-
-	@Test(expected=IllegalArgumentException.class)
-	public void parseUnknownScheme() {
-		parser.parse("hihi");
+	@Test(expected = UnsupportedEncodingException.class)
+	public void parseUnknownScheme() throws Exception {
+		createParser().parse("hihi");
 	}
 }

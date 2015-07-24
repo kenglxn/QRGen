@@ -3,7 +3,7 @@ package net.glxn.qrgen.core.scheme;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public abstract class AbstractQRCodeScheme implements QRCodeScheme {
+public abstract class AbstractQRCodeScheme {
 
 	protected final String LINE_FEED = "\n";
 	protected final String DEFAULT_PARAM_SEPARATOR = "\r?\n";
