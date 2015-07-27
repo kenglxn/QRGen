@@ -2,7 +2,6 @@ package net.glxn.qrgen.core.scheme;
 
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Constructor;
 import java.net.URL;
 import java.util.Collections;
 import java.util.Enumeration;
@@ -122,9 +121,13 @@ public class ExtendableQRCodeSchemeParser implements QRCodeSchemeParser {
 				if (Girocode.class.equals(type)) {
 					return Girocode.parse(qrCodeText);
 				}
-				
-				Constructor<?> constructor = type.getConstructor(String.class);
-				return constructor.newInstance(qrCodeText);
+				if (Wifi.class.equals(type)) {
+					return Wifi.parse(qrCodeText);
+				}
+				if (URL.class.equals(type)) {
+					return new URL(qrCodeText);
+				}
+				return null;
 			} catch (Exception e) {
 				return null;
 			}

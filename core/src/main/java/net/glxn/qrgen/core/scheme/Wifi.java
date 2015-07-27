@@ -1,12 +1,13 @@
 package net.glxn.qrgen.core.scheme;
 
 import java.util.Map;
+import static net.glxn.qrgen.core.scheme.SchemeUtil.*;
 
 /**
  * Encodes a Wifi connection, format is:
  * <code>WIFI:T:AUTHENTICATION;S:SSID;P:PSK;H:HIDDEN;</code>
  */
-public class Wifi extends AbstractQRCodeScheme {
+public class Wifi {
 
 	public enum Authentication {
 		WEP, WPA, nopass;
@@ -24,39 +25,6 @@ public class Wifi extends AbstractQRCodeScheme {
 	private boolean hidden = false;
 
 	public Wifi() {
-	}
-
-	public Wifi(final String wifiCode) {
-		if (wifiCode == null || !wifiCode.startsWith(WIFI_PROTOCOL_HEADER)) {
-			throw new IllegalArgumentException(
-					"this is not a valid WIFI code: " + wifiCode);
-		}
-		Map<String, String> parameters = getParameters(
-				wifiCode.substring(WIFI_PROTOCOL_HEADER.length()), "(?<!\\\\);");
-		if (parameters.containsKey(SSID)) {
-			setSsid(unescape(parameters.get(SSID)));
-		}
-		if (parameters.containsKey(AUTHENTICATION)) {
-			setAuthentication(parameters.get(AUTHENTICATION));
-		}
-		if (parameters.containsKey(PSK)) {
-			setPsk(unescape(parameters.get(PSK)));
-		}
-		if (parameters.containsKey(HIDDEN)) {
-			setHidden(parameters.get(HIDDEN));
-		}
-	}
-
-	public String escape(final String text) {
-		return text.replace("\\", "\\\\").replace(",", "\\,")
-				.replace(";", "\\;").replace(".", "\\.")
-				.replace("\"", "\\\"").replace("'", "\\'");
-	}
-
-	public String unescape(final String text) {
-		return text.replace("\\\\", "\\").replace("\\,", ",")
-				.replace("\\;", ";").replace("\\.", ".")
-				.replace("\\\"", "\"").replace("\\'", "'");
 	}
 
 	/**
@@ -186,6 +154,41 @@ public class Wifi extends AbstractQRCodeScheme {
 		}
 		bob.append(HIDDEN).append(":").append(isHidden()).append(";");
 		return bob.toString();
+	}
+
+	public static Wifi parse(final String wifiCode) {
+		if (wifiCode == null || !wifiCode.startsWith(WIFI_PROTOCOL_HEADER)) {
+			throw new IllegalArgumentException(
+					"this is not a valid WIFI code: " + wifiCode);
+		}
+		Wifi wifi = new Wifi();
+		Map<String, String> parameters = getParameters(
+				wifiCode.substring(WIFI_PROTOCOL_HEADER.length()), "(?<!\\\\);");
+		if (parameters.containsKey(SSID)) {
+			wifi.setSsid(unescape(parameters.get(SSID)));
+		}
+		if (parameters.containsKey(AUTHENTICATION)) {
+			wifi.setAuthentication(parameters.get(AUTHENTICATION));
+		}
+		if (parameters.containsKey(PSK)) {
+			wifi.setPsk(unescape(parameters.get(PSK)));
+		}
+		if (parameters.containsKey(HIDDEN)) {
+			wifi.setHidden(parameters.get(HIDDEN));
+		}
+		return wifi;
+	}
+
+	public static String escape(final String text) {
+		return text.replace("\\", "\\\\").replace(",", "\\,")
+				.replace(";", "\\;").replace(".", "\\.")
+				.replace("\"", "\\\"").replace("'", "\\'");
+	}
+
+	public static String unescape(final String text) {
+		return text.replace("\\\\", "\\").replace("\\,", ",")
+				.replace("\\;", ";").replace("\\.", ".")
+				.replace("\\\"", "\"").replace("\\'", "'");
 	}
 
 }

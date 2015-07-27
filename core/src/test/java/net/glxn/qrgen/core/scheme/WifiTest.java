@@ -9,8 +9,8 @@ import org.junit.Test;
 public class WifiTest {
 
 	@Test
-	public void wifiFromString() {
-		Wifi wifi = new Wifi(
+	public void parse() {
+		Wifi wifi = Wifi.parse(
 				"WIFI:S:some weird SSID;T:WPA;P:aintNoSecret;H:true;");
 		assertEquals("some weird SSID", wifi.getSsid());
 		assertEquals("WPA", wifi.getAuthentication());
@@ -24,8 +24,8 @@ public class WifiTest {
 	 * dot (.), colon (:), comma (,), and semicolon (;)
 	 */
 	@Test
-	public void wifiFromStringEscapeSsidAndPassword() {
-		Wifi wifi = new Wifi(
+	public void parseEscapeSsidAndPassword() {
+		Wifi wifi = Wifi.parse(
 				"WIFI:S:s\\;o\\,\\\"me \\'wei\\\\rd\\. SSID\\;;T:WPA;P:\\;a\\,\\\"intNo\\,Sec\\\\ret;false;");
 		
 		assertEquals("s;o,\"me 'wei\\rd. SSID;", wifi.getSsid());
@@ -35,18 +35,18 @@ public class WifiTest {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void wifiFromNull() {
-		new Wifi(null);
+	public void parseNull() {
+		Wifi.parse(null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void wifiFromEmptyString() {
-		new Wifi("");
+	public void parseEmptyString() {
+		Wifi.parse("");
 	}
 
 	@Test
-	public void wifiFromHeaderOnly() {
-		Wifi wifi = new Wifi("WIFI:");
+	public void parseHeaderOnly() {
+		Wifi wifi = Wifi.parse("WIFI:");
 		assertNull(null, wifi.getSsid());
 		assertNull(null, wifi.getAuthentication());
 		assertNull(null, wifi.getPsk());
