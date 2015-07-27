@@ -6,10 +6,11 @@ import com.google.zxing.client.j2se.MatrixToImageConfig;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+
 import net.glxn.qrgen.core.AbstractQRCode;
 import net.glxn.qrgen.core.exception.QRGenerationException;
 import net.glxn.qrgen.core.image.ImageType;
-import net.glxn.qrgen.core.vcard.VCard;
+import net.glxn.qrgen.core.scheme.VCard;
 
 import java.io.File;
 import java.io.IOException;

@@ -1,5 +1,8 @@
 package net.glxn.qrgen.core.scheme;
 
+import static net.glxn.qrgen.core.scheme.SchemeUtil.LINE_FEED;
+import static net.glxn.qrgen.core.scheme.SchemeUtil.getParameters;
+
 import java.util.Map;
 
 /**
@@ -9,7 +12,7 @@ import java.util.Map;
  *
  * @author Frederik Hahne <atomfrede@gmail.com>
  */
-public class VCard extends AbstractQRCodeScheme {
+public class VCard {
 
 	private static final String BEGIN_VCARD = "BEGIN:VCARD";
 	private static final String NAME = "N";
@@ -22,47 +25,26 @@ public class VCard extends AbstractQRCodeScheme {
 	private static final String NOTE = "NOTE";
 
 	private String name;
+
 	private String company;
+
 	private String title;
+
 	private String phoneNumber;
+
 	private String email;
+
 	private String address;
+
 	private String website;
+
 	private String note;
 
 	public VCard() {
 	}
 
-	public VCard(final String vcardCode) {
-		if (vcardCode == null || !vcardCode.startsWith(BEGIN_VCARD)) {
-			throw new IllegalArgumentException(
-					"this is not a valid VCARD code: " + vcardCode);
-		}
-		Map<String, String> parameters = getParameters(vcardCode);
-		if (parameters.containsKey(NAME)) {
-			setName(parameters.get(NAME));
-		}
-		if (parameters.containsKey(TITLE)) {
-			setTitle(parameters.get(TITLE));
-		}
-		if (parameters.containsKey(COMPANY)) {
-			setCompany(parameters.get(COMPANY));
-		}
-		if (parameters.containsKey(ADDRESS)) {
-			setAddress(parameters.get(ADDRESS));
-		}
-		if (parameters.containsKey(EMAIL)) {
-			setEmail(parameters.get(EMAIL));
-		}
-		if (parameters.containsKey(WEB)) {
-			setWebsite(parameters.get(WEB));
-		}
-		if (parameters.containsKey(PHONE)) {
-			setPhoneNumber(parameters.get(PHONE));
-		}
-		if (parameters.containsKey(NOTE)) {
-			setNote(parameters.get(NOTE));
-		}
+	public VCard(String name) {
+		this.name = name;
 	}
 
 	public String getName() {
@@ -174,4 +156,39 @@ public class VCard extends AbstractQRCodeScheme {
 		sb.append(LINE_FEED).append("END:VCARD");
 		return sb.toString();
 	}
+
+	public static VCard parse(final String vcardCode) {
+		if (vcardCode == null || !vcardCode.startsWith(BEGIN_VCARD)) {
+			throw new IllegalArgumentException(
+					"this is not a valid VCARD code: " + vcardCode);
+		}
+		VCard vcard = new VCard();
+		Map<String, String> parameters = getParameters(vcardCode);
+		if (parameters.containsKey(NAME)) {
+			vcard.setName(parameters.get(NAME));
+		}
+		if (parameters.containsKey(TITLE)) {
+			vcard.setTitle(parameters.get(TITLE));
+		}
+		if (parameters.containsKey(COMPANY)) {
+			vcard.setCompany(parameters.get(COMPANY));
+		}
+		if (parameters.containsKey(ADDRESS)) {
+			vcard.setAddress(parameters.get(ADDRESS));
+		}
+		if (parameters.containsKey(EMAIL)) {
+			vcard.setEmail(parameters.get(EMAIL));
+		}
+		if (parameters.containsKey(WEB)) {
+			vcard.setWebsite(parameters.get(WEB));
+		}
+		if (parameters.containsKey(PHONE)) {
+			vcard.setPhoneNumber(parameters.get(PHONE));
+		}
+		if (parameters.containsKey(NOTE)) {
+			vcard.setNote(parameters.get(NOTE));
+		}
+		return vcard;
+	}
+
 }

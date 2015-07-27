@@ -12,7 +12,7 @@ import java.util.Set;
 
 /**
  * An implementation of {@link QRCodeSchemeParser} which supports the types
- * {@link Wifi}, {@link VCard}, {@link Girocode} and {@link URL}, and may be
+ * {@link Wifi}, {@link XVCard}, {@link Girocode} and {@link URL}, and may be
  * extended by additional parsers for custom types. <br/>
  * <br/>
  * In order to add a parser, you have to put a properties file named
@@ -116,6 +116,10 @@ public class ExtendableQRCodeSchemeParser implements QRCodeSchemeParser {
 		protected Object createInstance(final String qrCodeText,
 				final Class<?> type) {
 			try {
+				if (VCard.class.equals(type)) {
+					return VCard.parse(qrCodeText);
+				}
+				
 				Constructor<?> constructor = type.getConstructor(String.class);
 				return constructor.newInstance(qrCodeText);
 			} catch (Exception e) {

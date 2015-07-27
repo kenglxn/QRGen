@@ -8,7 +8,7 @@ public class VCardTest {
 
 	@Test
 	public void vcardFromString() {
-		VCard vcard = new VCard("BEGIN:VCARD\n" + //
+		VCard vcard = VCard.parse("BEGIN:VCARD\n" + //
 				"VERSION:3.0\n" + //
 				"N:Cookiemonster\n" + //
 				"ORG:CTV\n" + //
@@ -31,12 +31,18 @@ public class VCardTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void vcardFromNull() {
-		new VCard(null);
+		VCard.parse(null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void vcardFromEmptyString() {
-		new VCard("");
+		VCard.parse("");
+	}
+
+	@Test
+	public void vcardWithName() {
+		VCard vcard = new VCard("Herbert");
+		assertEquals("Herbert", vcard.getName());
 	}
 
 	@Test
