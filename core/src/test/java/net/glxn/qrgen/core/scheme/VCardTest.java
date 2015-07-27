@@ -7,7 +7,7 @@ import org.junit.Test;
 public class VCardTest {
 
 	@Test
-	public void vcardFromString() {
+	public void parse() {
 		VCard vcard = VCard.parse("BEGIN:VCARD\n" + //
 				"VERSION:3.0\n" + //
 				"N:Cookiemonster\n" + //
@@ -30,12 +30,12 @@ public class VCardTest {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void vcardFromNull() {
+	public void parseNull() {
 		VCard.parse(null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void vcardFromEmptyString() {
+	public void parseEmptyString() {
 		VCard.parse("");
 	}
 
