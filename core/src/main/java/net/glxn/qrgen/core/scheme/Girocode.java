@@ -1,10 +1,11 @@
 package net.glxn.qrgen.core.scheme;
 
+import static net.glxn.qrgen.core.scheme.SchemeUtil.*;
 
 /**
  * European banking code, currently defines only SEPA credit transfer.
  */
-public class Girocode extends AbstractQRCodeScheme {
+public class Girocode {
 
 	protected static final String SERVICE_HEADER = "BCD";
 	protected static final String FUNCTION_SEPA_CREDIT_TRANSFER = "SCT";
@@ -44,38 +45,6 @@ public class Girocode extends AbstractQRCodeScheme {
 	private String hint;
 
 	public Girocode() {
-
-	}
-
-	public Girocode(final String qrCode) {
-		if (qrCode == null) {
-			throw new IllegalArgumentException("this is not a valid Girocode: "
-					+ qrCode);
-		}
-		String[] params = qrCode.split(DEFAULT_PARAM_SEPARATOR);
-		if (params.length < 6 || params[0].equals("SERVICE_HEADER")) {
-			throw new IllegalArgumentException("this is not a valid Girocode: "
-					+ qrCode);
-		}
-		setEncoding(Encoding.encodingFor(params[2]));
-		setBic(params[4]);
-		setName(params[5]);
-		setIban(params[6]);
-		if (params.length > 7) {
-			setAmount(params[7]);
-		}
-		if (params.length > 8) {
-			setPurposeCode(params[8]);
-		}
-		if (params.length > 9) {
-			setReference(params[9]);
-		}
-		if (params.length > 10) {
-			setText(params[10]);
-		}
-		if (params.length > 11) {
-			setHint(params[11]);
-		}
 
 	}
 
@@ -171,4 +140,39 @@ public class Girocode extends AbstractQRCodeScheme {
 	private String nullToEmptyString(final Object value) {
 		return value == null ? "" : value.toString();
 	}
+	
+	public static Girocode parse(final String qrCode) {
+		if (qrCode == null) {
+			throw new IllegalArgumentException("this is not a valid Girocode: "
+					+ qrCode);
+		}
+		String[] params = qrCode.split(DEFAULT_PARAM_SEPARATOR);
+		if (params.length < 6 || params[0].equals("SERVICE_HEADER")) {
+			throw new IllegalArgumentException("this is not a valid Girocode: "
+					+ qrCode);
+		}
+		Girocode girocode = new Girocode();
+		girocode.setEncoding(Encoding.encodingFor(params[2]));
+		girocode.setBic(params[4]);
+		girocode.setName(params[5]);
+		girocode.setIban(params[6]);
+		if (params.length > 7) {
+			girocode.setAmount(params[7]);
+		}
+		if (params.length > 8) {
+			girocode.setPurposeCode(params[8]);
+		}
+		if (params.length > 9) {
+			girocode.setReference(params[9]);
+		}
+		if (params.length > 10) {
+			girocode.setText(params[10]);
+		}
+		if (params.length > 11) {
+			girocode.setHint(params[11]);
+		}
+		return girocode;
+	}
+
+
 }

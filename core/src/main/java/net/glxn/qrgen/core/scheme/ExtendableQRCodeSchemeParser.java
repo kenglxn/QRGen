@@ -119,6 +119,9 @@ public class ExtendableQRCodeSchemeParser implements QRCodeSchemeParser {
 				if (VCard.class.equals(type)) {
 					return VCard.parse(qrCodeText);
 				}
+				if (Girocode.class.equals(type)) {
+					return Girocode.parse(qrCodeText);
+				}
 				
 				Constructor<?> constructor = type.getConstructor(String.class);
 				return constructor.newInstance(qrCodeText);

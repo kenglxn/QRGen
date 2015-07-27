@@ -8,17 +8,17 @@ import org.junit.Test;
 public class GirocodeTest {
 
 	@Test
-	public void girocodeFromStringLf() {
-		checkFromString("\n");
+	public void parseStringLf() {
+		checkParseString("\n");
 	}
 
 	@Test
-	public void girocodeFromStringCrLf() {
-		checkFromString("\r\n");
+	public void parseStringCrLf() {
+		checkParseString("\r\n");
 	}
 
-	private void checkFromString(final String lineFeed) {
-		Girocode girocode = new Girocode("BCD" + lineFeed + //
+	private void checkParseString(final String lineFeed) {
+		Girocode girocode = Girocode.parse("BCD" + lineFeed + //
 				"001" + lineFeed + //
 				"1" + lineFeed + //
 				"SCT" + lineFeed + //
@@ -44,13 +44,13 @@ public class GirocodeTest {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void girocodeFromNull() {
-		new Girocode(null);
+	public void parseNull() {
+		Girocode.parse(null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void girocodeFromEmptyString() {
-		new Girocode("");
+	public void parseEmptyString() {
+		Girocode.parse("");
 	}
 
 	@Test
