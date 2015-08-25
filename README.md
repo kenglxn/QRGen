@@ -133,7 +133,7 @@ VCard johnDoe = new VCard("John Doe")
                     .setAddress("John Doe Street 1, 5678 Doestown")
                     .setTitle("Mister")
                     .setCompany("John Doe Inc.")
-                    .setPhonenumber("1234")
+                    .setPhoneNumber("1234")
                     .setWebsite("www.example.org");
 QRCode.from(johnDoe).file();
 
