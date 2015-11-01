@@ -26,3 +26,4 @@ core/.classpath
 # generated files
 bin/
 gen/
+settings.xml
