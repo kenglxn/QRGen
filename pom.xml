@@ -10,7 +10,7 @@
 
     <groupId>net.glxn.qrgen</groupId>
     <artifactId>qrgen-parent</artifactId>
-    <version>2.1</version>
+    <version>2.2-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>QRGen-parent</name>
     <description>a simple QRCode generation api for java built on top ZXING</description>
