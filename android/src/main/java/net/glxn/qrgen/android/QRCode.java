@@ -19,6 +19,7 @@ import java.io.OutputStream;
 public class QRCode extends AbstractQRCode {
 
     protected final String text;
+    private MatrixToImageConfig matrixToImageConfig = new MatrixToImageConfig();
 
     protected QRCode(String text) {
         this.text = text;
@@ -80,6 +81,17 @@ public class QRCode extends AbstractQRCode {
     }
 
     /**
+     * override default colors (black on white)
+     * notice that the color format is "0x(alpha: 1 byte)(RGB: 3 bytes)"
+     * @param onColor the color for the qrcode
+     * @param offColor the color for the background
+     */
+    public QRCode withColor(int onColor, int offColor) {
+        matrixToImageConfig = new MatrixToImageConfig(onColor, offColor);
+        return this;
+    }
+
+    /**
      * Overrides the size of the qr from its default 125x125
      *
      * @param width  the width in pixels
@@ -129,7 +141,7 @@ public class QRCode extends AbstractQRCode {
      */
     public Bitmap bitmap() {
         try {
-            return MatrixToImageWriter.toBitmap(createMatrix(text));
+            return MatrixToImageWriter.toBitmap(createMatrix(text), matrixToImageConfig);
         } catch (WriterException e) {
             throw new QRGenerationException("Failed to create QR image from text due to underlying exception", e);
         }
@@ -140,7 +152,7 @@ public class QRCode extends AbstractQRCode {
         File file;
         try {
             file = createTempFile();
-            MatrixToImageWriter.writeToFile(createMatrix(text), imageType.toString(), file);
+            MatrixToImageWriter.writeToFile(createMatrix(text), imageType.toString(), file, matrixToImageConfig);
         } catch (Exception e) {
             throw new QRGenerationException("Failed to create QR image from text due to underlying exception", e);
         }
@@ -153,7 +165,7 @@ public class QRCode extends AbstractQRCode {
         File file;
         try {
             file = createTempFile(name);
-            MatrixToImageWriter.writeToFile(createMatrix(text), imageType.toString(), file);
+            MatrixToImageWriter.writeToFile(createMatrix(text), imageType.toString(), file, matrixToImageConfig);
         } catch (Exception e) {
             throw new QRGenerationException("Failed to create QR image from text due to underlying exception", e);
         }
@@ -163,6 +175,6 @@ public class QRCode extends AbstractQRCode {
 
     @Override
     protected void writeToStream(OutputStream stream) throws IOException, WriterException {
-        MatrixToImageWriter.writeToStream(createMatrix(text), imageType.toString(), stream);
+        MatrixToImageWriter.writeToStream(createMatrix(text), imageType.toString(), stream, matrixToImageConfig);
     }
 }
