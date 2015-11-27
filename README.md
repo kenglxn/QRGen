@@ -12,69 +12,73 @@ ZXING: http://code.google.com/p/zxing/
 
 #### Get it:
 
+[![Release](https://img.shields.io/github/tag/kenglxn/QRGen.svg?label=JitPack)](https://jitpack.io/#kenglxn/QRGen)
+
 QRGen consists of three modules: ```core```, ```javase``` and ```android```. Everything is available from [Maven Central Repository](http://search.maven.org/#browse%7C-852965118).
 
-_**NOTE: SNAPSHOT versions are not available through Maven Central. If you want the snapshot version either build locally or add the Sonatype Snapshot repo to your pom or gradle file:**_
+_**NOTE: As of 2.1.0 QRGen is available from [jitpack.io](https://jitpack.io/#kenglxn/QRGen). QRGen is no longer deployed to maven central (ref: #61). **_
 
 Maven:
 
+```xml
     <repositories>
-      <repository>
-        <id>sonatype-snapshots</id>
-        <name>sonatype-snapshots</name>
-        <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-      </repository>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
     </repositories>
+```
 
 Gradle:
 
-    repositories {
-        maven {
-            url "https://oss.sonatype.org/content/repositories/snapshots/"
-        }
-    }
-##### Java Application
+```gradle
+     repositories {
+        // ...
+        maven { url "https://jitpack.io" }
+     }
+```
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/net.glxn.qrgen/javase/badge.svg)](https://maven-badges.herokuapp.com/maven-central/net.glxn.qrgen/javase)
+#### Java Application
 
 When developing a Java application you need to add ```javase``` module to your list of dependencies. The required ```core``` module will be added automatically by your build system:
 
 
 Gradle:
 
+```gradle
     dependencies {
-		compile ("net.glxn.qrgen:javase:2.0")
+        compile 'com.github.kenglxn:QRGen:javase:2.1.0'
     }
+```
 
 Maven:
 
+```xml
     <dependencies>
         <dependency>
-            <groupId>net.glxn.qrgen</groupId>
+            <groupId>com.github.kenglxn.qrgen</groupId>
             <artifactId>javase</artifactId>
-            <version>2.0</version>
+            <version>2.1.0</version>
         </dependency>
     </dependencies>
 
 ##### Android
-
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/net.glxn.qrgen/android/badge.svg)](https://maven-badges.herokuapp.com/maven-central/net.glxn.qrgen/android)
 
 When you want to use QRGen inside your android application you need to add the ```android``` module to your list of dependencies. The required ```core``` module will be added automatically by your build system:
 
 Gradle:
 
     dependencies {
-		compile ("net.glxn.qrgen:android:2.0")
+		compile 'com.github.kenglxn:QRGen:android:2.1.0'
     }
 
 Maven:
 
     <dependencies>
         <dependency>
-            <groupId>net.glxn.qrgen</groupId>
+            <groupId>com.github.kenglxn.qrgen</groupId>
             <artifactId>android</artifactId>
-            <version>2.0</version>
+            <version>2.1.0</version>
         </dependency>
     </dependencies>
 
