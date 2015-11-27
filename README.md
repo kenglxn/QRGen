@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/kenglxn/QRGen.png?branch=master)](https://travis-ci.org/kenglxn/QRGen)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/net.glxn.qrgen/core/badge.svg)](https://maven-badges.herokuapp.com/maven-central/net.glxn.qrgen/core)
+[![Release](https://img.shields.io/github/tag/kenglxn/QRGen.svg?label=JitPack)](https://jitpack.io/#kenglxn/QRGen)
 
 <script data-gittip-username="kenglxn" data-gittip-widget="button" src="//gttp.co/v1.js">
 </script>
@@ -12,11 +12,10 @@ ZXING: http://code.google.com/p/zxing/
 
 #### Get it:
 
-[![Release](https://img.shields.io/github/tag/kenglxn/QRGen.svg?label=JitPack)](https://jitpack.io/#kenglxn/QRGen)
+QRGen consists of three modules: ```core```, ```javase``` and ```android```.
 
-QRGen consists of three modules: ```core```, ```javase``` and ```android```. Everything is available from [Maven Central Repository](http://search.maven.org/#browse%7C-852965118).
-
-_**NOTE: As of 2.1.0 QRGen is available from [jitpack.io](https://jitpack.io/#kenglxn/QRGen). QRGen is no longer deployed to maven central (ref: #61). **_
+As of 2.1.0 QRGen is available from [jitpack.io](https://jitpack.io/#kenglxn/QRGen). QRGen is no longer deployed to maven central (ref: #61).
+Older releases are available from [Maven Central Repository](http://search.maven.org/#browse%7C-852965118).
 
 Maven:
 
