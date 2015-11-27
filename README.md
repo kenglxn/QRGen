@@ -1,9 +1,6 @@
 [![Build Status](https://travis-ci.org/kenglxn/QRGen.png?branch=master)](https://travis-ci.org/kenglxn/QRGen)
 [![Release](https://img.shields.io/github/tag/kenglxn/QRGen.svg?label=JitPack)](https://jitpack.io/#kenglxn/QRGen)
 
-<script data-gittip-username="kenglxn" data-gittip-widget="button" src="//gttp.co/v1.js">
-</script>
-
 ### QRGen: a simple QRCode generation api for java built on top ZXING
 
 #### Dependencies:
@@ -60,6 +57,7 @@ Maven:
             <version>2.1.0</version>
         </dependency>
     </dependencies>
+```
 
 ##### Android
 
@@ -67,12 +65,15 @@ When you want to use QRGen inside your android application you need to add the `
 
 Gradle:
 
+```gradle
     dependencies {
-		compile 'com.github.kenglxn:QRGen:android:2.1.0'
+        compile 'com.github.kenglxn:QRGen:android:2.1.0'
     }
+```
 
 Maven:
 
+```xml
     <dependencies>
         <dependency>
             <groupId>com.github.kenglxn.qrgen</groupId>
@@ -80,12 +81,15 @@ Maven:
             <version>2.1.0</version>
         </dependency>
     </dependencies>
+```
 
 Or you can clone and build yourself:
 
+```bash
     git clone git://github.com/kenglxn/QRGen.git
     cd QRGen/
     mvn clean install
+```
 
 #### Usage:
 
