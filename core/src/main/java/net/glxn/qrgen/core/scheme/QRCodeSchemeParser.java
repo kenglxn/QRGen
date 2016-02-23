@@ -11,14 +11,11 @@ public interface QRCodeSchemeParser {
 
 	/**
 	 * Tries to parse the given QR code text.
-	 * @param qrCodeText
+	 * @param qrCodeText the qrcode text to interpret
 	 * @return the interpreted type
 	 * @throws UnsupportedEncodingException if the code is not supported by this interpreter.
 	 */
 	Object parse(final String qrCodeText) throws UnsupportedEncodingException;
-	
-	/**
-	 * @return the scheme types supported by this interpreter.
-	 */
+
 	Set<Class<?>> getSupportedSchemes();
 }

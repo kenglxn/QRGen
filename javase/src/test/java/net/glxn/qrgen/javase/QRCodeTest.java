@@ -7,11 +7,9 @@ import com.google.zxing.Writer;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
-
 import net.glxn.qrgen.core.exception.QRGenerationException;
 import net.glxn.qrgen.core.image.ImageType;
 import net.glxn.qrgen.core.scheme.VCard;
-
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -23,24 +21,6 @@ import java.nio.file.Files;
 import java.util.Map;
 
 public class QRCodeTest {
-
-    @Test
-    public void shouldGetSvgFromText() throws Exception {
-        File file = QRCode.from("www.example.org").svg();
-        Assert.assertNotNull(file);
-    }
-
-    @Test
-    public void shouldGetSvgWithSizeFromText() throws Exception {
-        File file = QRCode.from("www.example.com").withSize(250, 250).svg();
-        Assert.assertNotNull(file);
-    }
-
-    @Test
-    public void shouldGetSvgWithSizeAndColorFromText() {
-        File file = QRCode.from("www.example.com").withSize(250, 250).withColor(30, 90).svg();
-        Assert.assertNotNull(file);
-    }
 
     @Test
     public void shouldGetFileFromVCardWithDefaults() throws Exception {
