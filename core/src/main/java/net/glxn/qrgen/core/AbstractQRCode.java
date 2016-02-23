@@ -14,12 +14,11 @@ import java.io.OutputStream;
 import java.util.HashMap;
 
 /**
- * QRCode generator. This is a simple class that is built on top of <a href="http://code.google.com/p/zxing/">ZXING</a><br/><br/>
- * <p/>
- * Please take a look at their framework, as it has a lot of features. <br/> This small project is just a wrapper that gives a
- * convenient interface to work with. <br/><br/>
- * <p/>
- * Start here: {@link AbstractQRCode#from(String)} (e.g QRCode.from("hello"))
+ * <p>QRCode generator. This is a simple class that is built on top of <a href="http://code.google.com/p/zxing/">ZXING</a></p>
+ * <p>
+ * Please take a look at their framework, as it has a lot of features. <br> This small project is just a wrapper that gives a
+ * convenient interface to work with.
+ * </p>
  */
 public abstract class AbstractQRCode {
 

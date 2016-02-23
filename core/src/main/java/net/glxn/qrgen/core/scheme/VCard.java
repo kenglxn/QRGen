@@ -1,194 +1,194 @@
 package net.glxn.qrgen.core.scheme;
 
+import java.util.Map;
+
 import static net.glxn.qrgen.core.scheme.SchemeUtil.LINE_FEED;
 import static net.glxn.qrgen.core.scheme.SchemeUtil.getParameters;
 
-import java.util.Map;
-
 /**
  * A simple wrapper for vCard data to use with ZXing QR Code generator.
- *
+ * <p>
  * See also http://zxing.appspot.com/generator/ and Contact Information
  *
- * @author Frederik Hahne <atomfrede@gmail.com>
  */
 public class VCard {
 
-	private static final String BEGIN_VCARD = "BEGIN:VCARD";
-	private static final String NAME = "N";
-	private static final String COMPANY = "ORG";
-	private static final String TITLE = "TITLE";
-	private static final String PHONE = "TEL";
-	private static final String WEB = "URL";
-	private static final String EMAIL = "EMAIL";
-	private static final String ADDRESS = "ADR";
-	private static final String NOTE = "NOTE";
+    private static final String BEGIN_VCARD = "BEGIN:VCARD";
+    private static final String NAME = "N";
+    private static final String COMPANY = "ORG";
+    private static final String TITLE = "TITLE";
+    private static final String PHONE = "TEL";
+    private static final String WEB = "URL";
+    private static final String EMAIL = "EMAIL";
+    private static final String ADDRESS = "ADR";
+    private static final String NOTE = "NOTE";
 
-	private String name;
+    private String name;
 
-	private String company;
+    private String company;
 
-	private String title;
+    private String title;
 
-	private String phoneNumber;
+    private String phoneNumber;
 
-	private String email;
+    private String email;
 
-	private String address;
+    private String address;
 
-	private String website;
+    private String website;
 
-	private String note;
+    private String note;
 
-	public VCard() {
-	}
+    public VCard() {
+    }
 
-	public VCard(String name) {
-		this.name = name;
-	}
+    public VCard(String name) {
+        this.name = name;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public static VCard parse(final String vcardCode) {
+        if (vcardCode == null || !vcardCode.startsWith(BEGIN_VCARD)) {
+            throw new IllegalArgumentException(
+                    "this is not a valid VCARD code: " + vcardCode);
+        }
+        VCard vcard = new VCard();
+        Map<String, String> parameters = getParameters(vcardCode);
+        if (parameters.containsKey(NAME)) {
+            vcard.setName(parameters.get(NAME));
+        }
+        if (parameters.containsKey(TITLE)) {
+            vcard.setTitle(parameters.get(TITLE));
+        }
+        if (parameters.containsKey(COMPANY)) {
+            vcard.setCompany(parameters.get(COMPANY));
+        }
+        if (parameters.containsKey(ADDRESS)) {
+            vcard.setAddress(parameters.get(ADDRESS));
+        }
+        if (parameters.containsKey(EMAIL)) {
+            vcard.setEmail(parameters.get(EMAIL));
+        }
+        if (parameters.containsKey(WEB)) {
+            vcard.setWebsite(parameters.get(WEB));
+        }
+        if (parameters.containsKey(PHONE)) {
+            vcard.setPhoneNumber(parameters.get(PHONE));
+        }
+        if (parameters.containsKey(NOTE)) {
+            vcard.setNote(parameters.get(NOTE));
+        }
+        return vcard;
+    }
 
-	public VCard setName(String name) {
-		this.name = name;
-		return this;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getCompany() {
-		return company;
-	}
+    public VCard setName(String name) {
+        this.name = name;
+        return this;
+    }
 
-	public VCard setCompany(String company) {
-		this.company = company;
-		return this;
-	}
+    public String getCompany() {
+        return company;
+    }
 
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
+    public VCard setCompany(String company) {
+        this.company = company;
+        return this;
+    }
 
-	public VCard setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-		return this;
-	}
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public VCard setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+        return this;
+    }
 
-	public VCard setTitle(String title) {
-		this.title = title;
-		return this;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public VCard setTitle(String title) {
+        this.title = title;
+        return this;
+    }
 
-	public VCard setEmail(String email) {
-		this.email = email;
-		return this;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public String getAddress() {
-		return address;
-	}
+    public VCard setEmail(String email) {
+        this.email = email;
+        return this;
+    }
 
-	public VCard setAddress(String address) {
-		this.address = address;
-		return this;
-	}
+    public String getAddress() {
+        return address;
+    }
 
-	public String getWebsite() {
-		return website;
-	}
+    public VCard setAddress(String address) {
+        this.address = address;
+        return this;
+    }
 
-	public VCard setWebsite(String website) {
-		this.website = website;
-		return this;
-	}
+    public String getWebsite() {
+        return website;
+    }
 
-	public String getNote() {
-		return note;
-	}
+    public VCard setWebsite(String website) {
+        this.website = website;
+        return this;
+    }
 
-	public void setNote(String note) {
-		this.note = note;
-	}
+    public String getNote() {
+        return note;
+    }
 
-	/**
-	 * Returns the textual representation of this vcard of the form
-	 * <p/>
-	 * BEGIN:VCARD N:John Doe ORG:Company TITLE:Title TEL:1234
-	 * URL:www.example.org EMAIL:john.doe@example.org ADR:Street END:VCARD
-	 */
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
+    public void setNote(String note) {
+        this.note = note;
+    }
 
-		sb.append(BEGIN_VCARD).append(LINE_FEED);
-		sb.append("VERSION:3.0").append(LINE_FEED);
-		if (name != null) {
-			sb.append(NAME).append(":").append(name);
-		}
-		if (company != null) {
-			sb.append(LINE_FEED).append(COMPANY).append(":").append(company);
-		}
-		if (title != null) {
-			sb.append(LINE_FEED).append(TITLE).append(":").append(title);
-		}
-		if (phoneNumber != null) {
-			sb.append(LINE_FEED).append(PHONE).append(":").append(phoneNumber);
-		}
-		if (website != null) {
-			sb.append(LINE_FEED).append(WEB).append(":").append(website);
-		}
-		if (email != null) {
-			sb.append(LINE_FEED).append(EMAIL).append(":").append(email);
-		}
-		if (address != null) {
-			sb.append(LINE_FEED).append(ADDRESS).append(":").append(address);
-		}
-		if (note != null) {
-			sb.append(LINE_FEED).append(NOTE).append(":").append(note);
-		}
-		sb.append(LINE_FEED).append("END:VCARD");
-		return sb.toString();
-	}
+    /**
+     * Returns the textual representation of this vcard of the form
+     * <p>
+     * BEGIN:VCARD N:John Doe ORG:Company TITLE:Title TEL:1234
+     * URL:www.example.org EMAIL:john.doe@example.org ADR:Street END:VCARD
+     * </p>
+     */
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
 
-	public static VCard parse(final String vcardCode) {
-		if (vcardCode == null || !vcardCode.startsWith(BEGIN_VCARD)) {
-			throw new IllegalArgumentException(
-					"this is not a valid VCARD code: " + vcardCode);
-		}
-		VCard vcard = new VCard();
-		Map<String, String> parameters = getParameters(vcardCode);
-		if (parameters.containsKey(NAME)) {
-			vcard.setName(parameters.get(NAME));
-		}
-		if (parameters.containsKey(TITLE)) {
-			vcard.setTitle(parameters.get(TITLE));
-		}
-		if (parameters.containsKey(COMPANY)) {
-			vcard.setCompany(parameters.get(COMPANY));
-		}
-		if (parameters.containsKey(ADDRESS)) {
-			vcard.setAddress(parameters.get(ADDRESS));
-		}
-		if (parameters.containsKey(EMAIL)) {
-			vcard.setEmail(parameters.get(EMAIL));
-		}
-		if (parameters.containsKey(WEB)) {
-			vcard.setWebsite(parameters.get(WEB));
-		}
-		if (parameters.containsKey(PHONE)) {
-			vcard.setPhoneNumber(parameters.get(PHONE));
-		}
-		if (parameters.containsKey(NOTE)) {
-			vcard.setNote(parameters.get(NOTE));
-		}
-		return vcard;
-	}
+        sb.append(BEGIN_VCARD).append(LINE_FEED);
+        sb.append("VERSION:3.0").append(LINE_FEED);
+        if (name != null) {
+            sb.append(NAME).append(":").append(name);
+        }
+        if (company != null) {
+            sb.append(LINE_FEED).append(COMPANY).append(":").append(company);
+        }
+        if (title != null) {
+            sb.append(LINE_FEED).append(TITLE).append(":").append(title);
+        }
+        if (phoneNumber != null) {
+            sb.append(LINE_FEED).append(PHONE).append(":").append(phoneNumber);
+        }
+        if (website != null) {
+            sb.append(LINE_FEED).append(WEB).append(":").append(website);
+        }
+        if (email != null) {
+            sb.append(LINE_FEED).append(EMAIL).append(":").append(email);
+        }
+        if (address != null) {
+            sb.append(LINE_FEED).append(ADDRESS).append(":").append(address);
+        }
+        if (note != null) {
+            sb.append(LINE_FEED).append(NOTE).append(":").append(note);
+        }
+        sb.append(LINE_FEED).append("END:VCARD");
+        return sb.toString();
+    }
 
 }

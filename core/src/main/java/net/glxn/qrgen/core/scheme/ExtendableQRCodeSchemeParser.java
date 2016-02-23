@@ -3,25 +3,21 @@ package net.glxn.qrgen.core.scheme;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.LinkedHashSet;
-import java.util.Properties;
-import java.util.Set;
+import java.util.*;
 
 /**
  * An implementation of {@link QRCodeSchemeParser} which supports the types
- * {@link Wifi}, {@link XVCard}, {@link Girocode} and {@link URL}, and may be
- * extended by additional parsers for custom types. <br/>
- * <br/>
+ * {@link Wifi}, {@link VCard}, {@link Girocode} and {@link URL}, and may be
+ * extended by additional parsers for custom types. <br>
+ * <br>
  * In order to add a parser, you have to put a properties file named
  * <code>qrcode.meta</code> into your <code>META-INF</code> folder, containing a
  * comma-separated list of your parser class names assigned to the key
  * <code>net.glxn.qrgen.core.scheme.QRCodeSchemeParser</code>. Let's say you
  * have additional parsers with the full qualified names
  * <code>org.me.FooSchemeParser</code> and <code>org.me.BarSchemeParser</code>,
- * your qrcode.meta must have the following entry.<br/>
- * <br/>
+ * your qrcode.meta must have the following entry.<br>
+ * <br>
  * 
  * META-INF/qrcode.meta:
  * 

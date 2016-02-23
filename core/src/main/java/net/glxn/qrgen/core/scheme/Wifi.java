@@ -1,7 +1,8 @@
 package net.glxn.qrgen.core.scheme;
 
 import java.util.Map;
-import static net.glxn.qrgen.core.scheme.SchemeUtil.*;
+
+import static net.glxn.qrgen.core.scheme.SchemeUtil.getParameters;
 
 /**
  * Encodes a Wifi connection, format is:
@@ -9,22 +10,51 @@ import static net.glxn.qrgen.core.scheme.SchemeUtil.*;
  */
 public class Wifi {
 
-	public enum Authentication {
-		WEP, WPA, nopass;
-	}
-
 	private static final String WIFI_PROTOCOL_HEADER = "WIFI:";
 	private static final String AUTHENTICATION = "T";
 	private static final String SSID = "S";
 	private static final String PSK = "P";
 	private static final String HIDDEN = "H";
-
 	private String authentication;
 	private String ssid;
 	private String psk;
 	private boolean hidden = false;
-
 	public Wifi() {
+	}
+
+	public static Wifi parse(final String wifiCode) {
+		if (wifiCode == null || !wifiCode.startsWith(WIFI_PROTOCOL_HEADER)) {
+			throw new IllegalArgumentException(
+					"this is not a valid WIFI code: " + wifiCode);
+		}
+		Wifi wifi = new Wifi();
+		Map<String, String> parameters = getParameters(
+				wifiCode.substring(WIFI_PROTOCOL_HEADER.length()), "(?<!\\\\);");
+		if (parameters.containsKey(SSID)) {
+			wifi.setSsid(unescape(parameters.get(SSID)));
+		}
+		if (parameters.containsKey(AUTHENTICATION)) {
+			wifi.setAuthentication(parameters.get(AUTHENTICATION));
+		}
+		if (parameters.containsKey(PSK)) {
+			wifi.setPsk(unescape(parameters.get(PSK)));
+		}
+		if (parameters.containsKey(HIDDEN)) {
+			wifi.setHidden(parameters.get(HIDDEN));
+		}
+		return wifi;
+	}
+
+	public static String escape(final String text) {
+		return text.replace("\\", "\\\\").replace(",", "\\,")
+				.replace(";", "\\;").replace(".", "\\.")
+				.replace("\"", "\\\"").replace("'", "\\'");
+	}
+
+	public static String unescape(final String text) {
+		return text.replace("\\\\", "\\").replace("\\,", ",")
+				.replace("\\;", ";").replace("\\.", ".")
+				.replace("\\\"", "\"").replace("\\'", "'");
 	}
 
 	/**
@@ -38,16 +68,16 @@ public class Wifi {
 	 * @param authentication
 	 *            the authentication to set
 	 */
-	public void setAuthentication(String authentication) {
-		this.authentication = authentication;
+	public void setAuthentication(Authentication authentication) {
+		setAuthentication(authentication.toString());
 	}
 
 	/**
 	 * @param authentication
 	 *            the authentication to set
 	 */
-	public void setAuthentication(Authentication authentication) {
-		setAuthentication(authentication.toString());
+	public void setAuthentication(String authentication) {
+		this.authentication = authentication;
 	}
 
 	/**
@@ -115,19 +145,19 @@ public class Wifi {
 	}
 
 	/**
-	 * @param hidden
+	 * @param value
 	 *            the hidden to set
 	 */
-	public void setHidden(boolean hidden) {
-		this.hidden = hidden;
+	public void setHidden(final String value) {
+		setHidden(Boolean.valueOf(value));
 	}
 
 	/**
 	 * @param hidden
 	 *            the hidden to set
 	 */
-	public void setHidden(final String value) {
-		setHidden(Boolean.valueOf(value));
+	public void setHidden(boolean hidden) {
+		this.hidden = hidden;
 	}
 
 	/**
@@ -156,39 +186,8 @@ public class Wifi {
 		return bob.toString();
 	}
 
-	public static Wifi parse(final String wifiCode) {
-		if (wifiCode == null || !wifiCode.startsWith(WIFI_PROTOCOL_HEADER)) {
-			throw new IllegalArgumentException(
-					"this is not a valid WIFI code: " + wifiCode);
-		}
-		Wifi wifi = new Wifi();
-		Map<String, String> parameters = getParameters(
-				wifiCode.substring(WIFI_PROTOCOL_HEADER.length()), "(?<!\\\\);");
-		if (parameters.containsKey(SSID)) {
-			wifi.setSsid(unescape(parameters.get(SSID)));
-		}
-		if (parameters.containsKey(AUTHENTICATION)) {
-			wifi.setAuthentication(parameters.get(AUTHENTICATION));
-		}
-		if (parameters.containsKey(PSK)) {
-			wifi.setPsk(unescape(parameters.get(PSK)));
-		}
-		if (parameters.containsKey(HIDDEN)) {
-			wifi.setHidden(parameters.get(HIDDEN));
-		}
-		return wifi;
-	}
-
-	public static String escape(final String text) {
-		return text.replace("\\", "\\\\").replace(",", "\\,")
-				.replace(";", "\\;").replace(".", "\\.")
-				.replace("\"", "\\\"").replace("'", "\\'");
-	}
-
-	public static String unescape(final String text) {
-		return text.replace("\\\\", "\\").replace("\\,", ",")
-				.replace("\\;", ";").replace("\\.", ".")
-				.replace("\\\"", "\"").replace("\\'", "'");
+	public enum Authentication {
+		WEP, WPA, nopass;
 	}
 
 }
