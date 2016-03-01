@@ -1,7 +1,7 @@
 1: set maven version
 
 ```
-mvn versions:set -DnewVersion=2.1.0 -DgenerateBackupPoms=flse
+mvn versions:set -DnewVersion=2.1.0 -DgenerateBackupPoms=false
 ```
 
 2: commit and tag the version
