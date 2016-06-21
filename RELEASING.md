@@ -21,3 +21,5 @@ git add .
 git commit -m "set next version"
 git push
 ```
+
+4: update version in readme
