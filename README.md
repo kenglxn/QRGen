@@ -27,11 +27,13 @@ Maven:
 
 Gradle:
 
-```gradle
-     repositories {
-        // ...
-        maven { url "https://jitpack.io" }
-     }
+```gradle 
+    allprojects {
+        repositories {
+            // ...
+            maven { url "https://jitpack.io" }
+        }
+    }
 ```
 
 ##### Nexus proxy setup for jitpack
