@@ -10,15 +10,15 @@ import static net.glxn.qrgen.core.scheme.SchemeUtil.getParameters;
  */
 public class Wifi {
 
-	private static final String WIFI_PROTOCOL_HEADER = "WIFI:";
-	private static final String AUTHENTICATION = "T";
-	private static final String SSID = "S";
-	private static final String PSK = "P";
-	private static final String HIDDEN = "H";
-	private String authentication;
-	private String ssid;
-	private String psk;
-	private boolean hidden = false;
+	protected static final String WIFI_PROTOCOL_HEADER = "WIFI:";
+	protected static final String AUTHENTICATION = "T";
+	protected static final String SSID = "S";
+	protected static final String PSK = "P";
+	protected static final String HIDDEN = "H";
+	protected String authentication;
+	protected String ssid;
+	protected String psk;
+	protected boolean hidden = false;
 	public Wifi() {
 	}
 
