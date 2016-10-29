@@ -63,7 +63,7 @@ public class EnterpriseWifi extends Wifi {
         return this;
     }
 
-    public EnterpriseWifi setUser(String user) {
+    public void setUser(String user) {
         withUser(user);
     }
 
@@ -76,7 +76,7 @@ public class EnterpriseWifi extends Wifi {
         return this;
     }
 
-    public EnterpriseWifi setEap(String eap) {
+    public void setEap(String eap) {
         withEap(eap);
     }
 

@@ -11,12 +11,10 @@ public class WifiTest {
 	@Test
 	public void parse() {
 		Wifi wifi = Wifi.parse(
-				"WIFI:S:some weird SSID;T:WPA;P:aintNoSecret;E:PEAP;PH:MS-CHAPv2;H:true;");
+				"WIFI:S:some weird SSID;T:WPA;P:aintNoSecret;H:true;");
 		assertEquals("some weird SSID", wifi.getSsid());
 		assertEquals("WPA", wifi.getAuthentication());
 		assertEquals("aintNoSecret", wifi.getPsk());
-		assertEquals("PEAP", wifi.getEap());
-		assertEquals("MS-CHAPv2", wifi.getPhase());
 		assertEquals(true, wifi.isHidden());
 	}
 
@@ -28,13 +26,11 @@ public class WifiTest {
 	@Test
 	public void parseEscapeSsidAndPassword() {
 		Wifi wifi = Wifi.parse(
-				"WIFI:S:s\\;o\\,\\\"me \\'wei\\\\rd\\. SSID\\;;T:WPA;P:\\;a\\,\\\"intNo\\,Sec\\\\ret;false;E:PEAP;PH:MS-CHAPv2;");
-		
+				"WIFI:S:s\\;o\\,\\\"me \\'wei\\\\rd\\. SSID\\;;T:WPA;P:\\;a\\,\\\"intNo\\,Sec\\\\ret;false;");
+
 		assertEquals("s;o,\"me 'wei\\rd. SSID;", wifi.getSsid());
 		assertEquals("WPA", wifi.getAuthentication());
 		assertEquals(";a,\"intNo,Sec\\ret", wifi.getPsk());
-		assertEquals("PEAP", wifi.getEap());
-		assertEquals("MS-CHAPv2", wifi.getPhase());
 		assertEquals(false, wifi.isHidden());
 	}
 
@@ -54,8 +50,6 @@ public class WifiTest {
 		assertNull(null, wifi.getSsid());
 		assertNull(null, wifi.getAuthentication());
 		assertNull(null, wifi.getPsk());
-		assertNull(null, wifi.getEap());
-		assertNull(null, wifi.getPhase());
 		assertEquals(false, wifi.isHidden());
 	}
 
@@ -65,8 +59,6 @@ public class WifiTest {
 		wifi.setSsid("some weird SSID");
 		wifi.setAuthentication(Authentication.WPA);
 		wifi.setPsk("aintNoSecret");
-		wifi.setEap("PEAP");
-		wifi.setPhase("MS-CHAPv2");
 		wifi.setHidden(true);
 
 		assertEquals("WIFI:S:some weird SSID;T:WPA;P:aintNoSecret;H:true;",
