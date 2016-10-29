@@ -9,14 +9,14 @@ import static net.glxn.qrgen.core.scheme.SchemeUtil.getParameters;
  * <code>WIFI:S:SSID;U:USER;P:PSK;E:EAP;PH:PHASE;;</code>
  */
 public class EnterpriseWifi extends Wifi {
-
     private static final String USER = "U";
     private static final String EAP = "E";
     private static final String PHASE = "PH";
-    private String username;
+    private String user;
     private String eap;
     private String phase;
     private boolean hidden = false;
+
     public EnterpriseWifi() {
     }
 
@@ -25,7 +25,7 @@ public class EnterpriseWifi extends Wifi {
             throw new IllegalArgumentException(
                     "this is not a valid WIFI code: " + wifiCode);
         }
-        Wifi wifi = new Wifi();
+        EnterpriseWifi wifi = new EnterpriseWifi();
         Map<String, String> parameters = getParameters(
                 wifiCode.substring(WIFI_PROTOCOL_HEADER.length()), "(?<!\\\\);");
         if (parameters.containsKey(SSID)) {
@@ -58,20 +58,20 @@ public class EnterpriseWifi extends Wifi {
                 .replace("\\\"", "\"").replace("\\'", "'");
     }
 
-    public EnterpriseWifi withUsername(String username) {
-        this.username = username;
+    public EnterpriseWifi withUser(String user) {
+        this.user = user;
         return this;
     }
 
-    public EnterpriseWifi setUsername(String username) {
-        withUsername(username);
+    public EnterpriseWifi setUser(String user) {
+        withUser(user);
     }
 
-    public String getUsername() {
-        return username;
+    public String getUser() {
+        return user;
     }
 
-    public EnterpriseWifi withEap(Strin eap) {
+    public EnterpriseWifi withEap(String eap) {
         this.eap = eap;
         return this;
     }
@@ -103,8 +103,8 @@ public class EnterpriseWifi extends Wifi {
         if (getSsid() != null) {
             bob.append(SSID).append(":").append(escape(getSsid())).append(";");
         }
-        if (getUsername() != null) {
-            bob.append(USER).append(":").append(getUsername()).append(";");
+        if (getUser() != null) {
+            bob.append(USER).append(":").append(getUser()).append(";");
         }
         if (getPsk() != null) {
             bob.append(PSK).append(":").append(escape(getPsk())).append(";");
