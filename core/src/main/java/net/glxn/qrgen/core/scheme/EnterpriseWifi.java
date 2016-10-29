@@ -25,7 +25,7 @@ public class EnterpriseWifi extends Wifi {
             throw new IllegalArgumentException(
                     "this is not a valid WIFI code: " + wifiCode);
         }
-        Wifi wifi = new Wifi();
+        EnterpriseWifi wifi = new EnterpriseWifi();
         Map<String, String> parameters = getParameters(
                 wifiCode.substring(WIFI_PROTOCOL_HEADER.length()), "(?<!\\\\);");
         if (parameters.containsKey(SSID)) {
@@ -71,7 +71,7 @@ public class EnterpriseWifi extends Wifi {
         return username;
     }
 
-    public EnterpriseWifi withEap(Strin eap) {
+    public EnterpriseWifi withEap(String eap) {
         this.eap = eap;
         return this;
     }
