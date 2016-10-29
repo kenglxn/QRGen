@@ -43,6 +43,9 @@ public class EnterpriseWifi extends Wifi {
         if (parameters.containsKey(PHASE)) {
             wifi.setPhase(unescape(parameters.get(PHASE)));
         }
+        if (parameters.containsKey(HIDDEN)) {
+            wifi.setHidden(parameters.get(HIDDEN));
+        }
         return wifi;
     }
 
@@ -104,7 +107,7 @@ public class EnterpriseWifi extends Wifi {
             bob.append(SSID).append(":").append(escape(getSsid())).append(";");
         }
         if (getUser() != null) {
-            bob.append(USER).append(":").append(getUser()).append(";");
+            bob.append(USER).append(":").append(escape(getUser())).append(";");
         }
         if (getPsk() != null) {
             bob.append(PSK).append(":").append(escape(getPsk())).append(";");

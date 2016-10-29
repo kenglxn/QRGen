@@ -69,7 +69,7 @@ public class EnterpriseWifiTest {
         wifi.setPhase("MS-CHAPv2");
         wifi.setHidden(true);
 
-        assertEquals("WIFI:S:some weird SSID;U:Spcok;P:aintNoSecret;E:PEAP;PH:MS-CHAPv2;H:true;",
+        assertEquals("WIFI:S:some weird SSID;U:Spock;P:aintNoSecret;E:PEAP;PH:MS-CHAPv2;H:true;",
                 wifi.toString());
     }
 
