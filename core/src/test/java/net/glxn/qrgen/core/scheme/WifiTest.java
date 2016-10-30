@@ -27,7 +27,7 @@ public class WifiTest {
 	public void parseEscapeSsidAndPassword() {
 		Wifi wifi = Wifi.parse(
 				"WIFI:S:s\\;o\\,\\\"me \\'wei\\\\rd\\. SSID\\;;T:WPA;P:\\;a\\,\\\"intNo\\,Sec\\\\ret;false;");
-		
+
 		assertEquals("s;o,\"me 'wei\\rd. SSID;", wifi.getSsid());
 		assertEquals("WPA", wifi.getAuthentication());
 		assertEquals(";a,\"intNo,Sec\\ret", wifi.getPsk());
