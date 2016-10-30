@@ -5,17 +5,16 @@ import java.util.Map;
 import static net.glxn.qrgen.core.scheme.SchemeUtil.getParameters;
 
 /**
- * Encodes a Wifi connection, format is:
+ * Encodes a Wifi connection containing a username / password scheme for authentication, format is:
  * <code>WIFI:S:SSID;U:USER;P:PSK;E:EAP;PH:PHASE;;</code>
  */
 public class EnterpriseWifi extends Wifi {
-    private static final String USER = "U";
-    private static final String EAP = "E";
-    private static final String PHASE = "PH";
+    public static final String USER = "U";
+    public static final String EAP = "E";
+    public static final String PHASE = "PH";
     private String user;
     private String eap;
     private String phase;
-    private boolean hidden = false;
 
     public EnterpriseWifi() {
     }

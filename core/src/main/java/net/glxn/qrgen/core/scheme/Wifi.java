@@ -9,16 +9,16 @@ import static net.glxn.qrgen.core.scheme.SchemeUtil.getParameters;
  * <code>WIFI:T:AUTHENTICATION;S:SSID;P:PSK;H:HIDDEN;</code>
  */
 public class Wifi {
+	public static final String WIFI_PROTOCOL_HEADER = "WIFI:";
+	public static final String AUTHENTICATION = "T";
+	public static final String SSID = "S";
+	public static final String PSK = "P";
+	public static final String HIDDEN = "H";
+	private String authentication;
+	private String ssid;
+	private String psk;
+	private boolean hidden = false;
 
-	protected static final String WIFI_PROTOCOL_HEADER = "WIFI:";
-	protected static final String AUTHENTICATION = "T";
-	protected static final String SSID = "S";
-	protected static final String PSK = "P";
-	protected static final String HIDDEN = "H";
-	protected String authentication;
-	protected String ssid;
-	protected String psk;
-	protected boolean hidden = false;
 	public Wifi() {
 	}
 
