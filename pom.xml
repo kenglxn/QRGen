@@ -44,7 +44,7 @@
     </modules>
 
     <properties>
-        <zxing.version>3.1.0</zxing.version>
+        <zxing.version>3.3.0</zxing.version>
         <junit.version>4.8.2</junit.version>
         <robolectric.version>2.2</robolectric.version>
         <fest-android.version>1.0.7</fest-android.version>
