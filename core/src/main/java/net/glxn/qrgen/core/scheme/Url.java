@@ -15,6 +15,8 @@
  */
 package net.glxn.qrgen.core.scheme;
 
+import java.net.URL;
+
 /**
  * Encodes a url connection, format is: <code>HTTP://URL</code>
  * 
@@ -33,7 +35,11 @@ public class Url {
 
 	public Url(String url) {
 		super();
-		this.url = url;
+		init(url);
+	}
+
+	public Url(URL url) {
+		this(url.toString());
 	}
 
 	public String getUrl() {
@@ -41,7 +47,32 @@ public class Url {
 	}
 
 	public void setUrl(String url) {
-		this.url = url;
+		init(url);
+	}
+
+	private void init(String u) {
+		if (u != null) {
+			url = u.trim();
+			if (!url.isEmpty()) {
+				url = url.toUpperCase();
+				if (!url.startsWith(HTTP_PROTOCOL) && !url.startsWith(HTTPS_PROTOCOL)) {
+					url = HTTP_PROTOCOL + url;
+				}
+			}
+		}
+	}
+
+	public static Url parse(URL url) {
+		return new Url(url);
+	}
+
+	public static Url parse(final String url) {
+		return new Url(url);
+	}
+
+	@Override
+	public String toString() {
+		return url;
 	}
 
 }
