@@ -15,17 +15,56 @@
  */
 package net.glxn.qrgen.core.scheme;
 
+import static net.glxn.qrgen.core.scheme.SchemeUtil.getParameters;
+
+import java.util.Map;
+
 /**
+ * Encodes a e-mail address, format is: <code>mailto:mail@address.com</code>
+ * 
  * @author pawlidim
  *
  */
 public class EMail {
 
+	public static final String MAILTO = "mailto";
+	private String email;
+
 	/**
-	 * 
+	 * Default constructor to construct new e-mail object.
 	 */
 	public EMail() {
-		// TODO Auto-generated constructor stub
+		super();
+	}
+
+	public EMail(String email) {
+		super();
+		this.email = email;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public static EMail parse(final String email) {
+		if (email == null || !email.toLowerCase().startsWith(MAILTO)) {
+			throw new IllegalArgumentException("this is not a valid email code: " + email);
+		}
+		EMail mail = new EMail();
+		Map<String, String> parameters = getParameters(email.toLowerCase());
+		if (parameters.containsKey(MAILTO)) {
+			mail.setEmail(parameters.get(MAILTO));
+		}
+		return mail;
+	}
+
+	@Override
+	public String toString() {
+		return MAILTO + ":" + email;
 	}
 
 }
