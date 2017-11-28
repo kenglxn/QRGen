@@ -15,17 +15,55 @@
  */
 package net.glxn.qrgen.core.scheme;
 
+import static net.glxn.qrgen.core.scheme.SchemeUtil.getParameters;
+
+import java.util.Map;
+
 /**
+ * Encodes a telephone number, format is: <code>tel:+1-212-555-1212</code>
+ * 
  * @author pawlidim
  *
  */
 public class Telephone {
+	public static final String TEL = "tel";
+	private String telephone;
 
 	/**
-	 * 
+	 * Default constructor to construct new telephone object.
 	 */
 	public Telephone() {
-		// TODO Auto-generated constructor stub
+		super();
+	}
+
+	public Telephone(final String telephone) {
+		super();
+		this.telephone = telephone;
+	}
+
+	public String getTelephone() {
+		return telephone;
+	}
+
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
+
+	public static Telephone parse(final String telephone) {
+		if (telephone == null || !telephone.trim().toLowerCase().startsWith(TEL)) {
+			throw new IllegalArgumentException("this is not a valid telephone code: " + telephone);
+		}
+		Telephone tel = new Telephone();
+		Map<String, String> parameters = getParameters(telephone.trim().toLowerCase());
+		if (parameters.containsKey(TEL)) {
+			tel.setTelephone(parameters.get(TEL));
+		}
+		return tel;
+	}
+
+	@Override
+	public String toString() {
+		return TEL + ":" + telephone;
 	}
 
 }
