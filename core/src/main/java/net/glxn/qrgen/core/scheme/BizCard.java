@@ -25,7 +25,7 @@ public class BizCard {
 	 * 
 	 */
 	public BizCard() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
 
 }

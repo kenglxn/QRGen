@@ -50,12 +50,12 @@ public class EMail {
 		this.email = email;
 	}
 
-	public static EMail parse(final String email) {
-		if (email == null || !email.toLowerCase().startsWith(MAILTO)) {
-			throw new IllegalArgumentException("this is not a valid email code: " + email);
+	public static EMail parse(final String emailCode) {
+		if (emailCode == null || !emailCode.toLowerCase().startsWith(MAILTO)) {
+			throw new IllegalArgumentException("this is not a valid email code: " + emailCode);
 		}
 		EMail mail = new EMail();
-		Map<String, String> parameters = getParameters(email.toLowerCase());
+		Map<String, String> parameters = getParameters(emailCode.toLowerCase());
 		if (parameters.containsKey(MAILTO)) {
 			mail.setEmail(parameters.get(MAILTO));
 		}

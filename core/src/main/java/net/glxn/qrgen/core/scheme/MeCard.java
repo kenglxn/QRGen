@@ -24,7 +24,7 @@ import java.util.Map;
  * @author pawlidim
  *
  */
-public class MeCard {
+public final class MeCard {
 
 	private static final String BEGIN_MECARD = "MECARD";
 	private static final String NAME = "N";
