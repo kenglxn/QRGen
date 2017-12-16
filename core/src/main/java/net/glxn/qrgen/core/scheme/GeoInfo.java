@@ -15,17 +15,63 @@
  */
 package net.glxn.qrgen.core.scheme;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author pawlidim
  *
  */
 public class GeoInfo {
 
+	public static final String GEO = "geo";
+	private List<String> points;
+
 	/**
-	 * 
+	 * Default constructor to construct new geo info object.
 	 */
 	public GeoInfo() {
-		// TODO Auto-generated constructor stub
+		super();
+		this.points = new ArrayList<>();
 	}
 
+	public GeoInfo(String... points) {
+		this();
+		if (points != null && points.length > 0) {
+			for (String point : points) {
+				this.points.add(point);
+			}
+		}
+	}
+
+	public List<String> getPoints() {
+		return points;
+	}
+
+	public void setPoints(List<String> points) {
+		this.points = points;
+	}
+
+	public static GeoInfo parse(final String geoInfoCode) {
+		if (geoInfoCode == null || !geoInfoCode.toLowerCase().startsWith(GEO)) {
+			throw new IllegalArgumentException("this is not a geo info code: " + geoInfoCode);
+		}
+		String[] points = geoInfoCode.toLowerCase().replaceAll(GEO + ":", "").split(",");
+		return new GeoInfo(points);
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		if (points != null) {
+			int s = points.size();
+			for (int i = 0; i < s; i++) {
+				builder.append(points.get(i));
+				if (i < s - 1) {
+					builder.append(",");
+				}
+			}
+		}
+		return GEO + ":" + builder.toString();
+	}
 }
