@@ -15,10 +15,56 @@
  */
 package net.glxn.qrgen.core.scheme;
 
+import static net.glxn.qrgen.core.scheme.SchemeUtil.getParameters;
+
+import java.util.Map;
+
+/**
+ * Encodes a YouTube video, format is: <code>youtube://[video ID]</code>
+ * 
+ * @author pawlidim
+ *
+ */
 public class YouTube {
 
+	public static final String YOUTUBE = "youtube";
+	private String videoId;
+
+	/**
+	 * Default constructor to construct new YouTube object.
+	 */
 	public YouTube() {
-		// TODO Auto-generated constructor stub
+		super();
+	}
+
+	public YouTube(String videoId) {
+		super();
+		this.videoId = videoId;
+	}
+
+	public String getVideoId() {
+		return videoId;
+	}
+
+	public void setVideoId(String videoId) {
+		this.videoId = videoId;
+	}
+
+	public static YouTube parse(final String youTubeCode) {
+		if (youTubeCode == null || !youTubeCode.toLowerCase().startsWith(YOUTUBE)) {
+			throw new IllegalArgumentException("this is not a valid you tube code: " + youTubeCode);
+		}
+		YouTube youTube = new YouTube();
+		Map<String, String> parameters = getParameters(youTubeCode);
+		if (parameters.containsKey(YOUTUBE)) {
+			youTube.setVideoId(parameters.get(YOUTUBE));
+		}
+		return youTube;
+	}
+
+	@Override
+	public String toString() {
+		return YOUTUBE + ":" + videoId;
 	}
 
 }

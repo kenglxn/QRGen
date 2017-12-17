@@ -19,6 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Encodes a geographic information, format is:
+ * <code>geo:40.71872,-73.98905,100</code>
+ * 
  * @author pawlidim
  *
  */
@@ -53,10 +56,10 @@ public class GeoInfo {
 	}
 
 	public static GeoInfo parse(final String geoInfoCode) {
-		if (geoInfoCode == null || !geoInfoCode.toLowerCase().startsWith(GEO)) {
+		if (geoInfoCode == null || !geoInfoCode.trim().toLowerCase().startsWith(GEO)) {
 			throw new IllegalArgumentException("this is not a geo info code: " + geoInfoCode);
 		}
-		String[] points = geoInfoCode.toLowerCase().replaceAll(GEO + ":", "").split(",");
+		String[] points = geoInfoCode.trim().toLowerCase().replaceAll(GEO + ":", "").split(",");
 		return new GeoInfo(points);
 	}
 

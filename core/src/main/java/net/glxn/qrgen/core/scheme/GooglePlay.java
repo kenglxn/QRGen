@@ -16,16 +16,48 @@
 package net.glxn.qrgen.core.scheme;
 
 /**
+ * 
+ * Encodes a Google Play direct link, format is:
+ * <code>{{{market://details?id=de.pawlidi.android}}}</code>
+ * 
  * @author pawlidim
  *
  */
 public class GooglePlay {
 
+	public static final String GPLAY = "{{{market://details?id=%s}}}";
+	private String appPackage;
+
 	/**
-	 * 
+	 * Default constructor to construct the GooglePlay obeject.
 	 */
 	public GooglePlay() {
-		// TODO Auto-generated constructor stub
+		super();
+	}
+
+	public String getAppPackage() {
+		return appPackage;
+	}
+
+	public void setAppPackage(String appPackage) {
+		this.appPackage = appPackage;
+	}
+
+	public static GooglePlay parse(final String gplayCode) {
+		if (gplayCode == null || !gplayCode.trim().toLowerCase().startsWith("{{{market:")) {
+			throw new IllegalArgumentException("this is not a google play code: " + gplayCode);
+		}
+		String[] paths = gplayCode.trim().toLowerCase().replace("}}}", "").split("=");
+		GooglePlay googlePlay = new GooglePlay();
+		if (paths.length > 1) {
+			googlePlay.setAppPackage(paths[1]);
+		}
+		return googlePlay;
+	}
+
+	@Override
+	public String toString() {
+		return String.format(GPLAY, appPackage);
 	}
 
 }
