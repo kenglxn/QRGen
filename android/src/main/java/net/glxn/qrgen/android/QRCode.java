@@ -86,6 +86,11 @@ public class QRCode extends AbstractQRCode {
 		return new QRCode(vcard.toString());
 	}
 
+	/**
+	 * 
+	 * @param bizCard
+	 * @return
+	 */
 	public static QRCode from(BizCard bizCard) {
 		return new QRCode(bizCard.toString());
 	}
