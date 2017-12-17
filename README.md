@@ -150,6 +150,25 @@ VCard johnDoe = new VCard("John Doe")
                     .setWebsite("www.example.org");
 QRCode.from(johnDoe).file();
 
+// encode email data
+EMail email = new EMail("John.Doe@example.org");
+QRCode.from(email).file();
+
+// encode mms data
+MMS mms = new MMS("Hello World");
+QRCode.from(mms).file();
+
+// encode sms data
+SMS sms = new SMS("Hello World");
+QRCode.from(sms).file();
+
+// encode MeCard data
+MeCard johnDoe = new MeCard("John Doe")
+johnDoe.setEmail("john.doe@example.org")
+johnDoe.setAddress("John Doe Street 1, 5678 Doestown")
+johnDoe.setTelephone("1234")
+QRCode.from(johnDoe).file()
+
 // if using special characters don't forget to supply the encoding
 VCard johnSpecial = new VCard("Jöhn Dɵe")
                         .setAddress("ëåäöƞ Sträät 1, 1234 Döestüwn");
