@@ -19,6 +19,11 @@ import static net.glxn.qrgen.core.scheme.SchemeUtil.LINE_FEED;
 
 import java.util.Map;
 
+/**
+ * 
+ * @author pawlidim
+ *
+ */
 public class IJournal {
 
 	public static final String NAME = "VJOURNAL";
@@ -29,6 +34,7 @@ public class IJournal {
 	}
 
 	public static IJournal parse(Map<String, String> parameters, final String icalCode) {
+		// TODO
 		return null;
 	}
 

@@ -16,6 +16,7 @@
 package net.glxn.qrgen.core.scheme;
 
 import static net.glxn.qrgen.core.scheme.SchemeUtil.LINE_FEED;
+import static net.glxn.qrgen.core.scheme.SchemeUtil.getParameters;
 
 import java.util.Map;
 
@@ -41,7 +42,7 @@ public class IEvent {
 	public static final String NAME = "VEVENT";
 	private static final String BEGIN_EVENT = "BEGIN:VEVENT";
 	private static final String UID = "UID";
-	private static final String DTSTAMP = "DTSTAMP";
+	private static final String STAMP = "DTSTAMP";
 	private static final String ORGANIZER = "ORGANIZER";
 	private static final String START = "DTSTART";
 	private static final String END = "DTEND";
@@ -58,8 +59,74 @@ public class IEvent {
 		super();
 	}
 
+	public String getUid() {
+		return uid;
+	}
+
+	public void setUid(String uid) {
+		this.uid = uid;
+	}
+
+	public String getStamp() {
+		return stamp;
+	}
+
+	public void setStamp(String stamp) {
+		this.stamp = stamp;
+	}
+
+	public String getOrganizer() {
+		return organizer;
+	}
+
+	public void setOrganizer(String organizer) {
+		this.organizer = organizer;
+	}
+
+	public String getStart() {
+		return start;
+	}
+
+	public void setStart(String start) {
+		this.start = start;
+	}
+
+	public String getEnd() {
+		return end;
+	}
+
+	public void setEnd(String end) {
+		this.end = end;
+	}
+
+	public String getSummary() {
+		return summary;
+	}
+
+	public void setSummary(String summary) {
+		this.summary = summary;
+	}
+
 	public static IEvent parse(Map<String, String> parameters, final String icalCode) {
-		return null;
+		IEvent event = new IEvent();
+		if (parameters.containsKey(UID)) {
+			event.setUid(parameters.get(UID));
+		}
+		if (parameters.containsKey(STAMP)) {
+			event.setStamp(parameters.get(STAMP));
+		}
+		if (parameters.containsKey(START)) {
+			event.setStart(parameters.get(START));
+		}
+		if (parameters.containsKey(END)) {
+			event.setEnd(parameters.get(END));
+		}
+		if (parameters.containsKey(SUMMARY)) {
+			event.setSummary(parameters.get(SUMMARY));
+		}
+		Map<String, String> param = getParameters(icalCode);
+		// TODO
+		return event;
 	}
 
 	@Override
@@ -69,7 +136,7 @@ public class IEvent {
 		if (uid != null) {
 			sb.append(UID).append(":").append(uid).append(LINE_FEED);
 		} else if (stamp != null) {
-			sb.append(DTSTAMP).append(":").append(stamp).append(LINE_FEED);
+			sb.append(STAMP).append(":").append(stamp).append(LINE_FEED);
 		} else if (organizer != null) {
 			sb.append(ORGANIZER).append(";").append(organizer).append(LINE_FEED);
 		} else if (start != null) {

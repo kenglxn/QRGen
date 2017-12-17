@@ -19,6 +19,11 @@ import static net.glxn.qrgen.core.scheme.SchemeUtil.LINE_FEED;
 
 import java.util.Map;
 
+/**
+ * 
+ * @author pawlidim
+ *
+ */
 public class IToDo {
 
 	public static final String NAME = "VTODO";
@@ -29,6 +34,7 @@ public class IToDo {
 	}
 
 	public static IToDo parse(Map<String, String> parameters, final String icalCode) {
+		// TODO
 		return null;
 	}
 
