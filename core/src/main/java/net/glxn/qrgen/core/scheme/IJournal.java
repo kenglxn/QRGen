@@ -1,18 +1,3 @@
-/*
- * Copyright (C) 2017 Maximilian Pawlidi
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package net.glxn.qrgen.core.scheme;
 
 import static net.glxn.qrgen.core.scheme.SchemeUtil.LINE_FEED;
@@ -20,11 +5,9 @@ import static net.glxn.qrgen.core.scheme.SchemeUtil.LINE_FEED;
 import java.util.Map;
 
 /**
- * 
- * @author pawlidim
  *
  */
-public class IJournal {
+public class IJournal extends SubSchema {
 
 	public static final String NAME = "VJOURNAL";
 	private static final String BEGIN_TODO = "BEGIN:VJOURNAL";
@@ -33,18 +16,29 @@ public class IJournal {
 		super();
 	}
 
-	public static IJournal parse(Map<String, String> parameters, final String icalCode) {
-		// TODO
+	@Override
+	public SubSchema parseSchema(Map<String, String> parameters, String code) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String toString() {
+	public String generateString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(BEGIN_TODO).append(LINE_FEED);
-
+		// TODO
 		sb.append(LINE_FEED).append("END:VJOURNAL");
 		return sb.toString();
+	}
+
+	@Override
+	public String toString() {
+		return generateString();
+	}
+
+	public static SubSchema parse(Map<String, String> parameters, String code) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

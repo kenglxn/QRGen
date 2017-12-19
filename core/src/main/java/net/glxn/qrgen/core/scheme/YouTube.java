@@ -1,18 +1,3 @@
-/*
- * Copyright (C) 2017 Maximilian Pawlidi
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package net.glxn.qrgen.core.scheme;
 
 import static net.glxn.qrgen.core.scheme.SchemeUtil.getParameters;
@@ -22,10 +7,8 @@ import java.util.Map;
 /**
  * Encodes a YouTube video, format is: <code>youtube://[video ID]</code>
  * 
- * @author pawlidim
- *
  */
-public class YouTube {
+public class YouTube extends Schema {
 
 	public static final String YOUTUBE = "youtube";
 	private String videoId;
@@ -50,21 +33,31 @@ public class YouTube {
 		this.videoId = videoId;
 	}
 
-	public static YouTube parse(final String youTubeCode) {
-		if (youTubeCode == null || !youTubeCode.toLowerCase().startsWith(YOUTUBE)) {
-			throw new IllegalArgumentException("this is not a valid you tube code: " + youTubeCode);
+	@Override
+	public Schema parseSchema(String code) {
+		if (code == null || !code.toLowerCase().startsWith(YOUTUBE)) {
+			throw new IllegalArgumentException("this is not a valid you tube code: " + code);
 		}
-		YouTube youTube = new YouTube();
-		Map<String, String> parameters = getParameters(youTubeCode);
+		Map<String, String> parameters = getParameters(code);
 		if (parameters.containsKey(YOUTUBE)) {
-			youTube.setVideoId(parameters.get(YOUTUBE));
+			setVideoId(parameters.get(YOUTUBE));
 		}
-		return youTube;
+		return this;
+	}
+
+	@Override
+	public String generateString() {
+		return YOUTUBE + ":" + videoId;
 	}
 
 	@Override
 	public String toString() {
-		return YOUTUBE + ":" + videoId;
+		return generateString();
 	}
 
+	public static YouTube parse(final String code) {
+		YouTube youTube = new YouTube();
+		youTube.parseSchema(code);
+		return youTube;
+	}
 }

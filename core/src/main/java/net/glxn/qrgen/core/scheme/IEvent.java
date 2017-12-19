@@ -1,18 +1,3 @@
-/*
- * Copyright (C) 2017 Maximilian Pawlidi
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package net.glxn.qrgen.core.scheme;
 
 import static net.glxn.qrgen.core.scheme.SchemeUtil.LINE_FEED;
@@ -33,11 +18,9 @@ import java.util.Map;
  * SUMMARY:Bastille Day Party 
  * END:VEVENT
  * </code>
- * 
- * @author pawlidim
  *
  */
-public class IEvent {
+public class IEvent extends SubSchema {
 
 	public static final String NAME = "VEVENT";
 	private static final String BEGIN_EVENT = "BEGIN:VEVENT";
@@ -107,30 +90,30 @@ public class IEvent {
 		this.summary = summary;
 	}
 
-	public static IEvent parse(Map<String, String> parameters, final String icalCode) {
-		IEvent event = new IEvent();
+	@Override
+	public SubSchema parseSchema(Map<String, String> parameters, String code) {
 		if (parameters.containsKey(UID)) {
-			event.setUid(parameters.get(UID));
+			setUid(parameters.get(UID));
 		}
 		if (parameters.containsKey(STAMP)) {
-			event.setStamp(parameters.get(STAMP));
+			setStamp(parameters.get(STAMP));
 		}
 		if (parameters.containsKey(START)) {
-			event.setStart(parameters.get(START));
+			setStart(parameters.get(START));
 		}
 		if (parameters.containsKey(END)) {
-			event.setEnd(parameters.get(END));
+			setEnd(parameters.get(END));
 		}
 		if (parameters.containsKey(SUMMARY)) {
-			event.setSummary(parameters.get(SUMMARY));
+			setSummary(parameters.get(SUMMARY));
 		}
-		Map<String, String> param = getParameters(icalCode);
+		Map<String, String> param = getParameters(code);
 		// TODO
-		return event;
+		return this;
 	}
 
 	@Override
-	public String toString() {
+	public String generateString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(BEGIN_EVENT).append(LINE_FEED);
 		if (uid != null) {
@@ -150,4 +133,14 @@ public class IEvent {
 		return sb.toString();
 	}
 
+	@Override
+	public String toString() {
+		return generateString();
+	}
+
+	public static IEvent parse(Map<String, String> parameters, final String code) {
+		IEvent event = new IEvent();
+		event.parseSchema(parameters, code);
+		return event;
+	}
 }

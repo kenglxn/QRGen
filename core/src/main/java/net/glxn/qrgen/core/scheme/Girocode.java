@@ -1,11 +1,12 @@
 package net.glxn.qrgen.core.scheme;
 
-import static net.glxn.qrgen.core.scheme.SchemeUtil.*;
+import static net.glxn.qrgen.core.scheme.SchemeUtil.DEFAULT_PARAM_SEPARATOR;
+import static net.glxn.qrgen.core.scheme.SchemeUtil.LINE_FEED;
 
 /**
  * European banking code, currently defines only SEPA credit transfer.
  */
-public class Girocode {
+public class Girocode extends Schema {
 
 	protected static final String SERVICE_HEADER = "BCD";
 	protected static final String FUNCTION_SEPA_CREDIT_TRANSFER = "SCT";
@@ -29,8 +30,7 @@ public class Girocode {
 					return encoding;
 				}
 			}
-			throw new IllegalArgumentException(String.format(
-					"unknown encoding value '%s'", value));
+			throw new IllegalArgumentException(String.format("unknown encoding value '%s'", value));
 		}
 	}
 
@@ -120,7 +120,39 @@ public class Girocode {
 		this.hint = hint;
 	}
 
-	public String toString() {
+	@Override
+	public Schema parseSchema(String code) {
+		if (code == null) {
+			throw new IllegalArgumentException("this is not a valid Girocode: " + code);
+		}
+		String[] params = code.split(DEFAULT_PARAM_SEPARATOR);
+		if (params.length < 6 || params[0].equals("SERVICE_HEADER")) {
+			throw new IllegalArgumentException("this is not a valid Girocode: " + code);
+		}
+		setEncoding(Encoding.encodingFor(params[2]));
+		setBic(params[4]);
+		setName(params[5]);
+		setIban(params[6]);
+		if (params.length > 7) {
+			setAmount(params[7]);
+		}
+		if (params.length > 8) {
+			setPurposeCode(params[8]);
+		}
+		if (params.length > 9) {
+			setReference(params[9]);
+		}
+		if (params.length > 10) {
+			setText(params[10]);
+		}
+		if (params.length > 11) {
+			setHint(params[11]);
+		}
+		return this;
+	}
+
+	@Override
+	public String generateString() {
 		StringBuilder bob = new StringBuilder();
 		bob.append(SERVICE_HEADER).append(LINE_FEED);
 		bob.append(VERSION_1).append(LINE_FEED);
@@ -135,44 +167,21 @@ public class Girocode {
 		bob.append(nullToEmptyString(getText())).append(LINE_FEED);
 		bob.append(nullToEmptyString(getHint())).append(LINE_FEED);
 		return bob.toString();
-	};
+	}
 
 	private String nullToEmptyString(final Object value) {
 		return value == null ? "" : value.toString();
 	}
-	
-	public static Girocode parse(final String qrCode) {
-		if (qrCode == null) {
-			throw new IllegalArgumentException("this is not a valid Girocode: "
-					+ qrCode);
-		}
-		String[] params = qrCode.split(DEFAULT_PARAM_SEPARATOR);
-		if (params.length < 6 || params[0].equals("SERVICE_HEADER")) {
-			throw new IllegalArgumentException("this is not a valid Girocode: "
-					+ qrCode);
-		}
-		Girocode girocode = new Girocode();
-		girocode.setEncoding(Encoding.encodingFor(params[2]));
-		girocode.setBic(params[4]);
-		girocode.setName(params[5]);
-		girocode.setIban(params[6]);
-		if (params.length > 7) {
-			girocode.setAmount(params[7]);
-		}
-		if (params.length > 8) {
-			girocode.setPurposeCode(params[8]);
-		}
-		if (params.length > 9) {
-			girocode.setReference(params[9]);
-		}
-		if (params.length > 10) {
-			girocode.setText(params[10]);
-		}
-		if (params.length > 11) {
-			girocode.setHint(params[11]);
-		}
-		return girocode;
+
+	@Override
+	public String toString() {
+		return generateString();
 	}
 
+	public static Girocode parse(final String qrCode) {
+		Girocode girocode = new Girocode();
+		girocode.parseSchema(qrCode);
+		return girocode;
+	}
 
 }

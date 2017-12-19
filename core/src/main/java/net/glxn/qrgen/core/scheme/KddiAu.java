@@ -1,18 +1,3 @@
-/*
- * Copyright (C) 2017 Maximilian Pawlidi
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package net.glxn.qrgen.core.scheme;
 
 import static net.glxn.qrgen.core.scheme.SchemeUtil.LINE_FEED;
@@ -22,10 +7,9 @@ import java.util.Map;
 
 /**
  * 
- * @author pawlidim
  *
  */
-public class KddiAu {
+public class KddiAu extends Schema {
 
 	private static final String BEGIN = "MEMORY";
 	private static final String NAME1 = "NAME1";
@@ -128,43 +112,44 @@ public class KddiAu {
 		this.email3 = email3;
 	}
 
-	public static KddiAu parse(final String kddiAuCode) {
-		if (kddiAuCode == null || !kddiAuCode.startsWith(BEGIN)) {
-			throw new IllegalArgumentException("this is not a valid KDDI AU code: " + kddiAuCode);
+	@Override
+	public Schema parseSchema(String code) {
+		if (code == null || !code.startsWith(BEGIN)) {
+			throw new IllegalArgumentException("this is not a valid KDDI AU code: " + code);
 		}
-		KddiAu kddiAu = new KddiAu();
-		Map<String, String> parameters = getParameters(kddiAuCode);
+		Map<String, String> parameters = getParameters(code);
 		if (parameters.containsKey(NAME1)) {
-			kddiAu.setName1(parameters.get(NAME1));
+			setName1(parameters.get(NAME1));
 		}
 		if (parameters.containsKey(NAME2)) {
-			kddiAu.setName2(parameters.get(NAME2));
+			setName2(parameters.get(NAME2));
 		}
 		if (parameters.containsKey(ADD)) {
-			kddiAu.setAddress(parameters.get(ADD));
+			setAddress(parameters.get(ADD));
 		}
 		if (parameters.containsKey(TEL1)) {
-			kddiAu.setTelephone1(parameters.get(TEL1));
+			setTelephone1(parameters.get(TEL1));
 		}
 		if (parameters.containsKey(TEL2)) {
-			kddiAu.setTelephone1(parameters.get(TEL2));
+			setTelephone1(parameters.get(TEL2));
 		}
 		if (parameters.containsKey(TEL3)) {
-			kddiAu.setTelephone1(parameters.get(TEL3));
+			setTelephone1(parameters.get(TEL3));
 		}
 		if (parameters.containsKey(MAIL1)) {
-			kddiAu.setEmail1(parameters.get(MAIL1));
+			setEmail1(parameters.get(MAIL1));
 		}
 		if (parameters.containsKey(MAIL2)) {
-			kddiAu.setEmail2(parameters.get(MAIL2));
+			setEmail2(parameters.get(MAIL2));
 		}
 		if (parameters.containsKey(MAIL3)) {
-			kddiAu.setEmail3(parameters.get(MAIL3));
+			setEmail3(parameters.get(MAIL3));
 		}
-		return kddiAu;
+		return this;
 	}
 
-	public String toString() {
+	@Override
+	public String generateString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(BEGIN).append(LINE_FEED);
 		if (name1 != null) {
@@ -196,5 +181,16 @@ public class KddiAu {
 		}
 		sb.append(LINE_FEED);
 		return sb.toString();
+	}
+
+	@Override
+	public String toString() {
+		return generateString();
+	}
+
+	public static KddiAu parse(final String kddiAuCode) {
+		KddiAu kddiAu = new KddiAu();
+		kddiAu.parseSchema(kddiAuCode);
+		return kddiAu;
 	}
 }

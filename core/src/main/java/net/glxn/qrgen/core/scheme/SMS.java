@@ -1,18 +1,3 @@
-/*
- * Copyright (C) 2017 Maximilian Pawlidi
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package net.glxn.qrgen.core.scheme;
 
 import static net.glxn.qrgen.core.scheme.SchemeUtil.getParameters;
@@ -22,23 +7,15 @@ import java.util.Map;
 /**
  * Encodes a sms code, format is: <code>sms:+1-212-555-1212:subject</code>
  * 
- * @author pawlidim
- *
  */
-public class SMS {
+public class SMS extends Schema {
 
-	public static final String SMS = "sms";
+	private static final String SMS = "sms";
 	private String number;
 	private String subject;
 
 	public SMS() {
 		super();
-	}
-
-	public SMS(String number, String subject) {
-		super();
-		this.number = number;
-		this.subject = subject;
 	}
 
 	public String getNumber() {
@@ -57,23 +34,34 @@ public class SMS {
 		this.subject = subject;
 	}
 
-	public static SMS parse(final String smsCode) {
-		if (smsCode == null || !smsCode.trim().toLowerCase().startsWith(SMS)) {
-			throw new IllegalArgumentException("this is not a valid sms code: " + smsCode);
+	@Override
+	public Schema parseSchema(String code) {
+		if (code == null || !code.trim().toLowerCase().startsWith(SMS)) {
+			throw new IllegalArgumentException("this is not a valid sms code: " + code);
 		}
-		SMS sms = new SMS();
-		Map<String, String> parameters = getParameters(smsCode.trim().toLowerCase());
+		Map<String, String> parameters = getParameters(code.trim().toLowerCase());
 		if (parameters.containsKey(SMS)) {
-			sms.setNumber(parameters.get(SMS));
+			setNumber(parameters.get(SMS));
 		}
-		if (sms.getNumber() != null && parameters.containsKey(sms.getNumber())) {
-			sms.setSubject(parameters.get(sms.getNumber()));
+		if (getNumber() != null && parameters.containsKey(getNumber())) {
+			setSubject(parameters.get(getNumber()));
 		}
-		return sms;
+		return this;
+	}
+
+	@Override
+	public String generateString() {
+		return SMS + ":" + number + (subject != null ? ":" + subject : "");
 	}
 
 	@Override
 	public String toString() {
-		return SMS + ":" + number + (subject != null ? ":" + subject : "");
+		return generateString();
+	}
+
+	public static SMS parse(final String code) {
+		SMS sms = new SMS();
+		sms.parseSchema(code);
+		return sms;
 	}
 }

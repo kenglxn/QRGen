@@ -1,18 +1,3 @@
-/*
- * Copyright (C) 2017 Maximilian Pawlidi
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package net.glxn.qrgen.core.scheme;
 
 import java.util.ArrayList;
@@ -22,10 +7,8 @@ import java.util.List;
  * Encodes a geographic information, format is:
  * <code>geo:40.71872,-73.98905,100</code>
  * 
- * @author pawlidim
- *
  */
-public class GeoInfo {
+public class GeoInfo extends Schema {
 
 	public static final String GEO = "geo";
 	private List<String> points;
@@ -35,16 +18,7 @@ public class GeoInfo {
 	 */
 	public GeoInfo() {
 		super();
-		this.points = new ArrayList<>();
-	}
-
-	public GeoInfo(String... points) {
-		this();
-		if (points != null && points.length > 0) {
-			for (String point : points) {
-				this.points.add(point);
-			}
-		}
+		this.points = new ArrayList<String>();
 	}
 
 	public List<String> getPoints() {
@@ -55,16 +29,22 @@ public class GeoInfo {
 		this.points = points;
 	}
 
-	public static GeoInfo parse(final String geoInfoCode) {
-		if (geoInfoCode == null || !geoInfoCode.trim().toLowerCase().startsWith(GEO)) {
-			throw new IllegalArgumentException("this is not a geo info code: " + geoInfoCode);
+	@Override
+	public Schema parseSchema(String code) {
+		if (code == null || !code.trim().toLowerCase().startsWith(GEO)) {
+			throw new IllegalArgumentException("this is not a geo info code: " + code);
 		}
-		String[] points = geoInfoCode.trim().toLowerCase().replaceAll(GEO + ":", "").split(",");
-		return new GeoInfo(points);
+		String[] points = code.trim().toLowerCase().replaceAll(GEO + ":", "").split(",");
+		if (points != null && points.length > 0) {
+			for (String point : points) {
+				this.points.add(point);
+			}
+		}
+		return this;
 	}
 
 	@Override
-	public String toString() {
+	public String generateString() {
 		StringBuilder builder = new StringBuilder();
 		if (points != null) {
 			int s = points.size();
@@ -76,5 +56,16 @@ public class GeoInfo {
 			}
 		}
 		return GEO + ":" + builder.toString();
+	}
+
+	@Override
+	public String toString() {
+		return generateString();
+	}
+
+	public static GeoInfo parse(final String geoInfoCode) {
+		GeoInfo geoInfo = new GeoInfo();
+		geoInfo.parseSchema(geoInfoCode);
+		return geoInfo;
 	}
 }

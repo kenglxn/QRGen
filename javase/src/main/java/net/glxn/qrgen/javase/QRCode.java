@@ -14,22 +14,7 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import net.glxn.qrgen.core.AbstractQRCode;
 import net.glxn.qrgen.core.exception.QRGenerationException;
 import net.glxn.qrgen.core.image.ImageType;
-import net.glxn.qrgen.core.scheme.BizCard;
-import net.glxn.qrgen.core.scheme.EMail;
-import net.glxn.qrgen.core.scheme.EnterpriseWifi;
-import net.glxn.qrgen.core.scheme.GeoInfo;
-import net.glxn.qrgen.core.scheme.Girocode;
-import net.glxn.qrgen.core.scheme.GooglePlay;
-import net.glxn.qrgen.core.scheme.ICal;
-import net.glxn.qrgen.core.scheme.KddiAu;
-import net.glxn.qrgen.core.scheme.MMS;
-import net.glxn.qrgen.core.scheme.MeCard;
-import net.glxn.qrgen.core.scheme.SMS;
-import net.glxn.qrgen.core.scheme.Telephone;
-import net.glxn.qrgen.core.scheme.Url;
-import net.glxn.qrgen.core.scheme.VCard;
-import net.glxn.qrgen.core.scheme.Wifi;
-import net.glxn.qrgen.core.scheme.YouTube;
+import net.glxn.qrgen.core.scheme.Schema;
 
 public class QRCode extends AbstractQRCode {
 
@@ -73,7 +58,7 @@ public class QRCode extends AbstractQRCode {
 	}
 
 	/**
-	 * Creates a a QR Code from the given {@link VCard}.
+	 * Creates a a QR Code from the given {@link Schema}.
 	 * <p>
 	 * The QRCode will have the following defaults: <br>
 	 * {size: 100x100}<br>
@@ -81,72 +66,12 @@ public class QRCode extends AbstractQRCode {
 	 * <br>
 	 * </p>
 	 * 
-	 * @param vcard
-	 *            the vcard to encode as QRCode
+	 * @param schema
+	 *            the schema to encode as QRCode
 	 * @return the QRCode object
 	 */
-	public static QRCode from(VCard vcard) {
-		return new QRCode(vcard.toString());
-	}
-
-	public static QRCode from(BizCard bizCard) {
-		return new QRCode(bizCard.toString());
-	}
-
-	public static QRCode from(EMail eMail) {
-		return new QRCode(eMail.toString());
-	}
-
-	public static QRCode from(EnterpriseWifi wifi) {
-		return new QRCode(wifi.toString());
-	}
-
-	public static QRCode from(GeoInfo geoInfo) {
-		return new QRCode(geoInfo.toString());
-	}
-
-	public static QRCode from(Girocode girocode) {
-		return new QRCode(girocode.toString());
-	}
-
-	public static QRCode from(GooglePlay googlePlay) {
-		return new QRCode(googlePlay.toString());
-	}
-
-	public static QRCode from(ICal iCal) {
-		return new QRCode(iCal.toString());
-	}
-
-	public static QRCode from(KddiAu kddiAu) {
-		return new QRCode(kddiAu.toString());
-	}
-
-	public static QRCode from(MMS mms) {
-		return new QRCode(mms.toString());
-	}
-
-	public static QRCode from(MeCard meCard) {
-		return new QRCode(meCard.toString());
-	}
-
-	public static QRCode from(SMS sms) {
-		return new QRCode(sms.toString());
-	}
-
-	public static QRCode from(Telephone telephone) {
-		return new QRCode(telephone.toString());
-	}
-
-	public static QRCode from(Url url) {
-		return new QRCode(url.toString());
-	}
-
-	public static QRCode from(YouTube youTube) {
-		return new QRCode(youTube.toString());
-	}
-
-	public static QRCode from(Wifi wifi) {
-		return new QRCode(wifi.toString());
+	public static QRCode from(Schema schema) {
+		return new QRCode(schema.generateString());
 	}
 
 	/**
