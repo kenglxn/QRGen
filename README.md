@@ -163,11 +163,11 @@ SMS sms = new SMS("Hello World");
 QRCode.from(sms).file();
 
 // encode MeCard data
-MeCard johnDoe = new MeCard("John Doe")
-johnDoe.setEmail("john.doe@example.org")
-johnDoe.setAddress("John Doe Street 1, 5678 Doestown")
-johnDoe.setTelephone("1234")
-QRCode.from(johnDoe).file()
+MeCard johnDoe = new MeCard("John Doe");
+johnDoe.setEmail("john.doe@example.org");
+johnDoe.setAddress("John Doe Street 1, 5678 Doestown");
+johnDoe.setTelephone("1234");
+QRCode.from(johnDoe).file();
 
 // if using special characters don't forget to supply the encoding
 VCard johnSpecial = new VCard("Jöhn Dɵe")
