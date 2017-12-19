@@ -30,10 +30,10 @@ public class Telephone extends Schema {
 
 	@Override
 	public Schema parseSchema(String code) {
-		if (telephone == null || !telephone.trim().toLowerCase().startsWith(TEL)) {
-			throw new IllegalArgumentException("this is not a valid telephone code: " + telephone);
+		if (code == null || !code.trim().toLowerCase().startsWith(TEL)) {
+			throw new IllegalArgumentException("this is not a valid telephone code: " + code);
 		}
-		Map<String, String> parameters = getParameters(telephone.trim().toLowerCase());
+		Map<String, String> parameters = getParameters(code.trim().toLowerCase());
 		if (parameters.containsKey(TEL)) {
 			setTelephone(parameters.get(TEL));
 		}
