@@ -9,7 +9,7 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import net.glxn.qrgen.core.AbstractQRCode;
 import net.glxn.qrgen.core.exception.QRGenerationException;
 import net.glxn.qrgen.core.image.ImageType;
-import net.glxn.qrgen.core.scheme.VCard;
+import net.glxn.qrgen.core.scheme.Schema;
 
 import java.io.File;
 import java.io.IOException;
@@ -50,15 +50,15 @@ public class QRCode extends AbstractQRCode {
     }
 
     /**
-     * Creates a a QR Code from the given {@link VCard}.
+     * Creates a a QR Code from the given {@link Schema}.
      * <p>
      * The QRCode will have the following defaults:     <br> {size: 100x100}<br>{imageType:PNG}  <br><br>
      * </p>
-     * @param vcard the vcard to encode as QRCode
+     * @param schema the schema to encode as QRCode
      * @return the QRCode object
      */
-    public static QRCode from(VCard vcard) {
-        return new QRCode(vcard.toString());
+    public static QRCode from(Schema schema) {
+        return new QRCode(schema.generateString());
     }
 
     /**

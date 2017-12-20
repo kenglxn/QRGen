@@ -3,7 +3,11 @@ package net.glxn.qrgen.core.scheme;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
-import java.util.*;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.LinkedHashSet;
+import java.util.Properties;
+import java.util.Set;
 
 /**
  * An implementation of {@link QRCodeSchemeParser} which supports the types
@@ -34,16 +38,15 @@ public class ExtendableQRCodeSchemeParser implements QRCodeSchemeParser {
 	private Set<QRCodeSchemeParser> parser;
 
 	@Override
-	public Set<Class<?>> getSupportedSchemes() {
-		Set<Class<?>> supportedSchemes = new LinkedHashSet<Class<?>>();
+	public Set<Class<? extends Schema>> getSupportedSchemes() {
+		Set<Class<? extends Schema>> supportedSchemes = new LinkedHashSet<Class<? extends Schema>>();
 		for (QRCodeSchemeParser parser : getParser()) {
 			supportedSchemes.addAll(parser.getSupportedSchemes());
 		}
 		return supportedSchemes;
 	}
 
-	public Object parse(final String qrCodeText)
-			throws UnsupportedEncodingException {
+	public Object parse(final String qrCodeText) throws UnsupportedEncodingException {
 		for (QRCodeSchemeParser parser : getParser()) {
 			try {
 				return parser.parse(qrCodeText);
@@ -51,8 +54,7 @@ public class ExtendableQRCodeSchemeParser implements QRCodeSchemeParser {
 				// go on
 			}
 		}
-		throw new UnsupportedEncodingException("unkonwn QR code scheme: "
-				+ qrCodeText);
+		throw new UnsupportedEncodingException("unkonwn QR code scheme: " + qrCodeText);
 	}
 
 	protected Set<QRCodeSchemeParser> getParser() {
@@ -65,14 +67,12 @@ public class ExtendableQRCodeSchemeParser implements QRCodeSchemeParser {
 	protected Set<QRCodeSchemeParser> loadParser() {
 		Set<QRCodeSchemeParser> result = new LinkedHashSet<QRCodeSchemeParser>();
 		try {
-			Enumeration<URL> resources = this.getClass().getClassLoader()
-					.getResources("META-INF/qrcode.meta");
+			Enumeration<URL> resources = this.getClass().getClassLoader().getResources("META-INF/qrcode.meta");
 			for (URL url : Collections.list(resources)) {
 				Properties properties = new Properties();
 				try (InputStream is = url.openStream()) {
 					properties.load(is);
-					String prop = properties
-							.getProperty(QRCodeSchemeParser.class.getName());
+					String prop = properties.getProperty(QRCodeSchemeParser.class.getName());
 					String[] parserNames = prop.split(",");
 					for (String className : parserNames) {
 						result.add(createParserInstance(className));
@@ -87,8 +87,7 @@ public class ExtendableQRCodeSchemeParser implements QRCodeSchemeParser {
 	}
 
 	protected QRCodeSchemeParser createParserInstance(String className)
-			throws InstantiationException, IllegalAccessException,
-			ClassNotFoundException {
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException {
 		Class<?> clazz = Class.forName(className.trim());
 		return (QRCodeSchemeParser) clazz.newInstance();
 	}
@@ -96,46 +95,42 @@ public class ExtendableQRCodeSchemeParser implements QRCodeSchemeParser {
 	static class QRCodeSchemeParserImpl implements QRCodeSchemeParser {
 
 		@Override
-		public Object parse(String qrCodeText)
-				throws UnsupportedEncodingException {
-			for (Class<?> type : getSupportedSchemes()) {
+		public Object parse(String qrCodeText) throws UnsupportedEncodingException {
+			for (Class<? extends Schema> type : getSupportedSchemes()) {
 				Object instance = createInstance(qrCodeText, type);
 				if (instance != null) {
 					return instance;
 				}
 			}
-			throw new UnsupportedEncodingException("unkonwn QR code scheme: "
-					+ qrCodeText);
+			throw new UnsupportedEncodingException("unkonwn QR code scheme: " + qrCodeText);
 		}
 
-		protected Object createInstance(final String qrCodeText,
-				final Class<?> type) {
+		protected Object createInstance(final String qrCodeText, final Class<? extends Schema> type) {
 			try {
-				if (VCard.class.equals(type)) {
-					return VCard.parse(qrCodeText);
-				}
-				if (Girocode.class.equals(type)) {
-					return Girocode.parse(qrCodeText);
-				}
-				if (Wifi.class.equals(type)) {
-					return Wifi.parse(qrCodeText);
-				}
-				if (URL.class.equals(type)) {
-					return new URL(qrCodeText);
-				}
-				return null;
+				return type.getConstructor(null).newInstance(null).parseSchema(qrCodeText);
 			} catch (Exception e) {
 				return null;
 			}
 		}
 
 		@Override
-		public Set<Class<?>> getSupportedSchemes() {
-			Set<Class<?>> supportedSchemes = new LinkedHashSet<Class<?>>();
+		public Set<Class<? extends Schema>> getSupportedSchemes() {
+			Set<Class<? extends Schema>> supportedSchemes = new LinkedHashSet<Class<? extends Schema>>();
 			supportedSchemes.add(Girocode.class);
 			supportedSchemes.add(VCard.class);
 			supportedSchemes.add(Wifi.class);
-			supportedSchemes.add(URL.class);
+			supportedSchemes.add(BizCard.class);
+			supportedSchemes.add(EMail.class);
+			supportedSchemes.add(EnterpriseWifi.class);
+			supportedSchemes.add(GeoInfo.class);
+			supportedSchemes.add(GooglePlay.class);
+			supportedSchemes.add(ICal.class);
+			supportedSchemes.add(KddiAu.class);
+			supportedSchemes.add(MeCard.class);
+			supportedSchemes.add(MMS.class);
+			supportedSchemes.add(SMS.class);
+			supportedSchemes.add(Telephone.class);
+			supportedSchemes.add(Url.class);
 			return supportedSchemes;
 		}
 

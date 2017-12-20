@@ -15,8 +15,8 @@ public class FooSchemeParser implements QRCodeSchemeParser {
 	}
 
 	@Override
-	public Set<Class<?>> getSupportedSchemes() {
-		Set<Class<?>> supportedSchemes = new LinkedHashSet<Class<?>>();
+	public Set<Class<? extends Schema>> getSupportedSchemes() {
+		Set<Class<? extends Schema>> supportedSchemes = new LinkedHashSet<Class<? extends Schema>>();
 		supportedSchemes.add(Foo.class);
 		return supportedSchemes;
 	}

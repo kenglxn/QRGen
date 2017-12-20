@@ -6,13 +6,12 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URL;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import net.glxn.qrgen.core.scheme.Girocode.Encoding;
-
 import org.junit.Test;
+
+import net.glxn.qrgen.core.scheme.Girocode.Encoding;
 
 public class ExtendableQRCodeSchemeParserTest {
 
@@ -26,15 +25,25 @@ public class ExtendableQRCodeSchemeParserTest {
 		expectedTypes.add(Girocode.class);
 		expectedTypes.add(VCard.class);
 		expectedTypes.add(Wifi.class);
-		expectedTypes.add(URL.class);
+		expectedTypes.add(BizCard.class);
+		expectedTypes.add(EMail.class);
+		expectedTypes.add(EnterpriseWifi.class);
+		expectedTypes.add(GeoInfo.class);
+		expectedTypes.add(GooglePlay.class);
+		expectedTypes.add(ICal.class);
+		expectedTypes.add(KddiAu.class);
+		expectedTypes.add(MeCard.class);
+		expectedTypes.add(MMS.class);
+		expectedTypes.add(SMS.class);
+		expectedTypes.add(Telephone.class);
+		expectedTypes.add(Url.class);
 		expectedTypes.add(Foo.class);
 		assertEquals(expectedTypes, createParser().getSupportedSchemes());
 	}
 
 	@Test
 	public void parseWifi() throws Exception {
-		Object scheme = createParser().parse(
-				"WIFI:S:some weird SSID;T:WPA;P:aintNoSecret;H:true;");
+		Object scheme = createParser().parse("WIFI:S:some weird SSID;T:WPA;P:aintNoSecret;H:true;");
 		assertNotNull(scheme);
 		assertThat(scheme, is(Wifi.class));
 		Wifi wifi = (Wifi) scheme;
@@ -104,14 +113,15 @@ public class ExtendableQRCodeSchemeParserTest {
 	public void parseUrlCode() throws Exception {
 		Object scheme = createParser().parse("http://www.github.org");
 		assertNotNull(scheme);
-		assertThat(scheme, is(URL.class));
-		URL urlCode = (URL) scheme;
-		assertEquals(new URL("http://www.github.org"), urlCode);
+		assertThat(scheme, is(Url.class));
+		Url urlCode = (Url) scheme;
+		assertEquals("HTTP://WWW.GITHUB.ORG", urlCode.getUrl());
 	}
 
 	@Test(expected = UnsupportedEncodingException.class)
 	public void parseUnknownScheme() throws Exception {
-		createParser().parse("hihi");
+		Object o = createParser().parse("xx");
+		System.out.println(o);
 	}
 
 	@Test
