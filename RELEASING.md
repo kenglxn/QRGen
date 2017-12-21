@@ -23,3 +23,7 @@ git push
 ```
 
 4: update version in readme
+
+5: create the release in github
+- git log --pretty=format:"%h %ad%x09%s (%an)" --date=short --merges 2.1.0..2.2.0
+- add description for each merged PR with credit to conrtributor
