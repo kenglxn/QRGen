@@ -174,6 +174,23 @@ VCard johnSpecial = new VCard("Jöhn Dɵe")
                         .setAddress("ëåäöƞ Sträät 1, 1234 Döestüwn");
 QRCode.from(johnSpecial).withCharset("UTF-8").file();
 
+// QRGen currently supports the following schemas:
+// - BizCard
+// - Bookmark
+// - Email
+// - GeoInfo
+// - Girocode
+// - GooglePlay
+// - ICal
+// - KddiAu
+// - MMS
+// - MeCard
+// - SMS
+// - Telephone
+// - Url
+// - VCard
+// - Wifi
+// - YouTube
 ```
 
 #### Android only
