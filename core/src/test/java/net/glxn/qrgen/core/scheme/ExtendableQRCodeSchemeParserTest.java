@@ -111,11 +111,11 @@ public class ExtendableQRCodeSchemeParserTest {
 
 	@Test
 	public void parseUrlCode() throws Exception {
-		Object scheme = createParser().parse("http://www.github.org");
+		Object scheme = createParser().parse("http://www.github.org/QRCode");
 		assertNotNull(scheme);
 		assertThat(scheme, is(Url.class));
 		Url urlCode = (Url) scheme;
-		assertEquals("HTTP://WWW.GITHUB.ORG", urlCode.getUrl());
+		assertEquals("http://www.github.org/QRCode", urlCode.getUrl());
 	}
 
 	@Test(expected = UnsupportedEncodingException.class)
