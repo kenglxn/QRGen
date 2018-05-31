@@ -17,7 +17,7 @@ public class Url extends Schema {
 
 	public String getUrl() {
 		if (url != null) {
-			return url.toString().toUpperCase();
+			return url.toString();
 		}
 		return null;
 	}

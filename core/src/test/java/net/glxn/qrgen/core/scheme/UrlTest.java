@@ -10,12 +10,12 @@ public class UrlTest {
 
 	@Test
 	public void testParseString() {
-		assertTrue(Url.parse(URL).getUrl().equals(URL.toUpperCase()));
+		assertTrue(Url.parse(URL).getUrl().equals(URL));
 	}
 
 	@Test
 	public void testToString() {
-		assertTrue(Url.parse(URL).toString().equals(URL.toUpperCase()));
+		assertTrue(Url.parse(URL).toString().equals(URL));
 	}
 
 }
