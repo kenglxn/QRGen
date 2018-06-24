@@ -7,10 +7,6 @@ package net.glxn.qrgen.core.scheme;
  */
 public abstract class Schema {
 
-	Schema() {
-		super();
-	}
-
 	/**
 	 * Parse qr code schema for given code string.
 	 * 
