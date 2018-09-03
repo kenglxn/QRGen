@@ -150,6 +150,28 @@ public class QRCode extends AbstractQRCode {
         MatrixToImageWriter.writeToStream(createMatrix(text), imageType.toString(), stream, matrixToImageConfig);
     }
 
+    public File svg() {
+        File file;
+        try {
+            file = createTempSvgFile();
+            MatrixToSvgWriter.writeToPath(createMatrix(text), file.toPath(), matrixToImageConfig);
+        } catch (Exception e) {
+            throw new QRGenerationException("Failed to create QR svg from text due to underlying exception", e);
+        }
+        return file;
+    }
+
+    public File svg(String name) {
+        File file;
+        try {
+            file = createTempSvgFile(name);
+            MatrixToSvgWriter.writeToPath(createMatrix(text), file.toPath(), matrixToImageConfig);
+        } catch (Exception e) {
+            throw new QRGenerationException("Failed to create QR svg from text due to underlying exception", e);
+        }
+        return file;
+    }
+
     private File createTempSvgFile() throws IOException {
         return createTempSvgFile("QRCode");
     }
