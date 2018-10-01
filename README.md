@@ -192,6 +192,14 @@ QRCode.from(johnSpecial).withCharset("UTF-8").file();
 // - Wifi
 // - YouTube
 ```
+#### Java SE only
+
+When using java you can create svg files via `.svg()` terminal operator:
+
+```java
+File file = QRCode.from("www.example.org").svg();
+File file = QRCode.from("www.example.com").withSize(250, 250).withColor(30, 90).svg();
+```
 
 #### Android only
 
