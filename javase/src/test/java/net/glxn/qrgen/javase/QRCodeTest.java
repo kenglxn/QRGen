@@ -20,10 +20,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Map;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class QRCodeTest {
 
     @Test
-    public void shouldGetFileFromVCardWithDefaults() throws Exception {
+    public void shouldGetFileFromVCardWithDefaults() {
         VCard johnDoe = new VCard("John Doe")
                 .setName("John Doe")
                 .setEmail("john.doe@example.org")
@@ -33,11 +35,13 @@ public class QRCodeTest {
                 .setPhoneNumber("1234")
                 .setWebsite("www.example.org");
         File file = QRCode.from(johnDoe).file();
-        Assert.assertNotNull(file);
+        assertThat(file).exists();
+        assertThat(file).canRead();
+        assertThat(file.length()).isGreaterThan(0);
     }
 
     @Test
-    public void shouldGetFileFromVCardWithExtendedChars() throws Exception {
+    public void shouldGetFileFromVCardWithExtendedChars() {
         VCard johnDoe = new VCard("John Doe")
                 .setName("Björkelundsvägen")
                 .setEmail("john.doe@example.org")
@@ -47,36 +51,44 @@ public class QRCodeTest {
                 .setPhoneNumber("1234")
                 .setWebsite("www.Björkelundsvägen.org");
         File file = QRCode.from(johnDoe).file();
-        Assert.assertNotNull(file);
+        assertThat(file).exists();
+        assertThat(file).canRead();
+        assertThat(file.length()).isGreaterThan(0);
     }
 
     @Test
-    public void shouldGetBitmapFileFromText() throws Exception {
+    public void shouldGetBitmapFileFromText() {
         File file = QRCode.from("www.example.org").to(ImageType.BMP).file();
-        Assert.assertNotNull(file);
+        assertThat(file).exists();
+        assertThat(file).canRead();
+        assertThat(file.length()).isGreaterThan(0);
     }
 
     @Test
-    public void shouldGetFileFromTextWithDefaults() throws Exception {
+    public void shouldGetFileFromTextWithDefaults() {
         File file = QRCode.from("Hello World").file();
-        Assert.assertNotNull(file);
+        assertThat(file).exists();
+        assertThat(file).canRead();
+        assertThat(file.length()).isGreaterThan(0);
     }
 
     @Test
-    public void shouldGetFileWithNameFromTextWithDefaults() throws Exception {
+    public void shouldGetFileWithNameFromTextWithDefaults() {
         File file = QRCode.from("Hello World").file("Hello World");
-        Assert.assertNotNull(file);
+        assertThat(file).exists();
+        assertThat(file).canRead();
+        assertThat(file.length()).isGreaterThan(0);
         Assert.assertTrue(file.getName().startsWith("Hello World"));
     }
 
     @Test
-    public void shouldGetSTREAMFromTextWithDefaults() throws Exception {
+    public void shouldGetSTREAMFromTextWithDefaults() {
         ByteArrayOutputStream stream = QRCode.from("Hello World").stream();
         Assert.assertNotNull(stream);
     }
 
     @Test
-    public void shouldHandleLargeString() throws Exception {
+    public void shouldHandleLargeString() {
         int length = 2950;
         char[] chars = new char[length];
         for (int i = 0; i < length; i++) {
@@ -86,24 +98,30 @@ public class QRCodeTest {
         Assert.assertEquals(length, text.length());
 
         File file = QRCode.from(text).to(ImageType.PNG).file();
-        Assert.assertNotNull(file);
+        assertThat(file).exists();
+        assertThat(file).canRead();
+        assertThat(file.length()).isGreaterThan(0);
     }
 
     @Test
-    public void shouldGetFileFromTextWithImageTypeOverrides() throws Exception {
+    public void shouldGetFileFromTextWithImageTypeOverrides() {
         File jpg = QRCode.from("Hello World").to(ImageType.JPG).file();
         Assert.assertNotNull(jpg);
         File gif = QRCode.from("Hello World").to(ImageType.GIF).file();
-        Assert.assertNotNull(gif);
+        assertThat(gif).exists();
+        assertThat(gif).canRead();
+        assertThat(gif.length()).isGreaterThan(0);
     }
 
     @Test
-    public void shouldGetFileWithNameFromTextWithImageTypeOverrides() throws Exception {
+    public void shouldGetFileWithNameFromTextWithImageTypeOverrides() {
         File jpg = QRCode.from("Hello World").to(ImageType.JPG).file("Hello World");
         Assert.assertNotNull(jpg);
         Assert.assertTrue(jpg.getName().startsWith("Hello World"));
         File gif = QRCode.from("Hello World").to(ImageType.GIF).file("Hello World");
-        Assert.assertNotNull(gif);
+        assertThat(gif).exists();
+        assertThat(gif).canRead();
+        assertThat(gif.length()).isGreaterThan(0);
         Assert.assertTrue(gif.getName().startsWith("Hello World"));
     }
 
@@ -115,7 +133,7 @@ public class QRCodeTest {
         long lengthBefore = tempFile.length();
         FileOutputStream fileOutputStream = new FileOutputStream(tempFile);
         stream.writeTo(fileOutputStream);
-        Assert.assertTrue(lengthBefore < tempFile.length());
+        assertThat(tempFile.length()).isGreaterThan(lengthBefore);
     }
 
     @Test
@@ -128,32 +146,36 @@ public class QRCodeTest {
         long lengthBefore = tempFile.length();
         FileOutputStream fileOutputStream = new FileOutputStream(tempFile);
         stream.writeTo(fileOutputStream);
-        Assert.assertTrue(lengthBefore < tempFile.length());
+        assertThat(tempFile.length()).isGreaterThan(lengthBefore);
     }
 
     @Test
-    public void shouldBeAbleToOverrideDimensionsToFile() throws Exception {
+    public void shouldBeAbleToOverrideDimensionsToFile() {
         long defaultSize = QRCode.from("Hello World").to(ImageType.PNG).file().length();
         long defaultSize2 = QRCode.from("Hello World").to(ImageType.PNG).file().length();
         File file = QRCode.from("Hello World").to(ImageType.PNG).withSize(250, 250).file();
-        Assert.assertNotNull(file);
-        Assert.assertTrue(defaultSize == defaultSize2);
+        assertThat(file).exists();
+        assertThat(file).canRead();
+        assertThat(file.length()).isGreaterThan(0);
+        Assert.assertEquals(defaultSize, defaultSize2);
         Assert.assertTrue(defaultSize < file.length());
     }
 
     @Test
-    public void shouldBeAbleToOverrideDimensionsToFileWithName() throws Exception {
+    public void shouldBeAbleToOverrideDimensionsToFileWithName() {
         long defaultSize = QRCode.from("Hello World").to(ImageType.PNG).file("Hello World").length();
         long defaultSize2 = QRCode.from("Hello World").to(ImageType.PNG).file("Hello World").length();
         File file = QRCode.from("Hello World").to(ImageType.PNG).withSize(250, 250).file("Hello World");
-        Assert.assertNotNull(file);
-        Assert.assertTrue(defaultSize == defaultSize2);
+        assertThat(file).exists();
+        assertThat(file).canRead();
+        assertThat(file.length()).isGreaterThan(0);
+        Assert.assertEquals(defaultSize, defaultSize2);
         Assert.assertTrue(defaultSize < file.length());
         Assert.assertTrue(file.getName().startsWith("Hello World"));
     }
 
     @Test
-    public void shouldBeAbleToSupplyEncodingHint() throws Exception {
+    public void shouldBeAbleToSupplyEncodingHint() {
         String expected = "UTF-8";
         final Object[] capture = new Object[1];
         try {
@@ -166,7 +188,7 @@ public class QRCodeTest {
     }
 
     @Test
-    public void shouldBeAbleToSupplyErrorCorrectionHint() throws Exception {
+    public void shouldBeAbleToSupplyErrorCorrectionHint() {
         ErrorCorrectionLevel expected = ErrorCorrectionLevel.L;
         final Object[] capture = new Object[1];
         try {
@@ -199,7 +221,28 @@ public class QRCodeTest {
         File file = QRCode.from("Hello World").withColor(0xFFFF0000, 0xFFFFFFAA).file();
         File tempFile = File.createTempFile("qr_", ".png");
         Files.copy(file.toPath(), new FileOutputStream(tempFile));
-        System.out.println(tempFile.getAbsoluteFile());
+    }
+
+    @Test
+    public void shouldGetSvgFromText() {
+        File file = QRCode.from("www.example.org").svg();
+        assertThat(file).exists();
+        assertThat(file).canRead();
+        assertThat(file.length()).isGreaterThan(0);
+    }
+    @Test
+    public void shouldGetSvgWithSizeFromText() {
+        File file = QRCode.from("www.example.com").withSize(250, 250).svg();
+        assertThat(file).exists();
+        assertThat(file).canRead();
+        assertThat(file.length()).isGreaterThan(0);
+    }
+    @Test
+    public void shouldGetSvgWithSizeAndColorFromText() {
+        File file = QRCode.from("www.example.com").withSize(250, 250).withColor(30, 90).svg();
+        assertThat(file).exists();
+        assertThat(file).canRead();
+        assertThat(file.length()).isGreaterThan(0);
     }
 
     @SuppressWarnings("unchecked")
