@@ -86,7 +86,7 @@ public class ThaiQRBillPayment extends Schema {
     }
 
     public ThaiQRBillPayment setTerminalId(String terminalId) {
-        this.data.put("62", terminalId);
+        this.data.put("62", "07".concat(strLength(terminalId)).concat(terminalId));
         return this;
     }
 
