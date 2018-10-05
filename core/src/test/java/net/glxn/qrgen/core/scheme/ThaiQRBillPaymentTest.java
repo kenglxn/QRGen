@@ -17,7 +17,7 @@ public class ThaiQRBillPaymentTest {
 
     @Test(expected = RuntimeException.class)
     public void toStringShouldTrowRuntimeExceptionWhenBillerIDIsNotEqual15() {
-        ThaiQRBillPayment schema = new ThaiQRBillPayment()
+        new ThaiQRBillPayment()
                 .setBiller("", "", "")
                 .setAmount(100.00)
                 .setTerminalId("");
