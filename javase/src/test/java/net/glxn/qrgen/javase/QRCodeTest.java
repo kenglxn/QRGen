@@ -255,6 +255,7 @@ public class QRCodeTest {
         assertThat(data).isNotEmpty();
         assertThat(data.length).isGreaterThan(0);
         assertThat(data).startsWith("<?xml".getBytes());
+        assertThat(data).endsWith("</svg\n>\n".getBytes());
     }
 
     @Test
@@ -265,6 +266,7 @@ public class QRCodeTest {
         assertThat(data).isNotEmpty();
         assertThat(data.length).isGreaterThan(0);
         assertThat(data).startsWith("<?xml".getBytes());
+        assertThat(data).endsWith("</svg\n>\n".getBytes());
     }
 
     @Test
@@ -275,6 +277,7 @@ public class QRCodeTest {
         assertThat(data).isNotEmpty();
         assertThat(data.length).isGreaterThan(0);
         assertThat(data).startsWith("<?xml".getBytes());
+        assertThat(data).endsWith("</svg\n>\n".getBytes());
     }
 
     @SuppressWarnings("unchecked")
