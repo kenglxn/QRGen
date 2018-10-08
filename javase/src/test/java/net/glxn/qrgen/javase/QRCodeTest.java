@@ -230,6 +230,7 @@ public class QRCodeTest {
         assertThat(file).canRead();
         assertThat(file.length()).isGreaterThan(0);
     }
+
     @Test
     public void shouldGetSvgWithSizeFromText() {
         File file = QRCode.from("www.example.com").withSize(250, 250).svg();
@@ -237,12 +238,43 @@ public class QRCodeTest {
         assertThat(file).canRead();
         assertThat(file.length()).isGreaterThan(0);
     }
+
     @Test
     public void shouldGetSvgWithSizeAndColorFromText() {
         File file = QRCode.from("www.example.com").withSize(250, 250).withColor(30, 90).svg();
         assertThat(file).exists();
         assertThat(file).canRead();
         assertThat(file.length()).isGreaterThan(0);
+    }
+
+    @Test
+    public void shouldGetSvgFromTextAsStream() {
+        ByteArrayOutputStream outs = new ByteArrayOutputStream();
+        QRCode.from("www.example.org").svg(outs);
+        byte[] data = outs.toByteArray();
+        assertThat(data).isNotEmpty();
+        assertThat(data.length).isGreaterThan(0);
+        assertThat(data).startsWith("<?xml".getBytes());
+    }
+
+    @Test
+    public void shouldGetSvgWithSizeFromTextAsStream() {
+        ByteArrayOutputStream outs = new ByteArrayOutputStream();
+        QRCode.from("www.example.com").withSize(250, 250).svg(outs);
+        byte[] data = outs.toByteArray();
+        assertThat(data).isNotEmpty();
+        assertThat(data.length).isGreaterThan(0);
+        assertThat(data).startsWith("<?xml".getBytes());
+    }
+
+    @Test
+    public void shouldGetSvgWithSizeAndColorFromTextAsStream() {
+        ByteArrayOutputStream outs = new ByteArrayOutputStream();
+        QRCode.from("www.example.com").withSize(250, 250).withColor(30, 90).svg(outs);
+        byte[] data = outs.toByteArray();
+        assertThat(data).isNotEmpty();
+        assertThat(data.length).isGreaterThan(0);
+        assertThat(data).startsWith("<?xml".getBytes());
     }
 
     @SuppressWarnings("unchecked")

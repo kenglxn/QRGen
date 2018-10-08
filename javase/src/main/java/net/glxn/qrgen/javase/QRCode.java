@@ -172,6 +172,14 @@ public class QRCode extends AbstractQRCode {
         return file;
     }
 
+    public void svg(OutputStream outs) {
+        try {
+            MatrixToSvgWriter.writeToStream(createMatrix(text), outs, matrixToImageConfig);
+        } catch (Exception e) {
+            throw new QRGenerationException("Failed to create QR svg from text due to underlying exception", e);
+        }
+    }
+
     private File createTempSvgFile() throws IOException {
         return createTempSvgFile("QRCode");
     }

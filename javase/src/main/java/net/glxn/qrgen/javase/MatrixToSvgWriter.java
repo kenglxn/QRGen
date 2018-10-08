@@ -4,12 +4,15 @@ import com.google.zxing.client.j2se.MatrixToImageConfig;
 import com.google.zxing.common.BitMatrix;
 import org.apache.batik.dom.GenericDOMImplementation;
 import org.apache.batik.svggen.SVGGraphics2D;
+import org.apache.batik.svggen.SVGGraphics2DIOException;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 
 import java.awt.*;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.nio.file.Path;
 
 class MatrixToSvgWriter {
@@ -42,6 +45,13 @@ class MatrixToSvgWriter {
         return svgGraphics;
 
 
+    }
+
+    static void writeToStream(BitMatrix matrix, OutputStream outs, MatrixToImageConfig matrixToImageConfig) throws SVGGraphics2DIOException {
+        SVGGraphics2D g2 = toSvgDocument(matrix, matrixToImageConfig);
+
+        OutputStreamWriter out = new OutputStreamWriter(outs);
+        g2.stream(out);
     }
 
     static void writeToPath(BitMatrix matrix, Path file, MatrixToImageConfig matrixToImageConfig) throws IOException {
