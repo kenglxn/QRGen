@@ -4,7 +4,6 @@ import com.google.zxing.client.j2se.MatrixToImageConfig;
 import com.google.zxing.common.BitMatrix;
 import org.apache.batik.dom.GenericDOMImplementation;
 import org.apache.batik.svggen.SVGGraphics2D;
-import org.apache.batik.svggen.SVGGraphics2DIOException;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 
@@ -47,7 +46,7 @@ class MatrixToSvgWriter {
 
     }
 
-    static void writeToStream(BitMatrix matrix, OutputStream outs, MatrixToImageConfig matrixToImageConfig) throws SVGGraphics2DIOException {
+    static void writeToStream(BitMatrix matrix, OutputStream outs, MatrixToImageConfig matrixToImageConfig) throws IOException {
         SVGGraphics2D g2 = toSvgDocument(matrix, matrixToImageConfig);
 
         OutputStreamWriter out = new OutputStreamWriter(outs);
