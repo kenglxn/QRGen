@@ -253,7 +253,6 @@ public class QRCodeTest {
         QRCode.from("www.example.org").svg(outs);
         byte[] data = outs.toByteArray();
         assertThat(data).isNotEmpty();
-        assertThat(data.length).isGreaterThan(0);
         assertThat(data).startsWith("<?xml".getBytes());
         assertThat(data).endsWith("</svg\n>\n".getBytes());
     }
@@ -264,7 +263,6 @@ public class QRCodeTest {
         QRCode.from("www.example.com").withSize(250, 250).svg(outs);
         byte[] data = outs.toByteArray();
         assertThat(data).isNotEmpty();
-        assertThat(data.length).isGreaterThan(0);
         assertThat(data).startsWith("<?xml".getBytes());
         assertThat(data).endsWith("</svg\n>\n".getBytes());
     }
@@ -275,7 +273,6 @@ public class QRCodeTest {
         QRCode.from("www.example.com").withSize(250, 250).withColor(30, 90).svg(outs);
         byte[] data = outs.toByteArray();
         assertThat(data).isNotEmpty();
-        assertThat(data.length).isGreaterThan(0);
         assertThat(data).startsWith("<?xml".getBytes());
         assertThat(data).endsWith("</svg\n>\n".getBytes());
     }
