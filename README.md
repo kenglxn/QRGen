@@ -201,6 +201,13 @@ File file = QRCode.from("www.example.org").svg();
 File file = QRCode.from("www.example.com").withSize(250, 250).withColor(30, 90).svg();
 ```
 
+It's also possible to write svg to an `OutputStream` with terminal operation:
+
+```java
+OutputStream outs = // ...
+QRCode.from("www.example.org").svg(outs);
+```
+
 #### Android only
 
 On Android you have a special method `bitmap()` which returns a `android.graphics.Bitmap` without creating a `File` object before, so you can use the generated `android.graphics.Bitmap` immediately inside an `ImageView`:
