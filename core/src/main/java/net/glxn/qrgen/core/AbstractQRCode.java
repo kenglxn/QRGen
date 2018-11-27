@@ -82,7 +82,7 @@ public abstract class AbstractQRCode {
 
     protected abstract void writeToStream(OutputStream stream) throws IOException, WriterException;
 
-    protected BitMatrix createMatrix(String text) throws WriterException {
+    public BitMatrix createMatrix(String text) throws WriterException {
         return qrWriter.encode(text, com.google.zxing.BarcodeFormat.QR_CODE, width, height, hints);
     }
 
