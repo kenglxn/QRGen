@@ -51,7 +51,7 @@ Gradle:
 
 ```gradle
     dependencies {
-        compile 'com.github.kenglxn.QRGen:javase:2.5.0'
+        implementation 'com.github.kenglxn.QRGen:javase:2.5.0'
     }
 ```
 
@@ -75,7 +75,7 @@ Gradle:
 
 ```gradle
     dependencies {
-        compile 'com.github.kenglxn.QRGen:android:2.5.0'
+        implementation 'com.github.kenglxn.QRGen:android:2.5.0'
     }
 ```
 
