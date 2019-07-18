@@ -51,7 +51,7 @@ Gradle:
 
 ```gradle
     dependencies {
-        compile 'com.github.kenglxn.QRGen:javase:2.5.0'
+        compile 'com.github.kenglxn.QRGen:javase:2.6.0'
     }
 ```
 
@@ -62,7 +62,7 @@ Maven:
         <dependency>
             <groupId>com.github.kenglxn.qrgen</groupId>
             <artifactId>javase</artifactId>
-            <version>2.5.0</version>
+            <version>2.6.0</version>
         </dependency>
     </dependencies>
 ```
@@ -75,7 +75,7 @@ Gradle:
 
 ```gradle
     dependencies {
-        compile 'com.github.kenglxn.QRGen:android:2.5.0'
+        compile 'com.github.kenglxn.QRGen:android:2.6.0'
     }
 ```
 
@@ -86,7 +86,7 @@ Maven:
         <dependency>
             <groupId>com.github.kenglxn.qrgen</groupId>
             <artifactId>android</artifactId>
-            <version>2.5.0</version>
+            <version>2.6.0</version>
         </dependency>
     </dependencies>
 ```
