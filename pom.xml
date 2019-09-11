@@ -44,7 +44,7 @@
     </modules>
 
     <properties>
-        <zxing.version>3.4.0</zxing.version>
+        <zxing.version>3.3.0</zxing.version>
         <batik.version>1.10</batik.version>
         <junit.version>4.8.2</junit.version>
         <robolectric.version>2.2</robolectric.version>
