@@ -18,6 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowBitmap;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -25,7 +26,7 @@ import java.io.FileOutputStream;
 import java.util.Map;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(manifest = Config.NONE, shadows = {QRGenShadowBitmap.class})
+@Config(manifest = Config.NONE, shadows = {ShadowBitmap.class})
 public class QRCodeTest {
 
     @Test
