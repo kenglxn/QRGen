@@ -36,7 +36,6 @@
             <email>ken@glxn.net</email>
         </developer>
     </developers>
-
     <modules>
         <module>core</module>
         <module>javase</module>
@@ -84,41 +83,12 @@
         <profile>
             <id>sonatype-oss-release</id>
             <distributionManagement>
-                <repository>
-                    <id>sonatype-oss-release</id>
-                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-                </repository>
+              <repository>
+                <id>github</id>
+                <name>GitHub OWNER Apache Maven Packages</name>
+                <url>https://maven.pkg.github.com/OWNER/REPOSITORY</url>
+              </repository>
             </distributionManagement>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                        <version>${maven-gpg-plugin.version}</version>
-                        <executions>
-                            <execution>
-                                <id>sign-artifacts</id>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>sign</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.sonatype.plugins</groupId>
-                        <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>${nexus-staging-maven-plugin.version}</version>
-                        <extensions>true</extensions>
-                        <configuration>
-                            <serverId>sonatype-oss-release</serverId>
-                            <stagingProfileId>172315fda45a8</stagingProfileId>
-                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
         </profile>
     </profiles>
 
