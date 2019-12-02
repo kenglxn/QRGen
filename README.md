@@ -3,6 +3,8 @@
 
 ### QRGen: a simple QRCode generation api for java built on top ZXING
 
+Please consider [sponsoring](https://github.com/sponsors/kenglxn) the work on QRGen 
+
 #### Dependencies:
 
 ZXING: http://code.google.com/p/zxing/
