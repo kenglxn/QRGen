@@ -43,8 +43,8 @@
     </modules>
 
     <properties>
-        <zxing.version>3.3.0</zxing.version>
-        <batik.version>1.10</batik.version>
+        <zxing.version>3.4.1</zxing.version>
+        <batik.version>1.14</batik.version>
         <junit.version>4.8.2</junit.version>
         <robolectric.version>3.0</robolectric.version>
         <fest-android.version>1.0.7</fest-android.version>
