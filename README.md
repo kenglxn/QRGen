@@ -220,6 +220,12 @@ ImageView myImage = (ImageView) findViewById(R.id.imageView);
 myImage.setImageBitmap(myBitmap);
 ```
 
+##### Android Jetpack Compose
+```kotlin
+val myBitmap = QRCode.from("www.example.org").bitmap()
+Image(bitmap = myBitmap.asImageBitmap(), contentDescription = null)
+```
+
 #### License:
 
 http://www.apache.org/licenses/LICENSE-2.0.html
