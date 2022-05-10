@@ -45,7 +45,7 @@
     <properties>
         <zxing.version>3.4.1</zxing.version>
         <batik.version>1.14</batik.version>
-        <junit.version>4.8.2</junit.version>
+        <junit.version>4.13.1</junit.version>
         <robolectric.version>3.0</robolectric.version>
         <fest-android.version>1.0.7</fest-android.version>
         <android.platform.version>4.1.1.4</android.platform.version>
