@@ -43,16 +43,16 @@
     </modules>
 
     <properties>
-        <zxing.version>3.4.1</zxing.version>
-        <batik.version>1.14</batik.version>
-        <junit.version>4.8.2</junit.version>
-        <robolectric.version>3.0</robolectric.version>
+        <zxing.version>3.5.1</zxing.version>
+        <batik.version>1.16</batik.version>
+        <junit.version>4.13.2</junit.version>
+        <robolectric.version>4.8.2</robolectric.version>
         <fest-android.version>1.0.7</fest-android.version>
         <android.platform.version>4.1.1.4</android.platform.version>
         <maven-compiler-plugin.source>1.7</maven-compiler-plugin.source>
         <maven-compiler-plugin.target>1.7</maven-compiler-plugin.target>
-        <maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
-        <maven-checkstyle-plugin.version>2.12.1</maven-checkstyle-plugin.version>
+        <maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
+        <maven-checkstyle-plugin.version>2.17</maven-checkstyle-plugin.version>
         <maven-javadoc-plugin.version>3.0.1</maven-javadoc-plugin.version>
         <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
         <nexus-staging-maven-plugin.version>1.6.4</nexus-staging-maven-plugin.version>

@@ -1,9 +1,9 @@
 package net.glxn.qrgen.core.scheme;
 
-import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.io.UnsupportedEncodingException;
 import java.util.LinkedHashSet;
@@ -45,7 +45,8 @@ public class ExtendableQRCodeSchemeParserTest {
 	public void parseWifi() throws Exception {
 		Object scheme = createParser().parse("WIFI:S:some weird SSID;T:WPA;P:aintNoSecret;H:true;");
 		assertNotNull(scheme);
-		assertThat(scheme, is(Wifi.class));
+		assertThat(scheme,instanceOf(Wifi.class));
+		//assertThat(scheme, is(Wifi.class));
 		Wifi wifi = (Wifi) scheme;
 		assertEquals("some weird SSID", wifi.getSsid());
 		assertEquals("WPA", wifi.getAuthentication());
@@ -67,7 +68,7 @@ public class ExtendableQRCodeSchemeParserTest {
 				"NOTE:more cookies, please\n" + //
 				"END:VCARD");
 		assertNotNull(scheme);
-		assertThat(scheme, is(VCard.class));
+		assertThat(scheme,instanceOf(VCard.class));
 		VCard vcard = (VCard) scheme;
 		assertEquals("Cookiemonster", vcard.getName());
 		assertEquals("Sesamestreet 1", vcard.getAddress());
@@ -96,7 +97,7 @@ public class ExtendableQRCodeSchemeParserTest {
 
 		);
 		assertNotNull(scheme);
-		assertThat(scheme, is(Girocode.class));
+		assertThat(scheme,instanceOf(Girocode.class));
 		Girocode girocode = (Girocode) scheme;
 		assertEquals(Encoding.UTF_8, girocode.getEncoding());
 		assertEquals("DAAABCDGGD", girocode.getBic());
@@ -113,7 +114,7 @@ public class ExtendableQRCodeSchemeParserTest {
 	public void parseUrlCode() throws Exception {
 		Object scheme = createParser().parse("http://www.github.org/QRCode");
 		assertNotNull(scheme);
-		assertThat(scheme, is(Url.class));
+		assertThat(scheme,instanceOf(Url.class));
 		Url urlCode = (Url) scheme;
 		assertEquals("http://www.github.org/QRCode", urlCode.getUrl());
 	}
@@ -128,7 +129,7 @@ public class ExtendableQRCodeSchemeParserTest {
 	public void useParserExtension() throws Exception {
 		Object scheme = createParser().parse("foo:bar");
 		assertNotNull(scheme);
-		assertThat(scheme, is(Foo.class));
+		assertThat(scheme,instanceOf(Foo.class));
 	}
 
 }
