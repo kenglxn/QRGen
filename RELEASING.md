@@ -6,7 +6,7 @@ mvn versions:set -DnewVersion=3.0.0 -DgenerateBackupPoms=false
 
 2: commit and tag the version
 
-```
+```bash
 git add .
 git commit -m "release 3.0.0"
 git tag 3.0.0
@@ -15,7 +15,7 @@ git push --tags
 
 3: set next version
 
-```
+```bash
 mvn versions:set -DnewVersion=3.1.0-SNAPSHOT -DgenerateBackupPoms=false
 git add .
 git commit -m "set next version"
