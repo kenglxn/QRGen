@@ -14,7 +14,8 @@ public abstract class SubSchema {
 	/**
 	 * Parse qr code sub schema for given code string and parent parameters.
 	 * 
-	 * @param code
+	 * @param parameters parent parameters
+	 * @param code to be parsed
 	 * @return schema
 	 */
 	public abstract SubSchema parseSchema(Map<String, String> parameters, String code);
