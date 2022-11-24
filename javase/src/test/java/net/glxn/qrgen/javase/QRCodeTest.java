@@ -17,12 +17,15 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class QRCodeTest {
+    
+    private static final String LINESEPARATOR = System.getProperty("line.separator");
 
     @Test
     public void shouldGetFileFromVCardWithDefaults() {
@@ -254,7 +257,7 @@ public class QRCodeTest {
         byte[] data = outs.toByteArray();
         assertThat(data).isNotEmpty();
         assertThat(data).startsWith("<?xml".getBytes());
-        assertThat(data).endsWith("</svg\n>\n".getBytes());
+        assertThat(data).endsWith(("</svg"+LINESEPARATOR+">"+LINESEPARATOR).getBytes(StandardCharsets.UTF_8));
     }
 
     @Test
@@ -264,7 +267,7 @@ public class QRCodeTest {
         byte[] data = outs.toByteArray();
         assertThat(data).isNotEmpty();
         assertThat(data).startsWith("<?xml".getBytes());
-        assertThat(data).endsWith("</svg\n>\n".getBytes());
+        assertThat(data).endsWith(("</svg"+LINESEPARATOR+">"+LINESEPARATOR).getBytes(StandardCharsets.UTF_8));
     }
 
     @Test
@@ -274,7 +277,7 @@ public class QRCodeTest {
         byte[] data = outs.toByteArray();
         assertThat(data).isNotEmpty();
         assertThat(data).startsWith("<?xml".getBytes());
-        assertThat(data).endsWith("</svg\n>\n".getBytes());
+        assertThat(data).endsWith(("</svg"+LINESEPARATOR+">"+LINESEPARATOR).getBytes(StandardCharsets.UTF_8));
     }
 
     @SuppressWarnings("unchecked")

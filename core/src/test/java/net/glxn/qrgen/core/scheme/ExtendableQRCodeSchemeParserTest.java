@@ -1,5 +1,9 @@
 package net.glxn.qrgen.core.scheme;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.hamcrest.MatcherAssert.assertThat;
 import net.glxn.qrgen.core.scheme.Girocode.Encoding;
 import org.junit.Test;
 
@@ -65,7 +69,7 @@ public class ExtendableQRCodeSchemeParserTest {
 				"NOTE:more cookies, please\n" + //
 				"END:VCARD");
 		assertNotNull(scheme);
-		assertThat("wrong type", scheme, instanceOf(VCard.class));
+		assertThat(scheme,instanceOf(VCard.class));
 		VCard vcard = (VCard) scheme;
 		assertEquals("Cookiemonster", vcard.getName());
 		assertEquals("Sesamestreet 1", vcard.getAddress());
@@ -126,7 +130,7 @@ public class ExtendableQRCodeSchemeParserTest {
 	public void useParserExtension() throws Exception {
 		Object scheme = createParser().parse("foo:bar");
 		assertNotNull(scheme);
-		assertThat(scheme, instanceOf(Foo.class));
+		assertThat(scheme,instanceOf(Foo.class));
 	}
 
 }

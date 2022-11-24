@@ -48,8 +48,8 @@ public class Wifi extends Schema {
 	}
 
 	/**
-	 * @param authentication
-	 *            the authentication to set
+	 * @param authentication the authentication to set
+	 * @return Wifi 
 	 */
 	public Wifi withAuthentication(Authentication authentication) {
 		setAuthentication(authentication);
@@ -72,8 +72,8 @@ public class Wifi extends Schema {
 	}
 
 	/**
-	 * @param ssid
-	 *            the ssid to set
+	 * @param ssid the ssid to set
+	 * @return Wifi
 	 */
 	public Wifi withSsid(String ssid) {
 		setSsid(ssid);
@@ -96,8 +96,8 @@ public class Wifi extends Schema {
 	}
 
 	/**
-	 * @param psk
-	 *            the psk to set
+	 * @param psk the psk to set
+	 * @return Wifi 
 	 */
 	public Wifi withPsk(String psk) {
 		setPsk(psk);
@@ -128,8 +128,8 @@ public class Wifi extends Schema {
 	}
 
 	/**
-	 * @param hidden
-	 *            the hidden to set
+	 * @param hidden the hidden to set
+	 * @return Wifi
 	 */
 	public Wifi withHidden(boolean hidden) {
 		setHidden(hidden);
