@@ -4,14 +4,16 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.MatcherAssert.assertThat;
+import net.glxn.qrgen.core.scheme.Girocode.Encoding;
+import org.junit.Test;
 
 import java.io.UnsupportedEncodingException;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import org.junit.Test;
-
-import net.glxn.qrgen.core.scheme.Girocode.Encoding;
+import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.*;
 
 public class ExtendableQRCodeSchemeParserTest {
 
@@ -21,7 +23,7 @@ public class ExtendableQRCodeSchemeParserTest {
 
 	@Test
 	public void getSupportedSchemes() {
-		Set<Class<?>> expectedTypes = new LinkedHashSet<Class<?>>();
+		Set<Class<?>> expectedTypes = new LinkedHashSet<>();
 		expectedTypes.add(Girocode.class);
 		expectedTypes.add(VCard.class);
 		expectedTypes.add(Wifi.class);
@@ -45,13 +47,12 @@ public class ExtendableQRCodeSchemeParserTest {
 	public void parseWifi() throws Exception {
 		Object scheme = createParser().parse("WIFI:S:some weird SSID;T:WPA;P:aintNoSecret;H:true;");
 		assertNotNull(scheme);
-		assertThat(scheme,instanceOf(Wifi.class));
-		//assertThat(scheme, is(Wifi.class));
+		assertThat(scheme, instanceOf(Wifi.class));
 		Wifi wifi = (Wifi) scheme;
 		assertEquals("some weird SSID", wifi.getSsid());
 		assertEquals("WPA", wifi.getAuthentication());
 		assertEquals("aintNoSecret", wifi.getPsk());
-		assertEquals(true, wifi.isHidden());
+		assertTrue(wifi.isHidden());
 	}
 
 	@Test
@@ -97,7 +98,7 @@ public class ExtendableQRCodeSchemeParserTest {
 
 		);
 		assertNotNull(scheme);
-		assertThat(scheme,instanceOf(Girocode.class));
+		assertThat(scheme, instanceOf(Girocode.class));
 		Girocode girocode = (Girocode) scheme;
 		assertEquals(Encoding.UTF_8, girocode.getEncoding());
 		assertEquals("DAAABCDGGD", girocode.getBic());
@@ -114,7 +115,7 @@ public class ExtendableQRCodeSchemeParserTest {
 	public void parseUrlCode() throws Exception {
 		Object scheme = createParser().parse("http://www.github.org/QRCode");
 		assertNotNull(scheme);
-		assertThat(scheme,instanceOf(Url.class));
+		assertThat(scheme, instanceOf(Url.class));
 		Url urlCode = (Url) scheme;
 		assertEquals("http://www.github.org/QRCode", urlCode.getUrl());
 	}
