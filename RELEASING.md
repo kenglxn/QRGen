@@ -1,15 +1,15 @@
 1: set maven version
 
 ```
-mvn versions:set -DnewVersion=3.0.0 -DgenerateBackupPoms=false
+mvn versions:set -DnewVersion=3.0.1 -DgenerateBackupPoms=false
 ```
 
 2: commit and tag the version
 
 ```bash
 git add .
-git commit -m "release 3.0.0"
-git tag 3.0.0
+git commit -m "release 3.0.1"
+git tag 3.0.1
 git push --tags
 ```
 
