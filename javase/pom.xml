@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.github.kenglxn.QRGen</groupId>
         <artifactId>qrgen-parent</artifactId>
-        <version>2.6.0-SNAPSHOT</version>
+        <version>3.1.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>javase</artifactId>
@@ -38,37 +38,16 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven-compiler-plugin.version}</version>
-                <configuration>
-                    <source>${maven-compiler-plugin.source}</source>
-                    <target>${maven-compiler-plugin.target}</target>
-                    <encoding>UTF-8</encoding>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>${maven-source-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>${maven-javadoc-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>

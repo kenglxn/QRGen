@@ -3,6 +3,8 @@
 
 ### QRGen: a simple QRCode generation api for java built on top ZXING
 
+Please consider [sponsoring](https://github.com/sponsors/kenglxn) the work on QRGen 
+
 #### Dependencies:
 
 ZXING: http://code.google.com/p/zxing/
@@ -51,7 +53,7 @@ Gradle:
 
 ```gradle
     dependencies {
-        implementation 'com.github.kenglxn.QRGen:javase:2.5.0'
+        implementation 'com.github.kenglxn.QRGen:javase:3.0.1'
     }
 ```
 
@@ -62,7 +64,7 @@ Maven:
         <dependency>
             <groupId>com.github.kenglxn.qrgen</groupId>
             <artifactId>javase</artifactId>
-            <version>2.5.0</version>
+            <version>3.0.1</version>
         </dependency>
     </dependencies>
 ```
@@ -75,7 +77,7 @@ Gradle:
 
 ```gradle
     dependencies {
-        implementation 'com.github.kenglxn.QRGen:android:2.5.0'
+        implementation 'com.github.kenglxn.QRGen:android:3.0.1'
     }
 ```
 
@@ -86,7 +88,7 @@ Maven:
         <dependency>
             <groupId>com.github.kenglxn.qrgen</groupId>
             <artifactId>android</artifactId>
-            <version>2.5.0</version>
+            <version>3.0.1</version>
         </dependency>
     </dependencies>
 ```
@@ -221,3 +223,9 @@ myImage.setImageBitmap(myBitmap);
 #### License:
 
 http://www.apache.org/licenses/LICENSE-2.0.html
+
+
+#todo
+### NEW MATMSG Format
+
+*

@@ -10,12 +10,12 @@ public class GeoInfoTest {
 
 	@Test
 	public void testParseString() {
-		assertTrue(GeoInfo.parse(GEO_INFO).getPoints().size() == 3);
+		assertTrue(GEO.parse(GEO_INFO).getPoints().size() == 3);
 	}
 
 	@Test
 	public void testToString() {
-		assertTrue(GeoInfo.parse(GEO_INFO).toString().equals(GEO_INFO));
+		assertTrue(GEO.parse(GEO_INFO).toString().equals(GEO_INFO));
 	}
 
 }
