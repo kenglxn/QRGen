@@ -1,9 +1,5 @@
 package net.glxn.qrgen.core.scheme;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.hamcrest.MatcherAssert.assertThat;
 import net.glxn.qrgen.core.scheme.Girocode.Encoding;
 import org.junit.Test;
 
@@ -30,7 +26,7 @@ public class ExtendableQRCodeSchemeParserTest {
 		expectedTypes.add(BizCard.class);
 		expectedTypes.add(EMail.class);
 		expectedTypes.add(EnterpriseWifi.class);
-		expectedTypes.add(GeoInfo.class);
+		expectedTypes.add(GEO.class);
 		expectedTypes.add(GooglePlay.class);
 		expectedTypes.add(ICal.class);
 		expectedTypes.add(KddiAu.class);

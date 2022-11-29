@@ -122,7 +122,7 @@ public class ExtendableQRCodeSchemeParser implements QRCodeSchemeParser {
 			supportedSchemes.add(BizCard.class);
 			supportedSchemes.add(EMail.class);
 			supportedSchemes.add(EnterpriseWifi.class);
-			supportedSchemes.add(GeoInfo.class);
+			supportedSchemes.add(GEO.class);
 			supportedSchemes.add(GooglePlay.class);
 			supportedSchemes.add(ICal.class);
 			supportedSchemes.add(KddiAu.class);
