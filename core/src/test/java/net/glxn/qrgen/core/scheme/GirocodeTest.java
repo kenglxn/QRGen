@@ -8,52 +8,6 @@ import org.junit.Test;
 public class GirocodeTest {
 
 	@Test
-	public void parseStringLf() {
-		checkParseString("\n");
-	}
-
-	@Test
-	public void parseStringCrLf() {
-		checkParseString("\r\n");
-	}
-
-	private void checkParseString(final String lineFeed) {
-		Girocode girocode = Girocode.parse("BCD" + lineFeed + //
-				"001" + lineFeed + //
-				"1" + lineFeed + //
-				"SCT" + lineFeed + //
-				"DAAABCDGGD" + lineFeed + //
-				"Miss Marple" + lineFeed + //
-				"DE91300776014444814989" + lineFeed + //
-				"EUR27.06" + lineFeed + //
-				"xyz" + lineFeed + //
-				"reference" + lineFeed + //
-				"for a good prupose" + lineFeed + //
-				"Watch this Girocode :-)"
-
-		);
-		assertEquals(Encoding.UTF_8, girocode.getEncoding());
-		assertEquals("DAAABCDGGD", girocode.getBic());
-		assertEquals("Miss Marple", girocode.getName());
-		assertEquals("DE91300776014444814989", girocode.getIban());
-		assertEquals("EUR27.06", girocode.getAmount());
-		assertEquals("xyz", girocode.getPurposeCode());
-		assertEquals("reference", girocode.getReference());
-		assertEquals("for a good prupose", girocode.getText());
-		assertEquals("Watch this Girocode :-)", girocode.getHint());
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void parseNull() {
-		Girocode.parse(null);
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void parseEmptyString() {
-		Girocode.parse("");
-	}
-
-	@Test
 	public void testToString() {
 		Girocode girocode = new Girocode();
 		girocode.setEncoding(Encoding.UTF_8);

@@ -1,8 +1,8 @@
 package net.glxn.qrgen.core.scheme;
 
-import static net.glxn.qrgen.core.scheme.SchemeUtil.getParameters;
-
 import java.util.Map;
+
+import static net.glxn.qrgen.core.scheme.util.SchemeUtil.getParameters;
 
 /**
  * Encodes a Wifi connection containing a username / password scheme for
@@ -19,6 +19,7 @@ public class EnterpriseWifi extends Wifi {
 	private String eap;
 	private String phase;
 
+
 	public EnterpriseWifi() {
 		super();
 	}
@@ -28,25 +29,9 @@ public class EnterpriseWifi extends Wifi {
 		return this;
 	}
 
-	public void setUser(String user) {
-		withUser(user);
-	}
-
-	public String getUser() {
-		return user;
-	}
-
 	public EnterpriseWifi withEap(String eap) {
 		this.eap = eap;
 		return this;
-	}
-
-	public void setEap(String eap) {
-		withEap(eap);
-	}
-
-	public String getEap() {
-		return eap;
 	}
 
 	public EnterpriseWifi withPhase(String phase) {
@@ -54,8 +39,24 @@ public class EnterpriseWifi extends Wifi {
 		return this;
 	}
 
+	public void setUser(String user) {
+		withUser(user);
+	}
+
+	public void setEap(String eap) {
+		withEap(eap);
+	}
+
 	public void setPhase(String phase) {
 		withPhase(phase);
+	}
+
+	public String getUser() {
+		return user;
+	}
+
+	public String getEap() {
+		return eap;
 	}
 
 	public String getPhase() {
@@ -63,7 +64,7 @@ public class EnterpriseWifi extends Wifi {
 	}
 
 	@Override
-	public Schema parseSchema(String code) {
+	public EnterpriseWifi parseSchema(String code) {
 		if (code == null || !code.startsWith(WIFI_PROTOCOL_HEADER)) {
 			throw new IllegalArgumentException("this is not a valid WIFI code: " + code);
 		}

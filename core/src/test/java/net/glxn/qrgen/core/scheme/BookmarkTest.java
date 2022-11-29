@@ -12,14 +12,14 @@ public class BookmarkTest {
   public void testParse() {
     Bookmark bookmark = Bookmark.parse(BOOKMARK);
     assertEquals("google.com", bookmark.getUrl());
-    assertEquals("Google", bookmark.getTitel());
+    assertEquals("Google", bookmark.getTitle());
   }
 
   @Test
   public void testToString() {
     Bookmark bookmark = new Bookmark();
     bookmark.setUrl("google.com");
-    bookmark.setTitel("Google");
+    bookmark.setTitle("Google");
     assertEquals(BOOKMARK, bookmark.toString());
   }
 

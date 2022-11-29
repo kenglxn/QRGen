@@ -1,6 +1,6 @@
 package net.glxn.qrgen.core.scheme;
 
-import static net.glxn.qrgen.core.scheme.SchemeUtil.getParameters;
+import static net.glxn.qrgen.core.scheme.util.SchemeUtil.getParameters;
 
 import java.util.Map;
 
@@ -8,7 +8,7 @@ import java.util.Map;
  * Encodes a e-mail address, format is: <code>mailto:mail@address.com</code>
  *
  */
-public class EMail extends Schema {
+public class EMail implements Schema<EMail> {
 
 	private static final String MAILTO = "mailto";
 	private String email;
@@ -29,12 +29,17 @@ public class EMail extends Schema {
 		return email;
 	}
 
-	public void setEmail(String email) {
+	public EMail setEmail(String email) {
 		this.email = email;
+		return this;
+	}
+
+	public EMail withEmail(String email) {
+		return setEmail(email);
 	}
 
 	@Override
-	public Schema parseSchema(String code) {
+	public EMail parseSchema(String code) {
 		if (code == null || !code.toLowerCase().startsWith(MAILTO)) {
 			throw new IllegalArgumentException("this is not a valid email code: " + code);
 		}

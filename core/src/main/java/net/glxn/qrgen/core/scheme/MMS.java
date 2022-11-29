@@ -1,6 +1,6 @@
 package net.glxn.qrgen.core.scheme;
 
-import static net.glxn.qrgen.core.scheme.SchemeUtil.getParameters;
+import static net.glxn.qrgen.core.scheme.util.SchemeUtil.getParameters;
 
 import java.util.Map;
 
@@ -8,34 +8,40 @@ import java.util.Map;
  * Encodes a mms code, format is: <code>mms:+1-212-555-1212:subject</code>
  * 
  */
-public class MMS extends Schema {
+public class MMS implements Schema<MMS> {
 
 	private static final String MMS = "mms";
 	private String number;
 	private String subject;
 
 	public MMS() {
-		super();
+	}
+
+	public MMS(String number, String subject) {
+		this.number = number;
+		this.subject = subject;
 	}
 
 	public String getNumber() {
 		return number;
 	}
 
-	public void setNumber(String number) {
+	public MMS setNumber(String number) {
 		this.number = number;
+		return this;
 	}
 
 	public String getSubject() {
 		return subject;
 	}
 
-	public void setSubject(String subject) {
+	public MMS setSubject(String subject) {
 		this.subject = subject;
+		return this;
 	}
 
 	@Override
-	public Schema parseSchema(String code) {
+	public MMS parseSchema(String code) {
 		if (code == null || !code.trim().toLowerCase().startsWith(MMS)) {
 			throw new IllegalArgumentException("this is not a valid sms code: " + code);
 		}

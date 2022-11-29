@@ -1,6 +1,6 @@
 package net.glxn.qrgen.core.scheme;
 
-import static net.glxn.qrgen.core.scheme.SchemeUtil.getParameters;
+import static net.glxn.qrgen.core.scheme.util.SchemeUtil.getParameters;
 
 import java.util.Map;
 
@@ -8,7 +8,7 @@ import java.util.Map;
  * Encodes a YouTube video, format is: <code>youtube://[video ID]</code>
  * 
  */
-public class YouTube extends Schema {
+public class YouTube implements Schema<YouTube> {
 
 	public static final String YOUTUBE = "youtube";
 	private String videoId;
@@ -34,7 +34,7 @@ public class YouTube extends Schema {
 	}
 
 	@Override
-	public Schema parseSchema(String code) {
+	public YouTube parseSchema(String code) {
 		if (code == null || !code.toLowerCase().startsWith(YOUTUBE)) {
 			throw new IllegalArgumentException("this is not a valid you tube code: " + code);
 		}

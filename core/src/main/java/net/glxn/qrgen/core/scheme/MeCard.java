@@ -1,14 +1,10 @@
 package net.glxn.qrgen.core.scheme;
 
-import static net.glxn.qrgen.core.scheme.SchemeUtil.getParameters;
+import static net.glxn.qrgen.core.scheme.util.SchemeUtil.getParameters;
 
 import java.util.Map;
 
-/**
- * 
- *
- */
-public class MeCard extends Schema {
+public class MeCard implements Schema<MeCard> {
 
 	private static final String BEGIN_MECARD = "MECARD";
 	private static final String NAME = "N";
@@ -63,7 +59,7 @@ public class MeCard extends Schema {
 	}
 
 	@Override
-	public Schema parseSchema(String code) {
+	public MeCard parseSchema(String code) {
 		if (code == null || !code.startsWith(BEGIN_MECARD)) {
 			throw new IllegalArgumentException("this is not a valid MeCard code: " + code);
 		}

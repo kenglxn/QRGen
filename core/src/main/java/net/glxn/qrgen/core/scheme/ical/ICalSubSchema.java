@@ -1,15 +1,11 @@
-package net.glxn.qrgen.core.scheme;
+package net.glxn.qrgen.core.scheme.ical;
 
 import java.util.Map;
 
 /**
  * Abstact class for sub schema.
  */
-public abstract class SubSchema {
-
-	SubSchema() {
-		super();
-	}
+public interface ICalSubSchema<T> {
 
 	/**
 	 * Parse qr code sub schema for given code string and parent parameters.
@@ -18,13 +14,13 @@ public abstract class SubSchema {
 	 * @param code to be parsed
 	 * @return schema
 	 */
-	public abstract SubSchema parseSchema(Map<String, String> parameters, String code);
+	T parseSchema(Map<String, String> parameters, String code);
 
 	/**
 	 * Generates code string.
 	 * 
 	 * @return code
 	 */
-	public abstract String generateString();
+	String generateString();
 
 }

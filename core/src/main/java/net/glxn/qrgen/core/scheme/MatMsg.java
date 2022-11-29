@@ -1,11 +1,11 @@
 package net.glxn.qrgen.core.scheme;
 
-import static net.glxn.qrgen.core.scheme.SchemeUtil.LINE_FEED;
-import static net.glxn.qrgen.core.scheme.SchemeUtil.getParameters;
+import static net.glxn.qrgen.core.scheme.util.SchemeUtil.LINE_FEED;
+import static net.glxn.qrgen.core.scheme.util.SchemeUtil.getParameters;
 
 import java.util.Map;
 
-public class MatMsg extends Schema {
+public class MatMsg implements Schema<MatMsg> {
 
     private static final String BEGIN_MATMSG = "BEGIN:MATMSG";
     private static final String TO = "TO";
@@ -69,7 +69,7 @@ public class MatMsg extends Schema {
     }
 
     @Override
-    public Schema parseSchema(String code) {
+    public MatMsg parseSchema(String code) {
         if (code == null || !code.startsWith(BEGIN_MATMSG)) {
             throw new IllegalArgumentException("this is not a valid MATMSG code: " + code);
         }

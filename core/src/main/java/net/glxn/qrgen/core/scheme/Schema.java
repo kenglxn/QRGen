@@ -5,7 +5,7 @@ package net.glxn.qrgen.core.scheme;
  * Abstract schema class
  *
  */
-public abstract class Schema {
+public interface Schema<T> {
 
 	/**
 	 * Parses a given string for a QR code schema
@@ -13,12 +13,12 @@ public abstract class Schema {
 	 * @param code to be parsed
 	 * @return schema
 	 */
-	public abstract Schema parseSchema(String code);
+	T parseSchema(String code);
 
 	/**
 	 * Generates code string.
 	 * 
 	 * @return code
 	 */
-	public abstract String generateString();
+	String generateString();
 }

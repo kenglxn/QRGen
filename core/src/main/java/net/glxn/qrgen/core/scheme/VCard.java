@@ -1,7 +1,7 @@
 package net.glxn.qrgen.core.scheme;
 
-import static net.glxn.qrgen.core.scheme.SchemeUtil.LINE_FEED;
-import static net.glxn.qrgen.core.scheme.SchemeUtil.getParameters;
+import static net.glxn.qrgen.core.scheme.util.SchemeUtil.LINE_FEED;
+import static net.glxn.qrgen.core.scheme.util.SchemeUtil.getParameters;
 
 import java.util.Map;
 
@@ -11,7 +11,7 @@ import java.util.Map;
  * See also http://zxing.appspot.com/generator/ and Contact Information
  *
  */
-public class VCard extends Schema {
+public class VCard implements Schema<VCard> {
 
 	private static final String BEGIN_VCARD = "BEGIN:VCARD";
 	private static final String NAME = "N";
@@ -112,7 +112,7 @@ public class VCard extends Schema {
 	}
 
 	@Override
-	public Schema parseSchema(String code) {
+	public VCard parseSchema(String code) {
 		if (code == null || !code.startsWith(BEGIN_VCARD)) {
 			throw new IllegalArgumentException("this is not a valid VCARD code: " + code);
 		}
