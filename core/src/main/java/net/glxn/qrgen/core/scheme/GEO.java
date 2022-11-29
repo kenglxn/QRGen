@@ -1,6 +1,7 @@
 package net.glxn.qrgen.core.scheme;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -11,22 +12,17 @@ public class GEO extends Schema {
 
     public static final String GEO = "geo";
     public static final String Q = "q";
-    private String q;
-    private List<String> points;
-
-    /**
-     * Default constructor to construct new geo info object.
-     */
-    public GEO() {
-        super();
-        this.points = new ArrayList<String>();
-    }
+    private String q = "";
+    private List<String> points = new ArrayList<>();
 
     public List<String> getPoints() {
         return points;
     }
 
     public void setPoints(List<String> points) {
+        if (points == null) {
+            return;
+        }
         this.points = points;
     }
 
@@ -44,27 +40,15 @@ public class GEO extends Schema {
             throw new IllegalArgumentException("this is not a geo info code: " + code);
         }
         String[] points = code.trim().toLowerCase().replaceAll(GEO + ":", "").split(",");
-        if (points != null && points.length > 0) {
-            for (String point : points) {
-                this.points.add(point);
-            }
+        if (points.length > 0) {
+            Collections.addAll(this.points, points);
         }
         return this;
     }
 
     @Override
     public String generateString() {
-        StringBuilder builder = new StringBuilder();
-        if (points != null) {
-            int s = points.size();
-            for (int i = 0; i < s; i++) {
-                builder.append(points.get(i));
-                if (i < s - 1) {
-                    builder.append(",");
-                }
-            }
-        }
-        return GEO + ":" + builder.toString() + (q.isEmpty() ? "" : "?" + Q + "=" + q);
+        return GEO + ":" + String.join(",", points) + (q.isEmpty() ? "" : "?" + Q + "=" + q);
     }
 
     @Override

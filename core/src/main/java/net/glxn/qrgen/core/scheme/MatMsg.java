@@ -4,10 +4,7 @@ import static net.glxn.qrgen.core.scheme.SchemeUtil.LINE_FEED;
 import static net.glxn.qrgen.core.scheme.SchemeUtil.getParameters;
 
 import java.util.Map;
-/**
- *
- *
- */
+
 public class MatMsg extends Schema {
 
     private static final String BEGIN_MATMSG = "BEGIN:MATMSG";
