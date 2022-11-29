@@ -8,7 +8,7 @@ import java.util.List;
  * Encodes a geographic information, format is:
  * <code>geo:40.71872,-73.98905,100?q=Ankara</code>
  */
-public class GEO extends Schema {
+public class Geo implements Schema<Geo> {
 
     public static final String GEO = "geo";
     public static final String Q = "q";
@@ -35,7 +35,7 @@ public class GEO extends Schema {
     }
 
     @Override
-    public Schema parseSchema(String code) {
+    public Geo parseSchema(String code) {
         if (code == null || !code.trim().toLowerCase().startsWith(GEO)) {
             throw new IllegalArgumentException("this is not a geo info code: " + code);
         }
@@ -56,8 +56,8 @@ public class GEO extends Schema {
         return generateString();
     }
 
-    public static GEO parse(final String geoInfoCode) {
-        GEO geo = new GEO();
+    public static Geo parse(final String geoInfoCode) {
+        Geo geo = new Geo();
         geo.parseSchema(geoInfoCode);
         return geo;
     }

@@ -1,13 +1,12 @@
-package net.glxn.qrgen.core.scheme;
+package net.glxn.qrgen.core.scheme.ical;
 
-import static net.glxn.qrgen.core.scheme.SchemeUtil.LINE_FEED;
-import static net.glxn.qrgen.core.scheme.SchemeUtil.getParameters;
+import static net.glxn.qrgen.core.scheme.util.SchemeUtil.LINE_FEED;
+import static net.glxn.qrgen.core.scheme.util.SchemeUtil.getParameters;
 
 import java.util.Map;
 
 /**
  * A simple wrapper for iEvent data to use with ZXing QR Code generator.
- * 
  * <code>
  * BEGIN:VEVENT 
  * UID:uid1@example.com 
@@ -20,7 +19,7 @@ import java.util.Map;
  * </code>
  *
  */
-public class IEvent extends SubSchema {
+public class IEvent implements ICalSubSchema<IEvent> {
 
 	public static final String NAME = "VEVENT";
 	private static final String BEGIN_EVENT = "BEGIN:VEVENT";
@@ -37,10 +36,6 @@ public class IEvent extends SubSchema {
 	private String start;
 	private String end;
 	private String summary;
-
-	public IEvent() {
-		super();
-	}
 
 	public String getUid() {
 		return uid;
@@ -91,7 +86,7 @@ public class IEvent extends SubSchema {
 	}
 
 	@Override
-	public SubSchema parseSchema(Map<String, String> parameters, String code) {
+	public IEvent parseSchema(Map<String, String> parameters, String code) {
 		if (parameters.containsKey(UID)) {
 			setUid(parameters.get(UID));
 		}

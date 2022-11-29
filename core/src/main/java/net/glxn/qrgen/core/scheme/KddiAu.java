@@ -1,15 +1,11 @@
 package net.glxn.qrgen.core.scheme;
 
-import static net.glxn.qrgen.core.scheme.SchemeUtil.LINE_FEED;
-import static net.glxn.qrgen.core.scheme.SchemeUtil.getParameters;
+import static net.glxn.qrgen.core.scheme.util.SchemeUtil.LINE_FEED;
+import static net.glxn.qrgen.core.scheme.util.SchemeUtil.getParameters;
 
 import java.util.Map;
 
-/**
- * 
- *
- */
-public class KddiAu extends Schema {
+public class KddiAu implements Schema<KddiAu> {
 
 	private static final String BEGIN = "MEMORY";
 	private static final String NAME1 = "NAME1";
@@ -113,7 +109,7 @@ public class KddiAu extends Schema {
 	}
 
 	@Override
-	public Schema parseSchema(String code) {
+	public KddiAu parseSchema(String code) {
 		if (code == null || !code.startsWith(BEGIN)) {
 			throw new IllegalArgumentException("this is not a valid KDDI AU code: " + code);
 		}

@@ -1,6 +1,6 @@
 package net.glxn.qrgen.core.scheme;
 
-import static net.glxn.qrgen.core.scheme.SchemeUtil.getParameters;
+import static net.glxn.qrgen.core.scheme.util.SchemeUtil.getParameters;
 
 import java.util.Map;
 
@@ -8,7 +8,7 @@ import java.util.Map;
  * Encodes a Wifi connection, format is:
  * <code>WIFI:T:AUTHENTICATION;S:SSID;P:PSK;H:HIDDEN;</code>
  */
-public class Wifi extends Schema {
+public class Wifi implements Schema<Wifi> {
 
 	public static final String WIFI_PROTOCOL_HEADER = "WIFI:";
 	public static final String AUTHENTICATION = "T";
@@ -21,7 +21,6 @@ public class Wifi extends Schema {
 	private boolean hidden = false;
 
 	public Wifi() {
-		super();
 	}
 
 	/**
@@ -116,7 +115,7 @@ public class Wifi extends Schema {
 	 *            the hidden to set
 	 */
 	public void setHidden(final String value) {
-		setHidden(Boolean.valueOf(value));
+		setHidden(Boolean.parseBoolean(value));
 	}
 
 	/**
@@ -141,7 +140,7 @@ public class Wifi extends Schema {
 	}
 
 	@Override
-	public Schema parseSchema(String code) {
+	public Wifi parseSchema(String code) {
 		if (code == null || !code.startsWith(WIFI_PROTOCOL_HEADER)) {
 			throw new IllegalArgumentException("this is not a valid WIFI code: " + code);
 		}

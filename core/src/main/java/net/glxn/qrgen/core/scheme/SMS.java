@@ -1,6 +1,6 @@
 package net.glxn.qrgen.core.scheme;
 
-import static net.glxn.qrgen.core.scheme.SchemeUtil.getParameters;
+import static net.glxn.qrgen.core.scheme.util.SchemeUtil.getParameters;
 
 import java.util.Map;
 
@@ -8,34 +8,40 @@ import java.util.Map;
  * Encodes a sms code, format is: <code>sms:+1-212-555-1212:subject</code>
  * 
  */
-public class SMS extends Schema {
+public class SMS implements Schema<SMS> {
 
 	private static final String SMS = "SMSTO";
 	private String number;
 	private String subject;
 
 	public SMS() {
-		super();
+	}
+
+	public SMS(String number, String subject) {
+		this.number = number;
+		this.subject = subject;
 	}
 
 	public String getNumber() {
 		return number;
 	}
 
-	public void setNumber(String number) {
+	public SMS setNumber(String number) {
 		this.number = number;
+		return this;
 	}
 
 	public String getSubject() {
 		return subject;
 	}
 
-	public void setSubject(String subject) {
+	public SMS setSubject(String subject) {
 		this.subject = subject;
+		return this;
 	}
 
 	@Override
-	public Schema parseSchema(String code) {
+	public SMS parseSchema(String code) {
 		if (code == null || !code.trim().toLowerCase().startsWith(SMS)) {
 			throw new IllegalArgumentException("this is not a valid sms code: " + code);
 		}

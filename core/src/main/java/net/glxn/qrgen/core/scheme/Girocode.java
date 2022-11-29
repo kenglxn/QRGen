@@ -1,12 +1,12 @@
 package net.glxn.qrgen.core.scheme;
 
-import static net.glxn.qrgen.core.scheme.SchemeUtil.DEFAULT_PARAM_SEPARATOR;
-import static net.glxn.qrgen.core.scheme.SchemeUtil.LINE_FEED;
+import static net.glxn.qrgen.core.scheme.util.SchemeUtil.DEFAULT_PARAM_SEPARATOR;
+import static net.glxn.qrgen.core.scheme.util.SchemeUtil.LINE_FEED;
 
 /**
  * European banking code, currently defines only SEPA credit transfer.
  */
-public class Girocode extends Schema {
+public class Girocode implements Schema<Girocode> {
 
 	protected static final String SERVICE_HEADER = "BCD";
 	protected static final String FUNCTION_SEPA_CREDIT_TRANSFER = "SCT";
@@ -121,9 +121,9 @@ public class Girocode extends Schema {
 	}
 
 	@Override
-	public Schema parseSchema(String code) {
+	public Girocode parseSchema(String code) {
 		if (code == null) {
-			throw new IllegalArgumentException("this is not a valid Girocode: " + code);
+			throw new IllegalArgumentException("null is not a valid Girocode");
 		}
 		String[] params = code.split(DEFAULT_PARAM_SEPARATOR);
 		if (params.length < 6 || params[0].equals("SERVICE_HEADER")) {
@@ -153,24 +153,18 @@ public class Girocode extends Schema {
 
 	@Override
 	public String generateString() {
-		StringBuilder bob = new StringBuilder();
-		bob.append(SERVICE_HEADER).append(LINE_FEED);
-		bob.append(VERSION_1).append(LINE_FEED);
-		bob.append(nullToEmptyString(getEncoding())).append(LINE_FEED);
-		bob.append(FUNCTION_SEPA_CREDIT_TRANSFER).append(LINE_FEED); // Function
-		bob.append(nullToEmptyString(getBic())).append(LINE_FEED);
-		bob.append(nullToEmptyString(getName())).append(LINE_FEED);
-		bob.append(nullToEmptyString(getIban())).append(LINE_FEED);
-		bob.append(nullToEmptyString(getAmount())).append(LINE_FEED);
-		bob.append(nullToEmptyString(getPurposeCode())).append(LINE_FEED);
-		bob.append(nullToEmptyString(getReference())).append(LINE_FEED);
-		bob.append(nullToEmptyString(getText())).append(LINE_FEED);
-		bob.append(nullToEmptyString(getHint())).append(LINE_FEED);
-		return bob.toString();
-	}
-
-	private String nullToEmptyString(final Object value) {
-		return value == null ? "" : value.toString();
+		return SERVICE_HEADER + LINE_FEED +
+				VERSION_1 + LINE_FEED +
+				(getEncoding() == null ? "" : getEncoding()) + LINE_FEED +
+				FUNCTION_SEPA_CREDIT_TRANSFER + LINE_FEED +
+				(getBic() == null ? "" : getBic()) + LINE_FEED +
+				(getName() == null ? "" : getName()) + LINE_FEED +
+				(getIban() == null ? "" : getIban()) + LINE_FEED +
+				(getAmount() == null ? "" : getAmount()) + LINE_FEED +
+				(getPurposeCode() == null ? "" : getPurposeCode()) + LINE_FEED +
+				(getReference() == null ? "" : getReference()) + LINE_FEED +
+				(getText() == null ? "" : getText()) + LINE_FEED +
+				(getHint() == null ? "" : getHint()) + LINE_FEED;
 	}
 
 	@Override

@@ -6,7 +6,7 @@ package net.glxn.qrgen.core.scheme;
  * <code>{{{market://details?id=de.pawlidi.android}}}</code>
  *
  */
-public class GooglePlay extends Schema {
+public class GooglePlay implements Schema<GooglePlay> {
 
 	public static final String GPLAY = "{{{market://details?id=%s}}}";
 	private String appPackage;
@@ -27,12 +27,12 @@ public class GooglePlay extends Schema {
 	}
 
 	@Override
-	public Schema parseSchema(String code) {
+	public GooglePlay parseSchema(String code) {
 		if (code == null || !code.trim().toLowerCase().startsWith("{{{market:")) {
 			throw new IllegalArgumentException("this is not a google play code: " + code);
 		}
 		String[] paths = code.trim().toLowerCase().replace("}}}", "").split("=");
-		if (paths != null && paths.length > 1) {
+		if (paths.length > 1) {
 			setAppPackage(paths[1]);
 		}
 		return this;
@@ -49,9 +49,7 @@ public class GooglePlay extends Schema {
 	}
 
 	public static GooglePlay parse(final String code) {
-		GooglePlay googlePlay = new GooglePlay();
-		googlePlay.parseSchema(code);
-		return googlePlay;
+		return new GooglePlay().parseSchema(code);
 	}
 
 }

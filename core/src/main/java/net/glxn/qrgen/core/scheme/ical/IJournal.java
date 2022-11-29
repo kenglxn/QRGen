@@ -1,24 +1,22 @@
-package net.glxn.qrgen.core.scheme;
-
-import static net.glxn.qrgen.core.scheme.SchemeUtil.LINE_FEED;
+package net.glxn.qrgen.core.scheme.ical;
 
 import java.util.Map;
 
+import static net.glxn.qrgen.core.scheme.util.SchemeUtil.LINE_FEED;
+
 /**
- *
+ * TODO: implement or delete
  */
-public class IJournal extends SubSchema {
+class IJournal implements ICalSubSchema<IJournal> {
 
 	public static final String NAME = "VJOURNAL";
 	private static final String BEGIN_TODO = "BEGIN:VJOURNAL";
 
 	public IJournal() {
-		super();
 	}
 
 	@Override
-	public SubSchema parseSchema(Map<String, String> parameters, String code) {
-		// TODO Auto-generated method stub
+	public IJournal parseSchema(Map<String, String> parameters, String code) {
 		return null;
 	}
 
@@ -34,11 +32,6 @@ public class IJournal extends SubSchema {
 	@Override
 	public String toString() {
 		return generateString();
-	}
-
-	public static SubSchema parse(Map<String, String> parameters, String code) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

@@ -1,6 +1,6 @@
 package net.glxn.qrgen.core.scheme;
 
-import static net.glxn.qrgen.core.scheme.SchemeUtil.getParameters;
+import static net.glxn.qrgen.core.scheme.util.SchemeUtil.getParameters;
 
 import java.util.Map;
 
@@ -8,7 +8,7 @@ import java.util.Map;
  * Encodes a telephone number, format is: <code>tel:+1-212-555-1212</code>
  *
  */
-public class Telephone extends Schema {
+public class Telephone implements Schema<Telephone> {
 
 	private static final String TEL = "tel";
 	private String telephone;
@@ -29,7 +29,7 @@ public class Telephone extends Schema {
 	}
 
 	@Override
-	public Schema parseSchema(String code) {
+	public Telephone parseSchema(String code) {
 		if (code == null || !code.trim().toLowerCase().startsWith(TEL)) {
 			throw new IllegalArgumentException("this is not a valid telephone code: " + code);
 		}

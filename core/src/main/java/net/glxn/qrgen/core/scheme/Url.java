@@ -7,7 +7,7 @@ import java.net.URL;
  * Encodes a url connection, format is: <code>HTTP://URL</code>
  * 
  */
-public class Url extends Schema {
+public class Url implements Schema<Url> {
 
 	private URL url;
 
@@ -32,7 +32,7 @@ public class Url extends Schema {
 	}
 
 	@Override
-	public Schema parseSchema(String code) {
+	public Url parseSchema(String code) {
 		if (code == null
 				|| (!code.trim().toLowerCase().startsWith("http") && !code.trim().toLowerCase().startsWith("https"))) {
 			throw new IllegalArgumentException("this is not a valid url code: " + code);
