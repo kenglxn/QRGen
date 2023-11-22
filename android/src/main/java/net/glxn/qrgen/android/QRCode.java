@@ -42,9 +42,9 @@ public class QRCode extends AbstractQRCode {
      * <p/>
      * Both size and imageType can be overridden: <br/>
      * Image type override is done by calling
-     * {@link AbstractQRCode#to(net.glxn.qrgen.core.image.ImageType)} e.g.
+     * {@link QRCode#to(net.glxn.qrgen.core.image.ImageType)} e.g.
      * QRCode.from("hello world").to(JPG) <br/>
-     * Size override is done by calling {@link AbstractQRCode#withSize} e.g.
+     * Size override is done by calling {@link QRCode#withSize} e.g.
      * QRCode.from("hello world").to(JPG).withSize(125, 125) <br/>
      *
      * @param text the text to encode to a new QRCode, this may fail if the text

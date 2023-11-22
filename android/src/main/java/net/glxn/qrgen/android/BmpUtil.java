@@ -150,7 +150,7 @@ public class BmpUtil {
     /**
      * Write integer to little-endian
      * @param value
-     * @return
+     * @return byte[] 
      * @throws IOException
      */
     private static byte[] writeInt(int value) throws IOException {
@@ -167,7 +167,7 @@ public class BmpUtil {
     /**
      * Write short to little-endian byte array
      * @param value
-     * @return
+     * @return byte[]
      * @throws IOException
      */
     private static byte[] writeShort(short value) throws IOException {
